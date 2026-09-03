@@ -207,18 +207,26 @@ body::before {
 .main-nav {
   position: fixed; top: 0; right: 0; height: 100vh; width: min(80vw, 340px);
   background: var(--bg-2); border-left: 1px solid var(--line);
-  transform: translateX(100%); transition: transform .5s var(--ease-out);
+  transform: translateX(100%);
+  visibility: hidden;                 /* evita que su box-shadow "sangre" en el borde
+                                          cuando está fuera de pantalla (el transform
+                                          no alcanza a recortar la sombra) */
+  transition: transform .5s var(--ease-out), visibility 0s linear .5s;
   padding: 100px 32px 32px; z-index: 150;
   box-shadow: -20px 0 60px rgba(0,0,0,.4);
   display: flex; flex-direction: column;
 }
-.main-nav.is-open { transform: translateX(0); }
+.main-nav.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform .5s var(--ease-out), visibility 0s linear 0s;
+}
 .main-nav.is-open ul { display: flex; flex-direction: column; gap: 26px; }
 .main-nav.is-open a { color: var(--ink); font-size: 1.3rem; font-weight: 640; }
 .main-nav.is-open a::after { background: var(--accent); }
 
 @media (min-width: 900px) {
-  .main-nav { position: static; height: auto; width: auto; background: none; border: none; box-shadow: none; transform: none; padding: 0; display: block; }
+  .main-nav { position: static; height: auto; width: auto; background: none; border: none; box-shadow: none; transform: none; visibility: visible; padding: 0; display: block; }
   .main-nav ul { display: flex; gap: 30px; }
   .nav-toggle { display: none; }
   .nav-backdrop { display: none; }
@@ -422,9 +430,10 @@ body::before {
 /* Vista previa flotante que sigue al cursor (placeholder) */
 .project-preview {
   position: fixed; top: 0; left: 0; z-index: 250;
-  width: 240px; aspect-ratio: 4/3;
+  width: 260px; aspect-ratio: 4/3;
   border-radius: var(--radius-md);
   background: linear-gradient(145deg, var(--bg-3), var(--bg-2));
+  background-size: cover; background-position: center;
   border: 1.5px dashed var(--line);
   display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
   color: var(--ink-mute); font-size: .8rem; font-weight: 620;
@@ -434,6 +443,9 @@ body::before {
   box-shadow: 0 30px 70px rgba(0,0,0,.45);
 }
 .project-preview.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.project-preview.has-img { border-style: solid; border-color: var(--line); }
+.project-preview.has-img svg,
+.project-preview.has-img span { display: none; }
 @media (hover: none) { .project-preview { display: none; } }
 
 .portfolio-cta { margin-top: 48px; }

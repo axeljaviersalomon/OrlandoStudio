@@ -97,7 +97,6 @@
      ver regla 13 de la skill): solo si GSAP cargó, lo escondemos y animamos. ---------- */
   function initReveals() {
     if (!(window.gsap && window.ScrollTrigger)) return;
-    gsap.registerPlugin(ScrollTrigger);
     var els = $$("[data-reveal]");
     els.forEach(function (el, i) {
       gsap.fromTo(el,
@@ -177,10 +176,18 @@
     }
 
     rows.forEach(function (row) {
+      var imgSrc = row.getAttribute("data-img");
       row.addEventListener("mouseover", function (e) {
         if (row.contains(e.relatedTarget)) return;
         preview.classList.add("is-visible");
         if (label) label.textContent = row.getAttribute("data-tag") || "Ver proyecto";
+        if (imgSrc) {
+          preview.classList.add("has-img");
+          preview.style.backgroundImage = "url('" + imgSrc + "')";
+        } else {
+          preview.classList.remove("has-img");
+          preview.style.backgroundImage = "";
+        }
         preview.style.left = e.clientX + "px";
         preview.style.top = e.clientY + "px";
       });
