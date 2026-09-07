@@ -1007,6 +1007,7 @@ section[id] { scroll-margin-top: 100px; }
 .studio-portrait-wrap { position: relative; }
 .studio-portrait {
   width: 100%;
+  height: auto;
   border-radius: var(--r-lg);
   object-fit: cover;
   aspect-ratio: 4/5;
