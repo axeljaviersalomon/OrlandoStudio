@@ -1,302 +1,258 @@
-/* ==========================================================================
-   OrlandoStudio — main.js
-   IIFE clásico, sin módulos ES (compatible con file:// y hosting estático).
-   ========================================================================== */
 (function () {
   "use strict";
 
-  var $ = function (sel, scope) { return (scope || document).querySelector(sel); };
-  var $$ = function (sel, scope) { return Array.prototype.slice.call((scope || document).querySelectorAll(sel)); };
-  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var fineHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
-  function safe(fn, name) {
-    try { fn(); } catch (e) { console.warn("[" + name + "] failed:", e); }
+  /* ---------------------------------------------------------------------
+     Data
+     --------------------------------------------------------------------- */
+
+  var PROJECTS = [
+    { name: "The Outdoor Project", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/outdoor-project.jpg", url: "https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" },
+    { name: "Iron Lab", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/iron-lab.jpg", url: "https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" },
+    { name: "BulaVinaka", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/bulavinaka.jpg", url: "https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" },
+    { name: "HomeBoyz", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/homeboyz.jpg", url: "https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" },
+    { name: "Salentein", tag: "Branding", cat: "branding", img: "assets/img/portfolio/salentein.jpg", url: "https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" },
+    { name: "EtherCore", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/ethercore.jpg", url: "https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" },
+    { name: "Libema", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/libema.jpg", url: "https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" },
+    { name: "33usd", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/33usd.jpg", url: "https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" },
+    { name: "ArmonyDrinks", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/armonydrinks.jpg", url: "https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" },
+    { name: "La Pelota No Se Mancha", tag: "Campaña Social", cat: "social", img: "assets/img/portfolio/la-pelota-no-se-mancha.jpg", url: "https://www.behance.net/gallery/164034163/La-Pelota-No-Se-Mancha-Campana-Social" },
+    { name: "Hawaiian Tropic — Tattoo Line", tag: "Packaging", cat: "packaging", img: "assets/img/portfolio/hawaiian-tropic.jpg", url: "https://www.behance.net/gallery/166106825/Hawaiian-Tropic-Tattoo-Line" },
+    { name: "RE-EVOLUCIÓN", tag: "Sistema de Vinilos", cat: "packaging", img: "assets/img/portfolio/re-evolucion.jpg", url: "https://www.behance.net/gallery/193912543/RE-EVOLUCION-Sistema-de-Vinilos" },
+    { name: "INSURGENTE", tag: "Packaging", cat: "packaging", img: "assets/img/portfolio/insurgente.jpg", url: "https://www.behance.net/gallery/164594839/INSURGENTE-Cerveza-Craft-Mexicana" }
+  ];
+
+  var FAQ = [
+    { q: "¿Cuánto sale un proyecto de marca?", a: "Depende del alcance: un logotipo puntual no es lo mismo que una identidad visual completa con manual y aplicaciones. Después de una llamada de 20 minutos te envío una propuesta cerrada, con etapas, plazos y precio final sin sorpresas." },
+    { q: "¿Cuánto tarda?", a: "Entre 3 y 6 semanas según complejidad y velocidad de feedback. La agenda se reserva por orden de seña y trabajo un máximo de 2 proyectos por mes para no bajar el nivel de dedicación." },
+    { q: "¿Qué recibo al final?", a: "Logotipo en todas sus versiones y formatos productivos (vectorial y mapa de bits), sistema visual completo, manual de marca en PDF y las aplicaciones acordadas listas para imprimir o publicar." },
+    { q: "¿Trabajás con marcas de otros países?", a: "Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, México y España sin diferencia de calidad ni de plazos." },
+    { q: "¿Y si no me gusta la propuesta?", a: "Cada etapa se aprueba antes de avanzar y las rondas de corrección se definen en la propuesta inicial. No hay entregas sorpresa: vas viendo y validando el camino conmigo." }
+  ];
+
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  /* ---------------------------------------------------------------------
+     Scroll progress bar + dock flotante
+     --------------------------------------------------------------------- */
+
+  var progressBar = $("#scroll-progress");
+  var dock = $("#floating-dock");
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+    if (progressBar) progressBar.style.width = (pct * 100).toFixed(2) + "%";
+    if (dock) {
+      var show = window.scrollY > window.innerHeight * 0.9 && pct < 0.94;
+      dock.classList.toggle("is-visible", show);
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------------------------------------------------------------
+     Reveals en scroll (IntersectionObserver)
+     --------------------------------------------------------------------- */
+
+  if ("IntersectionObserver" in window && !reducedMotion) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
+    $all("[data-reveal]").forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    $all("[data-reveal]").forEach(function (el) { el.classList.add("is-visible"); });
   }
 
-  /* ---------- Header: fondo al hacer scroll + barra de progreso ---------- */
-  function initHeaderScroll() {
-    var header = $("#site-header");
-    var progressBar = $("#scroll-progress");
-    function onScroll() {
-      header.classList.toggle("is-scrolled", window.scrollY > 12);
-      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-      progressBar.style.width = pct + "%";
+  /* ---------------------------------------------------------------------
+     Contadores (hero stats)
+     --------------------------------------------------------------------- */
+
+  var statTargets = [
+    { el: $("#stat-0"), to: 40, prefix: "+", suffix: "" },
+    { el: $("#stat-1"), to: 6, prefix: "", suffix: "" },
+    { el: $("#stat-2"), to: 100, prefix: "", suffix: "%" }
+  ];
+
+  function countUp() {
+    if (reducedMotion) {
+      statTargets.forEach(function (t) { if (t.el) t.el.textContent = t.prefix + t.to + t.suffix; });
+      return;
     }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    var start = null;
+    var dur = 1600;
+    function tick(now) {
+      if (start === null) start = now;
+      var t = Math.min(1, (now - start) / dur);
+      var e = 1 - Math.pow(1 - t, 3);
+      statTargets.forEach(function (target) {
+        if (target.el) target.el.textContent = target.prefix + Math.round(target.to * e) + target.suffix;
+      });
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
-  /* ---------- Menú mobile ---------- */
-  function initNav() {
-    var navToggle = $("#nav-toggle");
-    var mainNav = $("#main-nav");
-    var backdrop = $("#nav-backdrop");
+  var statsGrid = $(".stats-grid");
+  if (statsGrid && "IntersectionObserver" in window) {
+    var statsObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          countUp();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    statsObserver.observe(statsGrid);
+  } else if (statsGrid) {
+    countUp();
+  }
 
-    function openNav() {
-      mainNav.classList.add("is-open");
-      backdrop.classList.add("is-open");
-      navToggle.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden";
-    }
-    function closeNav() {
-      mainNav.classList.remove("is-open");
-      backdrop.classList.remove("is-open");
+  /* ---------------------------------------------------------------------
+     Nav hamburguesa (mobile)
+     --------------------------------------------------------------------- */
+
+  var navToggle = $("#nav-toggle");
+  var mobileMenu = $("#mobile-menu");
+  if (navToggle && mobileMenu) {
+    var closeMenu = function () {
+      mobileMenu.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
-    }
+    };
     navToggle.addEventListener("click", function () {
-      if (mainNav.classList.contains("is-open")) closeNav(); else openNav();
+      var open = mobileMenu.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.style.overflow = open ? "hidden" : "";
     });
-    backdrop.addEventListener("click", closeNav);
-    $$("a", mainNav).forEach(function (link) { link.addEventListener("click", closeNav); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
-  }
-
-  /* ---------- Scroll suave nativo para anclas (sin Lenis — ver gotcha B.1.4) ---------- */
-  function initSmoothAnchors() {
-    document.addEventListener("click", function (e) {
-      var a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-      var id = a.getAttribute("href");
-      if (!id || id === "#") return;
-      var el = document.querySelector(id);
-      if (!el) return;
-      e.preventDefault();
-      var navOffset = 90;
-      window.scrollTo({
-        top: el.getBoundingClientRect().top + window.scrollY - navOffset,
-        behavior: reduced ? "auto" : "smooth"
-      });
+    $all("a", mobileMenu).forEach(function (a) {
+      a.addEventListener("click", closeMenu);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) closeMenu();
     });
   }
 
-  /* ---------- Gradiente del hero reactivo al mouse ---------- */
-  function initMouseGradient() {
-    var hero = $(".hero");
-    var gradient = $("#hero-gradient");
-    if (!hero || !gradient) return;
-    if (!fineHover) return; // en touch dejamos el gradiente estático (posición por defecto de la CSS)
+  /* ---------------------------------------------------------------------
+     Portfolio: filtros + filas + preview flotante
+     --------------------------------------------------------------------- */
 
-    var raf = null;
-    function setPos(x, y) {
-      var xPct = (x / window.innerWidth) * 100;
-      var yPct = (y / window.innerHeight) * 100;
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(function () {
-        gradient.style.setProperty("--mx", xPct + "%");
-        gradient.style.setProperty("--my", yPct + "%");
-      });
-    }
-    hero.addEventListener("mousemove", function (e) { setPos(e.clientX, e.clientY); });
-  }
+  var worksRows = $("#works-rows");
+  var filters = $all(".filter-pill");
+  var currentFilter = "all";
+  var preview = $("#work-preview");
+  var previewImg = $("#work-preview-img");
 
-  /* ---------- Reveals on-scroll — GSAP + ScrollTrigger cuando está disponible.
-     El contenido es visible por defecto en el CSS (sin JS no se pierde nada,
-     ver regla 13 de la skill): solo si GSAP cargó, lo escondemos y animamos. ---------- */
-  function initReveals() {
-    if (!(window.gsap && window.ScrollTrigger)) return;
-    var els = $$("[data-reveal]");
-    els.forEach(function (el, i) {
-      gsap.fromTo(el,
-        { opacity: 0, y: 26 },
-        {
-          opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-          delay: (i % 3) * 0.05,
-          scrollTrigger: { trigger: el, start: "top 92%", once: true }
-        }
+  function renderRows() {
+    if (!worksRows) return;
+    var shown = PROJECTS.filter(function (p) { return currentFilter === "all" || p.cat === currentFilter; });
+    worksRows.innerHTML = shown.map(function (p, i) {
+      var num = String(i + 1).padStart(2, "0");
+      return (
+        '<a href="' + p.url + '" target="_blank" rel="noopener" class="work-row" data-img="' + p.img + '" data-name="' + p.name + '">' +
+          '<span class="work-row-left">' +
+            '<span class="work-row-num">' + num + "</span>" +
+            '<span class="work-row-name">' + p.name + "</span>" +
+          "</span>" +
+          '<span class="work-row-right">' +
+            '<span class="work-row-tag">' + p.tag + "</span>" +
+            '<span class="work-row-arrow">↗</span>' +
+          "</span>" +
+        "</a>"
       );
-    });
-    // Filas de portfolio: entrada escalonada extra
-    var rows = $$(".project-row");
-    if (rows.length) {
-      gsap.fromTo(rows, { opacity: 0, x: -16 }, {
-        opacity: 1, x: 0, duration: 0.6, ease: "power2.out", stagger: 0.06,
-        scrollTrigger: { trigger: ".project-list", start: "top 88%", once: true }
-      });
-    }
+    }).join("");
+    bindRowEvents();
   }
 
-  /* ---------- Contadores animados (stats) ---------- */
-  function initCountUp() {
-    var stats = $$("[data-count-to]");
-    if (!stats.length) return;
-
-    function animate(el) {
-      var target = parseFloat(el.getAttribute("data-count-to"));
-      var suffix = el.getAttribute("data-suffix") || "";
-      if (window.gsap) {
-        var proxy = { val: 0 };
-        gsap.to(proxy, {
-          val: target, duration: 1.6, ease: "power2.out",
-          onUpdate: function () { el.textContent = Math.round(proxy.val) + suffix; }
-        });
-      } else {
-        el.textContent = target + suffix; // sin GSAP: valor final directo
-      }
-    }
-
-    if (window.gsap && window.ScrollTrigger) {
-      stats.forEach(function (el) {
-        ScrollTrigger.create({
-          trigger: el, start: "top 90%", once: true,
-          onEnter: function () { animate(el); }
-        });
-      });
-    } else if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { animate(entry.target); io.unobserve(entry.target); }
-        });
-      }, { threshold: 0.3 });
-      stats.forEach(function (el) { io.observe(el); });
-    } else {
-      stats.forEach(animate);
-    }
-  }
-
-  /* ---------- Vista previa flotante del portfolio (sigue al cursor) ---------- */
-  function initProjectPreview() {
-    if (!fineHover) return;
-    var preview = $("#project-preview");
-    var label = $("#project-preview-label");
-    var rows = $$(".project-row");
-    if (!preview || !rows.length) return;
-
-    var moveX, moveY;
-    if (window.gsap) {
-      moveX = gsap.quickTo(preview, "left", { duration: 0.5, ease: "power3.out" });
-      moveY = gsap.quickTo(preview, "top", { duration: 0.5, ease: "power3.out" });
-    }
-
-    function onMove(e) {
-      if (moveX && moveY) { moveX(e.clientX); moveY(e.clientY); }
-      else { preview.style.left = e.clientX + "px"; preview.style.top = e.clientY + "px"; }
-    }
-
-    rows.forEach(function (row) {
-      var imgSrc = row.getAttribute("data-img");
-      row.addEventListener("mouseover", function (e) {
-        if (row.contains(e.relatedTarget)) return;
+  function bindRowEvents() {
+    if (isCoarsePointer || !preview || !previewImg) return;
+    $all(".work-row", worksRows).forEach(function (row) {
+      row.addEventListener("mouseenter", function () {
+        previewImg.src = row.dataset.img || "";
+        previewImg.alt = row.dataset.name || "";
         preview.classList.add("is-visible");
-        if (label) label.textContent = row.getAttribute("data-tag") || "Ver proyecto";
-        if (imgSrc) {
-          preview.classList.add("has-img");
-          preview.style.backgroundImage = "url('" + imgSrc + "')";
-        } else {
-          preview.classList.remove("has-img");
-          preview.style.backgroundImage = "";
-        }
+      });
+      row.addEventListener("mousemove", function (e) {
         preview.style.left = e.clientX + "px";
         preview.style.top = e.clientY + "px";
       });
-      row.addEventListener("mouseout", function (e) {
-        if (row.contains(e.relatedTarget)) return;
-        preview.classList.remove("is-visible");
-      });
-      row.addEventListener("mousemove", onMove);
+    });
+    worksRows.addEventListener("mouseleave", function () {
+      preview.classList.remove("is-visible");
     });
   }
 
-  /* ---------- Filtro de portfolio ---------- */
-  function initPortfolioFilter() {
-    var filterButtons = $$(".filter-btn");
-    var rows = $$(".project-row");
-    filterButtons.forEach(function (btn) {
+  filters.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      currentFilter = btn.dataset.value;
+      filters.forEach(function (b) { b.setAttribute("aria-selected", b === btn ? "true" : "false"); });
+      renderRows();
+    });
+  });
+
+  renderRows();
+
+  /* ---------------------------------------------------------------------
+     FAQ acordeón
+     --------------------------------------------------------------------- */
+
+  var faqList = $("#faq-list");
+  var openFaq = 0;
+
+  function renderFaq() {
+    if (!faqList) return;
+    faqList.innerHTML = FAQ.map(function (f, i) {
+      var isOpen = i === openFaq;
+      return (
+        '<div class="faq-item">' +
+          '<button type="button" class="faq-question" data-index="' + i + '" aria-expanded="' + isOpen + '" aria-controls="faq-panel-' + i + '" id="faq-btn-' + i + '">' +
+            "<span>" + f.q + "</span>" +
+            '<span class="faq-icon" aria-hidden="true">' + (isOpen ? "−" : "+") + "</span>" +
+          "</button>" +
+          (isOpen ? '<p class="faq-answer" id="faq-panel-' + i + '" role="region" aria-labelledby="faq-btn-' + i + '">' + f.a + "</p>" : "") +
+        "</div>"
+      );
+    }).join("");
+    $all(".faq-question", faqList).forEach(function (btn) {
       btn.addEventListener("click", function () {
-        filterButtons.forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-selected", "false"); });
-        btn.classList.add("is-active");
-        btn.setAttribute("aria-selected", "true");
-        var filter = btn.getAttribute("data-filter");
-        rows.forEach(function (row) {
-          var match = filter === "all" || row.getAttribute("data-category") === filter;
-          row.classList.toggle("is-hidden", !match);
-        });
+        var i = Number(btn.dataset.index);
+        openFaq = openFaq === i ? -1 : i;
+        renderFaq();
       });
     });
   }
 
-  /* ---------- Popup a los 7 segundos (una vez por sesión) ---------- */
-  function initPopup() {
-    var popup = $("#popup-card");
-    var popupClose = $("#popup-close");
-    var popupCta = $("#popup-cta");
-    var KEY = "orlandostudio_popup_dismissed";
+  renderFaq();
 
-    function dismiss() {
-      popup.classList.remove("is-visible");
-      popup.setAttribute("aria-hidden", "true");
-      try { sessionStorage.setItem(KEY, "1"); } catch (e) { /* almacenamiento no disponible */ }
-    }
-    function show() {
-      var dismissed = false;
-      try { dismissed = sessionStorage.getItem(KEY) === "1"; } catch (e) { /* no disponible */ }
-      if (dismissed) return;
-      popup.classList.add("is-visible");
-      popup.setAttribute("aria-hidden", "false");
-    }
-    setTimeout(show, 7000);
-    popupClose.addEventListener("click", dismiss);
-    popupCta.addEventListener("click", dismiss);
-  }
+  /* ---------------------------------------------------------------------
+     Formulario de contacto
+     --------------------------------------------------------------------- */
 
-  /* ---------- Formulario de contacto (sin backend) ---------- */
-  function initForm() {
-    var form = $("#contact-form");
-    var formNote = $("#form-note");
+  var form = $("#contact-form");
+  var formError = $("#form-error");
+  var formSuccess = $("#form-success");
+
+  if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (!form.reportValidity()) {
-        formNote.textContent = "Revisá los campos marcados antes de enviar.";
-        formNote.classList.add("is-error");
+      if (!form.checkValidity()) {
+        formError.hidden = false;
+        formSuccess.hidden = true;
         return;
       }
-      var name = $("#name", form).value.trim();
-      formNote.classList.remove("is-error");
-      formNote.textContent = "¡Gracias" + (name ? ", " + name.split(" ")[0] : "") + "! Recibimos tu mensaje y te vamos a responder a la brevedad.";
+      formError.hidden = true;
+      formSuccess.hidden = false;
       form.reset();
-      /* NOTA: conectar a un endpoint propio, Formspree o EmailJS para recibir los envíos por email. */
+      /* NOTA: conectar a un endpoint propio, Formspree o Resend para recibir los envíos por email. */
     });
-  }
-
-  /* ---------- Año actual ---------- */
-  function initYear() {
-    var el = $("#year");
-    if (el) el.textContent = new Date().getFullYear();
-  }
-
-  function boot() {
-    safe(initHeaderScroll, "initHeaderScroll");
-    safe(initNav, "initNav");
-    safe(initSmoothAnchors, "initSmoothAnchors");
-    safe(initMouseGradient, "initMouseGradient");
-    safe(initPortfolioFilter, "initPortfolioFilter");
-    safe(initProjectPreview, "initProjectPreview");
-    safe(initPopup, "initPopup");
-    safe(initForm, "initForm");
-    safe(initYear, "initYear");
-
-    if (window.gsap && window.ScrollTrigger) {
-      safe(function () { gsap.registerPlugin(ScrollTrigger); }, "registerScrollTrigger");
-    }
-    safe(initReveals, "initReveals");
-    safe(initCountUp, "initCountUp");
-
-    // Failsafe: si algo se queda oculto por cualquier motivo, se revela a los 6s.
-    setTimeout(function () {
-      $$("[data-reveal]").forEach(function (el) {
-        var cs = window.getComputedStyle(el);
-        if (parseFloat(cs.opacity) < 1) { el.style.opacity = "1"; el.style.transform = "none"; }
-      });
-    }, 6000);
-
-    document.documentElement.classList.add("is-ready");
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
   }
 })();

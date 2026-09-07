@@ -16,588 +16,459 @@
 <meta property="og:image" content="assets/img/julian-orlando-retrato.jpg">
 <meta property="og:locale" content="es_AR">
 
-<!-- Favicon: monograma JO real de la marca -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23F3F2F3'/%3E%3Cg transform='translate(18,13) scale(0.183)'%3E%3Cpath fill='%23008358' d='M237.83,27.72a27.72,27.72,0,1,1,27.72,27.72A27.72,27.72,0,0,1,237.83,27.72Zm47,72.88V224.85A115.29,115.29,0,1,1,167.7,109.61,117.92,117.92,0,0,1,183.31,111V218.15s-.29,24.79-38.4,24.79v51.24s66.44,11.86,86.22-49.76a83.37,83.37,0,0,0,4.4-28.13l-.25-89.63V70.36a168.61,168.61,0,0,0-65.77-14.91v-.11c-.71,0-1.4,0-2.11,0s-1.31,0-2,0v.1C73.7,57.62,0,132.6,0,224.85A169.51,169.51,0,1,0,284.79,100.6Z'/%3E%3C/g%3E%3C/svg%3E">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css?v=20260907">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "OrlandoStudio",
+  "founder": { "@type": "Person", "name": "Julián Orlando" },
+  "areaServed": "AR",
+  "url": "https://orlandostudio.com.ar/",
+  "email": "julianorlando.dg@gmail.com",
+  "sameAs": [
+    "https://www.instagram.com/julianorlando.dg/",
+    "https://www.behance.net/julianorlandodg",
+    "https://www.tiktok.com/@julianorlando.dg"
+  ]
+}
+</script>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
+<div class="noise-overlay" aria-hidden="true"></div>
 <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
 <!-- ============ HEADER ============ -->
-<header class="site-header" id="site-header">
+<header class="site-header">
   <div class="header-inner">
     <a href="#top" class="brand" aria-label="OrlandoStudio, inicio">
-      <img class="brand-mark" src="assets/brand/JO_VerdeFondoOscuro.svg" alt="" width="24" height="28" aria-hidden="true">
+      <img class="brand-mark" src="assets/brand/JO_VerdeFondoOscuro.svg" alt="" width="22" height="26">
       <span class="brand-name">Orlando<span class="brand-accent">Studio</span><sup>™</sup></span>
     </a>
 
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       <ul>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#trabajos">Trabajos</a></li>
         <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#estudio">Estudio</a></li>
+        <li><a href="#voces">Clientes</a></li>
       </ul>
     </nav>
 
     <div class="header-actions">
-      <a href="#contacto" class="btn btn-primary btn-sm">Empezar proyecto</a>
-      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú de navegación">
+      <a href="#contacto" class="btn btn-primary btn-header">Empezar proyecto</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Navegación móvil">
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#estudio">Estudio</a></li>
+      <li><a href="#voces">Clientes</a></li>
+      <li><a href="#contacto" class="btn btn-primary btn-hero">Empezar proyecto</a></li>
+    </ul>
+  </nav>
+</div>
 
 <main id="main">
 
   <!-- ============ HERO ============ -->
-  <section class="hero" id="top">
-    <div class="hero-gradient" id="hero-gradient" aria-hidden="true"></div>
-    <div class="hero-noise-orbital" aria-hidden="true">
-      <svg viewBox="0 0 500 500" width="560" height="560">
-        <circle cx="250" cy="250" r="240" fill="none" stroke="currentColor" stroke-width="1"/>
-        <circle cx="250" cy="250" r="180" fill="none" stroke="currentColor" stroke-width="1"/>
-        <circle cx="250" cy="250" r="120" fill="none" stroke="currentColor" stroke-width="1"/>
-        <circle cx="250" cy="10" r="5" fill="currentColor"/>
-        <circle cx="470" cy="330" r="4" fill="currentColor"/>
-        <circle cx="70" cy="380" r="3.5" fill="currentColor"/>
-      </svg>
-    </div>
+  <section id="top" class="hero">
+    <div class="hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow-2" aria-hidden="true"></div>
 
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow" data-reveal>Branding &amp; Diseño de Marca — Buenos Aires, Argentina</p>
-        <h1 class="hero-title" data-reveal>
-          <span class="line">Diseñando para que</span>
-          <span class="line">tus clientes</span>
-          <span class="line"><em>te elijan.</em></span>
-        </h1>
-        <p class="hero-sub" data-reveal>
-          Diseño la percepción que hace que te elijan. Transformo ideas en marcas
-          visualmente coherentes y auténticas — identidades con las que las personas
-          conectan, creen y eligen una y otra vez.
-        </p>
-        <div class="hero-cta" data-reveal>
-          <a href="#contacto" class="btn btn-primary btn-lg">
-            <span>Empezar mi proyecto</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#portfolio" class="btn btn-ghost btn-lg">Ver portfolio</a>
+    <div class="container hero-content">
+      <div class="hero-meta-row">
+        <span class="hero-badge">
+          <span class="hero-badge-dot"></span>Agenda abierta · 2 cupos Q4
+        </span>
+        <span class="hero-meta-line"></span>
+        <span class="hero-meta-location">BUENOS AIRES · AR</span>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">
+            <span class="line">Diseñando para</span>
+            <span class="line">que tus clientes</span>
+            <span class="line line--accent">te elijan.</span>
+          </h1>
+          <p class="hero-sub">Branding e identidad visual para negocios que ya funcionan y necesitan verse a la altura. Transformo ideas en marcas coherentes y auténticas — identidades con las que las personas conectan, creen y eligen otra vez.</p>
+          <div class="hero-ctas">
+            <a href="#contacto" class="btn btn-primary btn-hero">Empezar mi proyecto <span>→</span></a>
+            <a href="#trabajos" class="btn btn-ghost">Ver 40 marcas</a>
+          </div>
         </div>
-        <div class="hero-meta" data-reveal>
-          <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-          <p><strong>+40 marcas</strong> diseñadas en 6 años de trayectoria</p>
+
+        <div class="hero-seal-wrap">
+          <div class="seal-ring seal-ring--spin" aria-hidden="true">
+            <span class="seal-ring-dot"></span>
+          </div>
+          <div class="seal-ring seal-ring--dashed" aria-hidden="true"></div>
+          <img class="hero-seal" src="assets/brand/OrlandoDesignCO_Negativo.svg" alt="Sello OrlandoDesignCo, la marca de Julián Orlando" width="407" height="409" fetchpriority="high">
         </div>
       </div>
 
-      <div class="hero-media" data-reveal>
-        <div class="hero-media-rings" aria-hidden="true">
-          <svg viewBox="0 0 400 400" width="100%" height="100%">
-            <circle cx="330" cy="70" r="46" fill="none" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M40,340 A160,160 0 0 1 200,180" fill="none" stroke="currentColor" stroke-width="1.2"/>
-            <circle cx="40" cy="340" r="3.5" fill="currentColor"/>
-            <circle cx="200" cy="180" r="3.5" fill="currentColor"/>
-          </svg>
+      <div class="stats-grid" data-reveal>
+        <div class="stat-cell">
+          <span class="stat-num" id="stat-0">0</span>
+          <span class="stat-label">Marcas construidas</span>
         </div>
-        <img src="assets/brand/OrlandoDesignCO_Negativo.svg" alt="Sello OrlandoDesignCo — la marca de Julián Orlando, fundador de OrlandoStudio" loading="eager" fetchpriority="high" decoding="async" width="407" height="409">
+        <div class="stat-cell">
+          <span class="stat-num" id="stat-1">0</span>
+          <span class="stat-label">Años de trayectoria</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num" id="stat-2">0</span>
+          <span class="stat-label">Proyectos a medida</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num stat-num--accent">1</span>
+          <span class="stat-label">Diseñador detrás de cada marca</span>
+        </div>
       </div>
     </div>
-
-    <span class="scroll-cue" aria-hidden="true">Scroll</span>
   </section>
 
-  <!-- ============ LOGOS / MARQUEE ============ -->
+  <!-- ============ MARQUESINA ============ -->
   <section class="marquee-section" aria-label="Marcas que confiaron en OrlandoStudio">
-    <div class="marquee">
-      <div class="marquee-track">
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-01.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-02.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-03.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-04.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-05.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-06.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-07.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-08.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-09.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-10.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-11.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-12.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-13.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-14.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-15.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-16.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-17.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-18.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-19.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-01.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-02.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-03.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-04.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-05.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-06.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-07.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-08.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-09.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-10.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-11.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-12.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-13.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-14.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-15.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-16.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-17.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-18.png" alt="" loading="lazy" width="120" height="120"></span>
-        <span class="marquee-logo"><img src="assets/img/clientes/logo-19.png" alt="" loading="lazy" width="120" height="120"></span>
+    <p class="marquee-title">Confiaron en el estudio</p>
+    <div class="marquee-mask">
+      <div class="marquee-track" id="marquee-track">
+        <img src="assets/img/clientes/logo-01.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-02.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-03.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-04.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-05.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-06.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-07.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-08.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-09.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-10.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-11.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-12.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-13.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-14.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-15.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-16.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-17.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-18.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-19.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-01.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-02.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-03.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-04.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-05.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-06.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-07.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-08.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-09.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-10.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-11.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-12.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-13.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-14.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-15.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-16.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-17.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-18.png" alt="" width="120" height="120">
+        <img src="assets/img/clientes/logo-19.png" alt="" width="120" height="120">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section class="section-light">
+    <div class="container manifesto-grid">
+      <div data-reveal>
+        <p class="eyebrow eyebrow--light">01 — El problema real</p>
+        <h2 class="h2">Tu público te ve gratis.<br>Pero elige y paga según lo que percibe.</h2>
+      </div>
+      <div class="manifesto-right" data-reveal>
+        <p class="manifesto-lead">No vendo logos. Vendo el motivo por el que te van a elegir: una marca que se lee como profesional antes de que digas una palabra, que sostiene tu precio y que no se confunde con la competencia.</p>
+        <div class="manifesto-mini-grid">
+          <div class="manifesto-mini">
+            <h3>Posicionamiento</h3>
+            <p>Un lugar claro y propio en la mente de tu cliente ideal.</p>
+          </div>
+          <div class="manifesto-mini">
+            <h3>Diferenciación</h3>
+            <p>Si se parece a otra marca, no está terminada.</p>
+          </div>
+          <div class="manifesto-mini">
+            <h3>Percepción de valor</h3>
+            <p>Más confianza, menos objeciones de precio.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ SERVICIOS ============ -->
-  <section class="section" id="servicios">
+  <section id="servicios" class="section-dark">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Servicios</p>
-        <h2>Un especialista en marca, no un generalista.</h2>
-        <p class="section-lead">Diseño de logotipos e identidad visual, de punta a punta. Sin distraerme en disciplinas que no domino.</p>
+      <div class="services-header" data-reveal>
+        <div>
+          <p class="eyebrow">02 — Servicios</p>
+          <h2 class="h2">Un especialista en marca, no un generalista.</h2>
+        </div>
+        <p class="services-lead">Diseño de logotipos e identidad visual de punta a punta. Sin distraerme en disciplinas que no domino.</p>
       </div>
 
-      <div class="numbered-grid">
-        <article class="numbered-item" data-reveal>
-          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v10M8 9.5c0-1.4 1.8-2.5 4-2.5s4 1.1 4 2.5-1.8 2-4 2.5-4 1.1-4 2.5 1.8 2.5 4 2.5 4-1.1 4-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-          <span class="num">01</span>
-          <h3>Diseño de Logotipos</h3>
-          <p>Mi especialidad. Signos marcarios distintivos, memorables y pensados para funcionar en cualquier tamaño y soporte.</p>
+      <div class="hairline-grid-4" data-reveal>
+        <article class="service-card">
+          <span class="service-num">01</span>
+          <h3>Diseño de logotipos</h3>
+          <p>Mi especialidad. Signos marcarios distintivos, memorables y construidos para funcionar en cualquier tamaño y soporte.</p>
         </article>
-
-        <article class="numbered-item" data-reveal>
-          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="1.6"/></svg></div>
-          <span class="num">02</span>
-          <h3>Identidad Visual</h3>
-          <p>Paleta cromática, tipografías y sistema visual completo para que tu marca se vea igual de sólida en todos lados.</p>
+        <article class="service-card">
+          <span class="service-num">02</span>
+          <h3>Identidad visual</h3>
+          <p>Paleta cromática, tipografías y sistema visual completo para que la marca se vea igual de sólida en todos lados.</p>
         </article>
-
-        <article class="numbered-item" data-reveal>
-          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16M9 9v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
-          <span class="num">03</span>
-          <h3>Manual de Marca</h3>
-          <p>Documento con las especificaciones técnicas de tu identidad, para que cualquiera pueda aplicarla bien.</p>
+        <article class="service-card">
+          <span class="service-num">03</span>
+          <h3>Manual de marca</h3>
+          <p>Especificaciones técnicas documentadas, para que cualquier proveedor aplique tu identidad sin romperla.</p>
         </article>
-
-        <article class="numbered-item" data-reveal>
-          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/></svg></div>
-          <span class="num">04</span>
-          <h3>Aplicación de Marca</h3>
-          <p>Papelería, packaging, banners y piezas para redes sociales, todo coherente con tu sistema de marca.</p>
+        <article class="service-card">
+          <span class="service-num">04</span>
+          <h3>Aplicación de marca</h3>
+          <p>Papelería, packaging, vidriera y piezas para redes, todo coherente con el sistema.</p>
         </article>
       </div>
 
-      <div class="services-scope" data-reveal>
-        <p><strong>Lo que no hago:</strong> diseño web, apps, UX/UI, multimedia ni audiovisual — así puedo enfocarme al 100% en construir la identidad de tu marca.</p>
-      </div>
+      <p class="services-note" data-reveal><strong>Lo que no hago:</strong> diseño web, apps, UX/UI ni audiovisual — así puedo enfocarme al 100% en construir la identidad de tu marca.</p>
     </div>
   </section>
 
-  <!-- ============ PROCESO ============ -->
-  <section class="section on-dark" id="proceso">
+  <!-- ============ TRABAJOS ============ -->
+  <section id="trabajos" class="section-dark-2">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Cómo trabajamos</p>
-        <h2>Un proceso claro, de la estrategia a la entrega.</h2>
-        <p class="section-lead">Plazos estimativos, sujetos a la complejidad y alcance del proyecto: entre 3 y 6 semanas aproximadamente.</p>
+      <div class="works-header" data-reveal>
+        <div>
+          <p class="eyebrow">03 — Trabajos</p>
+          <h2 class="h2">Proyectos que hablan por sí solos.</h2>
+        </div>
+        <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Ver todo en Behance <span>↗</span></a>
       </div>
 
-      <div class="timeline" data-reveal>
-        <div class="timeline-item">
-          <span class="timeline-step">Etapa 1 · 1 sem</span>
-          <h3>Estrategia e investigación</h3>
-          <p>Definidos los objetivos, comienza la investigación y el análisis para tomar las mejores decisiones gráficas a lo largo del proyecto.</p>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-step">Etapa 2 · 2-3 sem</span>
-          <h3>Conceptualización inicial</h3>
-          <p>Desarrollo creativo para definir un signo marcario acorde a los valores de la marca y una identidad visual alineada a su esencia y personalidad.</p>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-step">Etapa 3 · 3-4 sem</span>
-          <h3>Refinamiento y feedback</h3>
-          <p>Instancia de ajustes identitarios del logo y la identidad visual en general. Las rondas de corrección incluidas se determinan previamente.</p>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-step">Etapa 4 · 4-6 sem</span>
-          <h3>Entrega del proyecto</h3>
-          <p>Se desarrolla el manual de marca con las especificaciones técnicas y se preparan todos los archivos que conforman la totalidad del proyecto.</p>
-        </div>
+      <div class="filters" role="tablist" aria-label="Filtrar por categoría" id="filters">
+        <button type="button" role="tab" class="filter-pill" data-value="all" aria-selected="true">Todos</button>
+        <button type="button" role="tab" class="filter-pill" data-value="identidad" aria-selected="false">Identidad Visual</button>
+        <button type="button" role="tab" class="filter-pill" data-value="branding" aria-selected="false">Branding</button>
+        <button type="button" role="tab" class="filter-pill" data-value="packaging" aria-selected="false">Packaging</button>
+        <button type="button" role="tab" class="filter-pill" data-value="social" aria-selected="false">Campañas</button>
       </div>
 
-      <div class="proceso-cta" data-reveal>
-        <a href="#contacto" class="btn btn-primary btn-lg">
-          <span>Empezar mi proyecto</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+      <div class="works-rows" id="works-rows"></div>
+    </div>
+
+    <div class="work-preview" id="work-preview" aria-hidden="true">
+      <img id="work-preview-img" alt="">
     </div>
   </section>
 
   <!-- ============ PULL QUOTE ============ -->
-  <section class="pull-quote on-dark">
-    <div class="pull-quote-glow" aria-hidden="true"></div>
-    <div class="container pull-quote-inner" data-reveal>
-      <p class="eyebrow">Objetivo</p>
-      <blockquote>&ldquo;Diseño la percepción<br>que hace que te elijan.&rdquo;</blockquote>
-      <p class="pull-quote-lead">Tu público te ve gratis. Pero elige, compra y paga según lo que percibe.<br>Que tu negocio empiece a percibirse como lo que realmente vale.</p>
+  <section class="pullquote-section">
+    <div class="pullquote-glow" aria-hidden="true"></div>
+    <div class="container pullquote-content" data-reveal>
+      <p class="pullquote-eyebrow">Objetivo</p>
+      <blockquote class="pullquote">"Diseño la percepción que hace que te elijan."</blockquote>
+      <p class="pullquote-sub">Que tu negocio empiece a percibirse como lo que realmente vale.</p>
     </div>
   </section>
 
-  <!-- ============ POR QUÉ ELEGIRNOS ============ -->
-  <section class="section on-dark" id="por-que-elegirnos">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Por qué elegirme</p>
-        <h2>No vendo logos. Vendo el motivo por el que te van a elegir.</h2>
+  <!-- ============ PROCESO ============ -->
+  <section id="proceso" class="section-light">
+    <div class="container process-grid">
+      <div class="process-left" data-reveal>
+        <p class="eyebrow eyebrow--light">04 — Proceso</p>
+        <h2 class="h2">De la estrategia a la entrega, en 3 a 6 semanas.</h2>
+        <p>Plazos estimativos según complejidad y alcance. Trabajás directo conmigo en cada etapa, con rondas de corrección definidas de antemano.</p>
+        <a href="#contacto" class="btn btn-light">Reservar una llamada <span>→</span></a>
       </div>
 
-      <div class="numbered-grid">
-        <article class="numbered-item" data-reveal>
-          <span class="num">01</span>
-          <h3>Posicionamiento</h3>
-          <p>Te ayudo a ocupar un lugar claro y propio en la mente de tu cliente ideal, no un espacio genérico más.</p>
-        </article>
-        <article class="numbered-item" data-reveal>
-          <span class="num">02</span>
-          <h3>Diferenciación</h3>
-          <p>Diseño marcas que no se confunden con la competencia. Si se parece a otra, no está terminada.</p>
-        </article>
-        <article class="numbered-item" data-reveal>
-          <span class="num">03</span>
-          <h3>Resultados</h3>
-          <p>Cada decisión de diseño tiene una razón estratégica detrás: más confianza, más percepción de valor, más ventas.</p>
-        </article>
-        <article class="numbered-item" data-reveal>
-          <span class="num">04</span>
-          <h3>Proceso a medida</h3>
-          <p>Trabajás directo conmigo. Sin plantillas prearmadas, sin recetas genéricas de agencia.</p>
-        </article>
-      </div>
-
-      <div class="stats-row" data-reveal>
-        <div class="stat"><span class="stat-num" data-count-to="40">0</span><span class="stat-label">Marcas construidas</span></div>
-        <div class="stat"><span class="stat-num" data-count-to="6">0</span><span class="stat-label">Años de trayectoria</span></div>
-        <div class="stat"><span class="stat-num" data-count-to="100" data-suffix="%">0</span><span class="stat-label">Proyectos a medida</span></div>
-        <div class="stat"><span class="stat-num" data-count-to="1">0</span><span class="stat-label">Diseñador detrás de cada marca</span></div>
-      </div>
+      <ol class="process-list">
+        <li class="process-step" data-reveal>
+          <div class="process-step-head">
+            <span class="process-stage">ETAPA 01</span>
+            <span class="process-duration">1 semana</span>
+          </div>
+          <h3>Estrategia e investigación</h3>
+          <p>Definidos los objetivos, empieza la investigación y el análisis competitivo que sostienen cada decisión gráfica del proyecto.</p>
+        </li>
+        <li class="process-step" data-reveal>
+          <div class="process-step-head">
+            <span class="process-stage">ETAPA 02</span>
+            <span class="process-duration">2–3 semanas</span>
+          </div>
+          <h3>Conceptualización</h3>
+          <p>Desarrollo creativo del signo marcario y de una identidad visual alineada a la esencia y personalidad de la marca.</p>
+        </li>
+        <li class="process-step" data-reveal>
+          <div class="process-step-head">
+            <span class="process-stage">ETAPA 03</span>
+            <span class="process-duration">3–4 semanas</span>
+          </div>
+          <h3>Refinamiento y feedback</h3>
+          <p>Ajustes identitarios del logo y del sistema visual, con instancias de revisión pautadas para llegar a la versión definitiva.</p>
+        </li>
+        <li class="process-step" data-reveal>
+          <div class="process-step-head">
+            <span class="process-stage">ETAPA 04</span>
+            <span class="process-duration">4–6 semanas</span>
+          </div>
+          <h3>Entrega</h3>
+          <p>Manual de marca con las especificaciones técnicas y todos los archivos productivos listos para usar.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- ============ SOBRE MÍ ============ -->
-  <section class="section about-founder on-dark" id="sobre-mi">
-    <div class="container about-grid">
-      <div class="about-copy" data-reveal>
-        <p class="eyebrow">Quién está detrás</p>
-        <h2>Un solo diseñador. Sin intermediarios, sin plantillas.</h2>
-        <p class="section-lead">
-          Soy Julián Orlando. Cada proyecto que sale de OrlandoStudio pasa por mis manos
-          de principio a fin — hablás conmigo, no con un account manager ni un equipo rotativo.
-          Por eso cada marca que armamos tiene una mirada consistente, no un collage de decisiones
-          de distintas personas.
-        </p>
-        <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="btn btn-outline">
-          Conoceme en Instagram
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+  <!-- ============ ESTUDIO ============ -->
+  <section id="estudio" class="section-dark-2">
+    <div class="container studio-grid">
+      <div class="studio-left" data-reveal>
+        <p class="eyebrow">05 — Quién está detrás</p>
+        <h2 class="h2">Un solo diseñador. Sin intermediarios, sin plantillas.</h2>
+        <p>Soy Julián Orlando. Cada proyecto que sale de OrlandoStudio pasa por mis manos de principio a fin — hablás conmigo, no con un account manager ni con un equipo rotativo. Por eso cada marca tiene una mirada consistente, no un collage de decisiones de distintas personas.</p>
+        <div class="studio-links">
+          <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="btn btn-ghost-sm">Instagram <span>↗</span></a>
+          <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Behance <span>↗</span></a>
+        </div>
       </div>
-      <div class="about-badge" aria-hidden="true">
-        <img src="assets/img/julian-orlando-retrato.jpg" alt="" loading="lazy" width="690" height="1010">
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PORTFOLIO ============ -->
-  <section class="section" id="portfolio">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Portfolio</p>
-        <h2>Proyectos que hablan por sí solos.</h2>
-        <p class="section-lead">Trabajos reales de Julián Orlando — pasá el cursor sobre cada fila para verlos.</p>
-      </div>
-
-      <div class="portfolio-filters" data-reveal role="tablist" aria-label="Filtrar portfolio por categoría">
-        <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
-        <button class="filter-btn" data-filter="branding" role="tab" aria-selected="false">Branding</button>
-        <button class="filter-btn" data-filter="identidad" role="tab" aria-selected="false">Identidad Visual</button>
-        <button class="filter-btn" data-filter="packaging" role="tab" aria-selected="false">Packaging</button>
-        <button class="filter-btn" data-filter="social" role="tab" aria-selected="false">Redes Sociales</button>
-      </div>
-
-      <div class="project-list" data-reveal>
-        <a href="https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/outdoor-project.jpg">
-          <div class="project-row-left">
-            <span class="row-num">01</span>
-            <span class="project-row-name">The Outdoor Project</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/iron-lab.jpg">
-          <div class="project-row-left">
-            <span class="row-num">02</span>
-            <span class="project-row-name">Iron Lab</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/bulavinaka.jpg">
-          <div class="project-row-left">
-            <span class="row-num">03</span>
-            <span class="project-row-name">BulaVinaka</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/homeboyz.jpg">
-          <div class="project-row-left">
-            <span class="row-num">04</span>
-            <span class="project-row-name">HomeBoyz</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" target="_blank" rel="noopener" class="project-row" data-category="branding" data-tag="Branding" data-img="assets/img/portfolio/salentein.jpg">
-          <div class="project-row-left">
-            <span class="row-num">05</span>
-            <span class="project-row-name">Salentein</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Branding</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/ethercore.jpg">
-          <div class="project-row-left">
-            <span class="row-num">06</span>
-            <span class="project-row-name">EtherCore</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/libema.jpg">
-          <div class="project-row-left">
-            <span class="row-num">07</span>
-            <span class="project-row-name">Libema</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/33usd.jpg">
-          <div class="project-row-left">
-            <span class="row-num">08</span>
-            <span class="project-row-name">33usd</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" target="_blank" rel="noopener" class="project-row" data-category="identidad" data-tag="Identidad Visual" data-img="assets/img/portfolio/armonydrinks.jpg">
-          <div class="project-row-left">
-            <span class="row-num">09</span>
-            <span class="project-row-name">ArmonyDrinks</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Identidad Visual</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/164034163/La-Pelota-No-Se-Mancha-Campana-Social" target="_blank" rel="noopener" class="project-row" data-category="social" data-tag="Redes Sociales" data-img="assets/img/portfolio/la-pelota-no-se-mancha.jpg">
-          <div class="project-row-left">
-            <span class="row-num">10</span>
-            <span class="project-row-name">La Pelota No Se Mancha</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Campaña Social</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/166106825/Hawaiian-Tropic-Tattoo-Line" target="_blank" rel="noopener" class="project-row" data-category="packaging" data-tag="Packaging" data-img="assets/img/portfolio/hawaiian-tropic.jpg">
-          <div class="project-row-left">
-            <span class="row-num">11</span>
-            <span class="project-row-name">Hawaiian Tropic — Tattoo Line</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Packaging</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/193912543/RE-EVOLUCION-Sistema-de-Vinilos" target="_blank" rel="noopener" class="project-row" data-category="packaging" data-tag="Packaging" data-img="assets/img/portfolio/re-evolucion.jpg">
-          <div class="project-row-left">
-            <span class="row-num">12</span>
-            <span class="project-row-name">RE-EVOLUCIÓN</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Sistema de Vinilos</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-        <a href="https://www.behance.net/gallery/164594839/INSURGENTE-Cerveza-Craft-Mexicana" target="_blank" rel="noopener" class="project-row" data-category="packaging" data-tag="Packaging" data-img="assets/img/portfolio/insurgente.jpg">
-          <div class="project-row-left">
-            <span class="row-num">13</span>
-            <span class="project-row-name">INSURGENTE</span>
-          </div>
-          <div class="project-row-right">
-            <span class="project-row-cat">Cerveza Craft Mexicana</span>
-            <span class="project-row-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </a>
-      </div>
-
-      <div class="portfolio-cta" data-reveal>
-        <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-outline">
-          Ver más en Behance
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+      <div class="studio-portrait-wrap" data-reveal>
+        <img class="studio-portrait" src="assets/img/julian-orlando-retrato.jpg" alt="Julián Orlando, fundador de OrlandoStudio" loading="lazy" width="690" height="1010">
+        <div class="studio-badge">
+          <span class="studio-badge-role">Fundador · Diseñador</span>
+          <span class="studio-badge-name">Julián Orlando</span>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- Vista previa flotante para las filas de portfolio (desktop, hover) -->
-  <div class="project-preview" id="project-preview" aria-hidden="true">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 16l4.5-6 3 4 2.5-3L20 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
-    <span id="project-preview-label">Ver proyecto</span>
-  </div>
 
   <!-- ============ TESTIMONIOS ============ -->
-  <section class="section on-dark" id="testimonios">
+  <section id="voces" class="section-dark">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Testimonios</p>
-        <h2>Lo que dicen las marcas que ya trabajaron conmigo.</h2>
+      <div style="margin-bottom:clamp(36px,4.5vw,60px);" data-reveal>
+        <p class="eyebrow">06 — Clientes</p>
+        <h2 class="h2" style="max-width:26ch;">Lo que dicen las marcas que ya trabajaron conmigo.</h2>
       </div>
-
-      <div class="testimonials-grid" data-reveal>
-        <blockquote class="testimonial-card">
-          <p>“Estamos encantadas con el equipo, por fin podemos mostrar una imagen igual de profesional que nuestro trabajo. A nuestros pacientes les encanta ver los colores! Nuestro espacio se integra y comunica, algo fundamental para la salud infantil.”</p>
-          <footer>
-            <span class="avatar" aria-hidden="true">FG</span>
-            <span><cite>Florencia G.</cite><span class="role">Fundadora, Libema — Equipo Integral</span></span>
+      <div class="testimonials-grid">
+        <blockquote class="testimonial" data-reveal>
+          <span class="testimonial-mark" aria-hidden="true">"</span>
+          <p>Por fin podemos mostrar una imagen igual de profesional que nuestro trabajo. A nuestros pacientes les encanta ver los colores: el espacio se integra y comunica, algo fundamental en salud infantil.</p>
+          <footer class="testimonial-foot">
+            <span class="testimonial-avatar" aria-hidden="true">FG</span>
+            <span><cite>Florencia G.</cite><span class="role">Fundadora · Libema</span></span>
           </footer>
         </blockquote>
-
-        <blockquote class="testimonial-card">
-          <p>“Necesitaba hace mucho poder dar este salto, siempre me costó identificarme con mi marca, y hoy mi indumentaria compite con las primeras marcas de skateboarding a nivel internacional. Gracias por todo hermano, la vidriera quedó increíble.”</p>
-          <footer>
-            <span class="avatar" aria-hidden="true">JA</span>
-            <span><cite>Juan A.</cite><span class="role">Fundador y dueño, BulaVinaka®</span></span>
+        <blockquote class="testimonial" data-reveal>
+          <span class="testimonial-mark" aria-hidden="true">"</span>
+          <p>Siempre me costó identificarme con mi marca, y hoy mi indumentaria compite con las primeras marcas de skateboarding a nivel internacional. La vidriera quedó increíble.</p>
+          <footer class="testimonial-foot">
+            <span class="testimonial-avatar" aria-hidden="true">JA</span>
+            <span><cite>Juan A.</cite><span class="role">Fundador · BulaVinaka®</span></span>
           </footer>
         </blockquote>
-
-        <blockquote class="testimonial-card">
-          <p>“Con Julián buscábamos algo distinto, crear una submarca para un segmento difícil de abastecer era un desafío importante, pero podemos decir que hoy nos diferenciamos de la competencia, no solo con nuestros muebles, ahora también desde lo visual, por fin podemos destacar.”</p>
-          <footer>
-            <span class="avatar" aria-hidden="true">BB</span>
-            <span><cite>Belén B.</cite><span class="role">Co-fundadora, The Outdoor Project®</span></span>
+        <blockquote class="testimonial" data-reveal>
+          <span class="testimonial-mark" aria-hidden="true">"</span>
+          <p>Crear una submarca para un segmento difícil era un desafío importante. Hoy nos diferenciamos de la competencia no solo con nuestros muebles, también desde lo visual.</p>
+          <footer class="testimonial-foot">
+            <span class="testimonial-avatar" aria-hidden="true">BB</span>
+            <span><cite>Belén B.</cite><span class="role">Co-fundadora · The Outdoor Project®</span></span>
           </footer>
         </blockquote>
       </div>
     </div>
   </section>
 
-  <!-- ============ CTA BANNER ============ -->
-  <section class="cta-banner">
-    <div class="cta-banner-glow" aria-hidden="true"></div>
-    <div class="container cta-banner-inner" data-reveal>
-      <h2>¿Listo para que tu marca sea la elegida?</h2>
-      <p>Contame sobre tu proyecto y coordinamos los próximos pasos sin compromiso.</p>
-      <a href="#contacto" class="btn btn-primary btn-lg">Empezar mi proyecto</a>
+  <!-- ============ FAQ ============ -->
+  <section class="section-light">
+    <div class="container faq-grid">
+      <div class="faq-left" data-reveal>
+        <p class="eyebrow eyebrow--light">07 — Preguntas</p>
+        <h2 class="h2">Antes de escribirme, quizá esto te resuelve.</h2>
+      </div>
+      <div class="faq-list" id="faq-list"></div>
     </div>
   </section>
 
   <!-- ============ CONTACTO ============ -->
-  <section class="section" id="contacto">
+  <section id="contacto" class="section-dark contact-section">
+    <div class="contact-glow" aria-hidden="true"></div>
     <div class="container">
-      <div class="contact-huge" data-reveal>
-        <p class="eyebrow">Contacto</p>
+      <div class="contact-intro" data-reveal>
+        <p class="eyebrow">08 — Contacto</p>
+        <h2 class="h2">Contame tu proyecto. Respondo en menos de 24 h hábiles.</h2>
         <a href="mailto:julianorlando.dg@gmail.com" class="contact-email">julianorlando.dg@gmail.com</a>
-        <p class="section-lead">Contame tu proyecto por mail, por el formulario, o directo por redes. Te respondo en menos de 24hs hábiles.</p>
       </div>
 
       <div class="contact-grid">
-        <div data-reveal>
-          <ul class="contact-list">
-            <li>
-              <span class="contact-label">Estudio</span>
-              <span class="contact-value">OrlandoStudio™ — Buenos Aires, Argentina</span>
-            </li>
-            <li>
-              <span class="contact-label">Disponibilidad</span>
-              <span class="contact-value">Autónomo disponible para nuevos proyectos</span>
-            </li>
-          </ul>
-
-          <div class="social-pills">
-            <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="btn btn-social">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-              <span>@julianorlando.dg</span>
-            </a>
-            <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener" class="btn btn-social">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3v10.5a3.5 3.5 0 1 1-3-3.46" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 3c.5 2.5 2.3 4.2 5 4.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-              <span>@julianorlando.dg</span>
-            </a>
-            <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-social">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 6v12h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-              <span>Behance</span>
-            </a>
+        <div class="contact-info" data-reveal>
+          <div class="contact-info-cell">
+            <span class="contact-info-label">Estudio</span>
+            <span>OrlandoStudio™ — Buenos Aires, Argentina</span>
+          </div>
+          <div class="contact-info-cell">
+            <span class="contact-info-label">Disponibilidad</span>
+            <span>Agenda abierta · 2 proyectos por mes</span>
+          </div>
+          <div class="contact-info-cell">
+            <span class="contact-info-label">Redes</span>
+            <span class="contact-socials">
+              <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="contact-social">@julianorlando.dg</a>
+              <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener" class="contact-social">TikTok</a>
+              <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="contact-social">Behance</a>
+            </span>
           </div>
         </div>
 
         <form class="contact-form" id="contact-form" data-reveal novalidate>
-          <div class="form-row">
-            <label for="name">Nombre y apellido</label>
-            <input type="text" id="name" name="name" autocomplete="name" required>
-          </div>
-          <div class="form-row">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </div>
-          <div class="form-row">
-            <label for="project-type">Tipo de proyecto</label>
-            <select id="project-type" name="project-type" required>
-              <option value="" disabled selected>Elegí una opción</option>
+          <label class="form-field">
+            <span>Nombre y apellido</span>
+            <input type="text" name="nombre" id="field-nombre" autocomplete="name" required>
+          </label>
+          <label class="form-field">
+            <span>Email</span>
+            <input type="email" name="email" id="field-email" autocomplete="email" required>
+          </label>
+          <label class="form-field">
+            <span>Tipo de proyecto</span>
+            <select name="tipo" id="field-tipo" required>
               <option value="logo">Diseño de logotipo</option>
-              <option value="identidad">Identidad visual</option>
+              <option value="identidad">Identidad visual completa</option>
               <option value="manual">Manual de marca</option>
-              <option value="aplicaciones">Aplicación de marca (packaging, papelería, redes)</option>
-              <option value="otro">Otro / no estoy seguro</option>
+              <option value="aplicaciones">Aplicación de marca</option>
+              <option value="otro">Otro / todavía no sé</option>
             </select>
-          </div>
-          <div class="form-row">
-            <label for="message">Contame sobre tu marca</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">
-            <span>Enviar mensaje</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
+          </label>
+          <label class="form-field">
+            <span>Contame sobre tu marca</span>
+            <textarea name="mensaje" id="field-mensaje" rows="4" required></textarea>
+          </label>
+          <button type="submit" class="btn form-submit">Enviar mensaje <span>→</span></button>
+          <p class="form-error" id="form-error" hidden>Revisá los campos marcados antes de enviar.</p>
+          <p class="form-success" id="form-success" hidden>Mensaje enviado. Te respondo dentro de las próximas 24 h hábiles.</p>
         </form>
       </div>
     </div>
@@ -607,43 +478,29 @@
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <img class="brand-mark" src="assets/brand/JO_VerdeFondoOscuro.svg" alt="" width="22" height="26" aria-hidden="true">
-      <span class="brand-name">Orlando<span class="brand-accent">Studio</span><sup>™</sup></span>
+  <div class="container">
+    <div class="footer-top">
+      <img class="footer-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio">
+      <nav class="footer-nav">
+        <a href="#servicios">Servicios</a>
+        <a href="#trabajos">Trabajos</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
     </div>
-
-    <nav class="footer-nav" aria-label="Navegación del pie de página">
-      <a href="#servicios">Servicios</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#testimonios">Testimonios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-
-    <div class="footer-social">
-      <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" aria-label="Instagram de OrlandoStudio">IG</a>
-      <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener" aria-label="TikTok de OrlandoStudio">TT</a>
-      <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" aria-label="Behance de OrlandoStudio">BE</a>
+    <div class="footer-bottom">
+      <p>© 2026 OrlandoStudio™ — Branding &amp; Design</p>
+      <p>Diseñando para que tus clientes te elijan</p>
     </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> OrlandoStudio™ — Branding & Design. Todos los derechos reservados.</p>
-    <p>Diseñando para que tus clientes te elijan.</p>
   </div>
 </footer>
 
-<!-- ============ POPUP ============ -->
-<div class="popup-card" id="popup-card" role="dialog" aria-labelledby="popup-title" aria-hidden="true">
-  <button class="popup-close" id="popup-close" aria-label="Cerrar aviso">&times;</button>
-  <p class="popup-eyebrow">Antes de irte</p>
-  <h3 id="popup-title">¿Tu marca ya está lista para que la elijan?</h3>
-  <p>Contame tu proyecto y te respondo con los próximos pasos, sin compromiso.</p>
-  <a href="#contacto" class="btn btn-primary btn-block" id="popup-cta">Empezar mi proyecto</a>
+<!-- ============ DOCK FLOTANTE ============ -->
+<div class="floating-dock" id="floating-dock">
+  <span class="floating-dock-text">Agenda abierta · 2 cupos</span>
+  <a href="#contacto" class="btn btn-primary">Empezar</a>
 </div>
 
-<!-- Librerías — classic scripts con defer, sin ES modules (ver skill: file:// + cache) -->
-<script defer src="lib/gsap.min.js"></script>
-<script defer src="lib/ScrollTrigger.min.js"></script>
-<script defer src="main.js?v=20260907"></script>
+<script src="main.js"></script>
 </body>
 </html>
