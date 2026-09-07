@@ -446,6 +446,7 @@ section[id] { scroll-margin-top: 100px; }
 }
 
 .hero-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
   gap: clamp(32px,5vw,72px);
@@ -489,10 +490,36 @@ section[id] { scroll-margin-top: 100px; }
 
 .hero-seal-wrap {
   position: relative;
+  align-self: center;
+  width: min(460px,82vw);
+  aspect-ratio: 1;
+  margin-inline: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: clamp(12px,3vw,32px);
+}
+
+/* A partir de acá el sello se saca del flujo del grid y se centra
+   respecto a la altura visible de pantalla, no respecto al bloque de
+   texto (que es más alto y lo empujaba hacia abajo). El padding
+   reservado en el texto usa la MISMA medida que el ancho del sello
+   para que nunca se superpongan, en cualquier ancho de pantalla. */
+@media (min-width: 680px) {
+  .hero-grid {
+    --seal-size: clamp(260px, 34vw, 460px);
+    min-height: min(620px, calc(100vh - 260px));
+    min-height: min(620px, calc(100svh - 260px));
+  }
+  .hero-grid > :first-child { padding-right: calc(var(--seal-size) + 40px); }
+  .hero-seal-wrap {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: var(--seal-size);
+    transform: translateY(-50%);
+    margin: 0;
+  }
 }
 .seal-ring {
   position: absolute;
