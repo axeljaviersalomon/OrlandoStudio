@@ -41,6 +41,7 @@
 
   var progressBar = $("#scroll-progress");
   var dock = $("#floating-dock");
+  var backToTop = $("#back-to-top");
 
   function onScroll() {
     var doc = document.documentElement;
@@ -51,9 +52,18 @@
       var show = window.scrollY > window.innerHeight * 0.9 && pct < 0.94;
       dock.classList.toggle("is-visible", show);
     }
+    if (backToTop) {
+      backToTop.classList.toggle("is-visible", window.scrollY > window.innerHeight * 0.6);
+    }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  if (backToTop) {
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+    });
+  }
 
   /* ---------------------------------------------------------------------
      Reveals en scroll (IntersectionObserver)
