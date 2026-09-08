@@ -993,7 +993,36 @@ section[id] { scroll-margin-top: 100px; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
   gap: clamp(32px,5vw,72px);
-  align-items: center;
+  align-items: stretch;
+}
+.studio-left {
+  position: relative;
+  overflow: visible;
+  margin-top: calc(-1 * clamp(72px,10vw,150px));
+  padding-top: clamp(72px,10vw,150px);
+}
+.studio-left-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.studio-watermark {
+  position: absolute;
+  top: 0;
+  right: 58%;
+  height: 68%;
+  width: auto;
+  max-width: none;
+  opacity: .15;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+@media (max-width: 700px) {
+  .studio-watermark { display: none; }
 }
 .studio-left .h2 { max-width: 22ch; }
 .studio-left p {
