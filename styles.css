@@ -248,6 +248,7 @@ section[id] { scroll-margin-top: 100px; }
   white-space: nowrap;
   cursor: pointer;
   border: none;
+  background: transparent;
 }
 .btn-primary {
   background: var(--brand-2);
@@ -831,6 +832,13 @@ section[id] { scroll-margin-top: 100px; }
   color: var(--brand-2);
   font-size: .9rem;
 }
+
+.works-load-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+.works-load-more-wrap.is-hidden { display: none; }
 
 .works-grid {
   display: grid;

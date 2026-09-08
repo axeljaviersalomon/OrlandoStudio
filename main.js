@@ -151,10 +151,20 @@
   var currentFilter = "all";
   var preview = $("#work-preview");
   var previewImg = $("#work-preview-img");
+  var loadMoreWrap = $("#works-load-more-wrap");
+  var loadMoreBtn = $("#works-load-more");
+  var desktopMq = window.matchMedia("(min-width: 901px)");
+  var visibleCount = desktopMq.matches ? 5 : 4;
+
+  function worksPageSize() {
+    return desktopMq.matches ? 5 : 4;
+  }
 
   function renderRows() {
     if (!worksRows) return;
-    var shown = PROJECTS.filter(function (p) { return currentFilter === "all" || p.cat === currentFilter; });
+    var all = PROJECTS.filter(function (p) { return currentFilter === "all" || p.cat === currentFilter; });
+    var shown = all.slice(0, visibleCount);
+    if (loadMoreWrap) loadMoreWrap.classList.toggle("is-hidden", visibleCount >= all.length);
     worksRows.innerHTML = shown.map(function (p, i) {
       var num = String(i + 1).padStart(2, "0");
       return (
@@ -195,9 +205,24 @@
     btn.addEventListener("click", function () {
       currentFilter = btn.dataset.value;
       filters.forEach(function (b) { b.setAttribute("aria-selected", b === btn ? "true" : "false"); });
+      visibleCount = worksPageSize();
       renderRows();
     });
   });
+
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", function () {
+      visibleCount += worksPageSize();
+      renderRows();
+    });
+  }
+
+  if (desktopMq.addEventListener) {
+    desktopMq.addEventListener("change", function () {
+      visibleCount = worksPageSize();
+      renderRows();
+    });
+  }
 
   renderRows();
 
