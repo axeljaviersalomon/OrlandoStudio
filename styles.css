@@ -381,7 +381,7 @@ section[id] { scroll-margin-top: 100px; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(64px,9vw,120px) 0 clamp(48px,6vw,88px);
+  padding: clamp(32px,4vw,56px) 0 clamp(48px,6vw,88px);
 }
 .hero-glow-1 {
   position: absolute;
@@ -390,7 +390,7 @@ section[id] { scroll-margin-top: 100px; }
   width: min(900px,90vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(0,167,112,.26), rgba(0,131,88,.06) 46%, transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(0,167,112,.14), rgba(0,131,88,.04) 46%, transparent 70%);
   filter: blur(20px);
 }
 .hero-glow-2 {
@@ -400,7 +400,7 @@ section[id] { scroll-margin-top: 100px; }
   width: min(700px,80vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(194,220,175,.12), transparent 68%);
+  background: radial-gradient(circle at 50% 50%, rgba(194,220,175,.07), transparent 68%);
 }
 
 .hero-content { position: relative; }
