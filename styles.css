@@ -442,17 +442,6 @@ section[id] { scroll-margin-top: 100px; }
 }
 .mobile-menu.is-open .mobile-menu-bottom { animation: osRise .6s var(--ease-main) .58s both; }
 .mobile-menu-cta { width: 100%; justify-content: center; margin-top: 8px; }
-.mobile-menu-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 22px;
-  font-family: var(--font-mono);
-  font-size: .7rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--dark-text-mute);
-}
 
 /* ==========================================================================
    Hero
