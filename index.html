@@ -76,16 +76,29 @@
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <nav aria-label="Navegación móvil">
-    <ul>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#trabajos">Trabajos</a></li>
-      <li><a href="#proceso">Proceso</a></li>
-      <li><a href="#estudio">Estudio</a></li>
-      <li><a href="#voces">Clientes</a></li>
-      <li><a href="#contacto" class="btn btn-primary btn-hero" data-modal-trigger>Empezar proyecto</a></li>
-    </ul>
-  </nav>
+  <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Cerrar menú">
+    <span aria-hidden="true">×</span>
+  </button>
+
+  <div class="mobile-menu-inner">
+    <nav class="mobile-nav" aria-label="Navegación móvil">
+      <ol>
+        <li><a href="#servicios"><span class="mobile-nav-index">01</span><span class="mobile-nav-label">Servicios</span></a></li>
+        <li><a href="#trabajos"><span class="mobile-nav-index">02</span><span class="mobile-nav-label">Trabajos</span></a></li>
+        <li><a href="#proceso"><span class="mobile-nav-index">03</span><span class="mobile-nav-label">Proceso</span></a></li>
+        <li><a href="#estudio"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Estudio</span></a></li>
+        <li><a href="#voces"><span class="mobile-nav-index">05</span><span class="mobile-nav-label">Clientes</span></a></li>
+      </ol>
+    </nav>
+
+    <div class="mobile-menu-bottom">
+      <a href="#contacto" class="btn btn-primary btn-hero mobile-menu-cta" data-modal-trigger>Empezar proyecto <span aria-hidden="true">→</span></a>
+      <div class="mobile-menu-meta">
+        <span>Buenos Aires · AR</span>
+        <span>Agenda abierta · 2 cupos Q4</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <main id="main">

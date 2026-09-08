@@ -133,6 +133,7 @@
 
   var navToggle = $("#nav-toggle");
   var mobileMenu = $("#mobile-menu");
+  var mobileMenuClose = $("#mobile-menu-close");
   if (navToggle && mobileMenu) {
     var closeMenu = function () {
       mobileMenu.classList.remove("is-open");
@@ -144,6 +145,7 @@
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
       document.body.style.overflow = open ? "hidden" : "";
     });
+    if (mobileMenuClose) mobileMenuClose.addEventListener("click", closeMenu);
     $all("a", mobileMenu).forEach(function (a) {
       a.addEventListener("click", closeMenu);
     });
