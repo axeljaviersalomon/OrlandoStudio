@@ -1012,7 +1012,7 @@ section[id] { scroll-margin-top: 100px; }
 .studio-watermark {
   position: absolute;
   top: 0;
-  right: 58%;
+  right: 12%;
   height: 68%;
   width: auto;
   max-width: none;
