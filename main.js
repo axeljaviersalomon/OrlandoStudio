@@ -1,6 +1,23 @@
 (function () {
   "use strict";
 
+  /* ---------------------------------------------------------------------
+     Forzar inicio en el top (evita que el navegador restaure el scroll
+     de una visita anterior o de la cache bfcache al entrar al sitio).
+     --------------------------------------------------------------------- */
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+  if (!location.hash) {
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("pageshow", function (e) {
+    if (!location.hash && (e.persisted || window.scrollY > 0)) {
+      window.scrollTo(0, 0);
+    }
+  });
+
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
