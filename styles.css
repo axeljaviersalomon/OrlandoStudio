@@ -363,6 +363,13 @@ section[id] { scroll-margin-top: 100px; }
   transition: clip-path .65s var(--ease-main);
 }
 
+.mobile-menu-brand {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1;
+}
+
 .mobile-menu-close {
   position: absolute;
   top: 14px;
