@@ -1178,8 +1178,18 @@ section[id] { scroll-margin-top: 100px; }
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0,167,112,.2), transparent 65%);
 }
-.contact-intro { position: relative; margin-bottom: clamp(40px,5vw,64px); }
-.contact-intro .h2 { max-width: 22ch; font-size: clamp(1.9rem,4.6vw,3.8rem); letter-spacing: -.04em; }
+.contact-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(36px,4.5vw,56px);
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+.contact-intro { position: relative; }
+.contact-intro .h2 { max-width: 22ch; margin-inline: auto; font-size: clamp(1.9rem,4.6vw,3.8rem); letter-spacing: -.04em; }
 .contact-email {
   display: inline-block;
   margin-top: 26px;
@@ -1193,21 +1203,17 @@ section[id] { scroll-margin-top: 100px; }
 }
 .contact-email:hover { color: #fff; border-color: #fff; }
 
-.contact-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
-  gap: clamp(24px,3vw,48px);
-  align-items: start;
-}
 .contact-info {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1px;
+  width: 100%;
   background: var(--dark-hairline);
   border: 1px solid var(--dark-hairline);
   border-radius: var(--r-panel);
   overflow: hidden;
+  text-align: left;
 }
 .contact-info-cell { background: var(--bg-dark-2); padding: 22px 24px; }
 .contact-info-label {
@@ -1230,95 +1236,13 @@ section[id] { scroll-margin-top: 100px; }
 }
 .contact-social:hover { border-color: var(--mint); background: rgba(243,242,243,.06); color: var(--ink-dark); }
 
-.contact-form {
-  background: var(--bg-dark-2);
-  border: 1px solid var(--dark-hairline);
-  border-radius: var(--r-panel);
-  padding: clamp(24px,3vw,34px);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.form-field { display: flex; flex-direction: column; gap: 8px; }
-.form-field span {
-  font-family: var(--font-mono);
-  font-size: .66rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--dark-text-mute);
-}
-.form-field input,
-.form-field textarea,
-.form-field select {
-  background: var(--dark-input-bg);
-  border: 1px solid var(--dark-input-border);
-  border-radius: var(--r-input);
-  padding: 14px 16px;
-  font-size: 1rem;
-  color: var(--ink-dark);
-  transition: border-color .3s, background .3s;
-}
-.form-field select { background: var(--dark-input-bg); }
-.form-field input:focus,
-.form-field textarea:focus,
-.form-field select:focus {
-  border-color: var(--brand-2);
-  background: rgba(243,242,243,.14);
-  outline: none;
-}
-.form-field textarea { resize: vertical; }
-.form-submit {
-  justify-content: center;
-  background: var(--brand-2);
-  color: var(--deep);
-  font-weight: 640;
-  font-size: 1rem;
-  padding: 16px 26px;
-}
-.form-submit:hover { background: var(--mint); transform: translateY(-2px); }
-.form-success {
-  font-size: .9rem;
-  color: var(--mint);
-  text-align: center;
-  animation: osFade .4s ease both;
-}
+.contact-cta { font-size: 1.05rem; padding: 18px 34px; }
+
 .form-error {
   font-size: .85rem;
   color: #ffb4a8;
   text-align: center;
 }
-
-/* Radio groups (formulario) */
-.form-field--radio > span { margin-bottom: 2px; }
-.form-radio-group { display: flex; flex-direction: column; gap: 10px; }
-.form-radio {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--dark-input-bg);
-  border: 1px solid var(--dark-border);
-  border-radius: var(--r-input);
-  padding: 13px 16px;
-  cursor: pointer;
-  transition: border-color .3s, background .3s;
-}
-.form-radio:hover { border-color: var(--dark-border-3); }
-.form-radio:has(input:checked) { border-color: var(--brand-2); background: rgba(0,167,112,.12); }
-.form-radio input[type="radio"] { accent-color: var(--brand-2); width: 18px; height: 18px; flex-shrink: 0; }
-.form-radio span { font-size: .95rem; color: var(--ink-dark); text-transform: none; letter-spacing: normal; font-family: var(--font-display); }
-.form-radio--other { flex-wrap: wrap; }
-.form-radio-other-input {
-  flex: 1 1 160px;
-  min-width: 0;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--dark-border);
-  padding: 4px 2px;
-  font-size: .92rem;
-  color: var(--ink-dark);
-  font-family: var(--font-display);
-}
-.form-radio-other-input:focus { outline: none; border-color: var(--brand-2); }
 
 /* Modal "Empezar proyecto" */
 .modal-overlay {

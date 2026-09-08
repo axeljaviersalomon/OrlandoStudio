@@ -24,94 +24,6 @@
     { name: "INSURGENTE", tag: "Packaging", cat: "packaging", img: "assets/img/portfolio/insurgente.jpg", url: "https://www.behance.net/gallery/164594839/INSURGENTE-Cerveza-Craft-Mexicana" }
   ];
 
-  var FORM_QUESTIONS = [
-    { type: "text", name: "nombre", label: "¿Cuál es tu nombre y apellido?", required: true, autocomplete: "name" },
-    { type: "email", name: "email", label: "Mail que utilices", required: true, autocomplete: "email" },
-    { type: "tel", name: "telefono", label: "Número de teléfono", required: true, autocomplete: "tel" },
-    { type: "text", name: "pais", label: "¿Desde qué país te contactás?", required: true },
-    { type: "text", name: "negocio", label: "¿Cuál es el nombre de tu negocio?", required: true },
-    { type: "text", name: "redes", label: "¿Tenés enlaces a redes sociales que te gustaría compartir? (si los hay)", required: false },
-    { type: "radio", name: "ayuda", label: "¿En qué puedo ayudarte?", required: true, otherOption: true, options: ["Diseño de Logo", "Diseño de Identidad visual", "Diseño de Branding completo"] },
-    { type: "textarea", name: "sobre_negocio", label: "Quisiera saber más sobre tu negocio... ¿Qué hacés y qué lo hace especial?", required: true },
-    { type: "textarea", name: "objetivo", label: "¿Qué te gustaría conseguir o lograr con tu diseño de marca?", required: true },
-    { type: "text", name: "vision", label: "¿Tenés una visión clara de la imagen de tu marca? (Si tenés un tablero de Pinterest, un panel de inspiración o cualquier otro recurso que capture tus ideas, adjuntá el enlace aquí)", required: false },
-    { type: "radio", name: "inversion", label: "¿Cuánto invertirías en un proceso para que tu marca se vuelva inolvidable?", required: true, options: ["De 750 - 1200 USD", "De 1200 - 1800 USD", "De 1800 - 2900 USD", "Más de 3000 USD"] },
-    { type: "textarea", name: "fit", label: "¿Qué te atrajo de mi trabajo y por qué creés que encajaríamos bien?", required: true },
-    { type: "date", name: "fecha", label: "¿Cuándo planeás (re)lanzar tu marca? ¿Tenemos fecha límite para terminar el proyecto?", required: false }
-  ];
-
-  function renderFormFields(container, idPrefix) {
-    if (!container) return;
-    container.innerHTML = FORM_QUESTIONS.map(function (q, qi) {
-      var fieldId = idPrefix + "-" + q.name;
-      var reqAttr = q.required ? " required" : "";
-      var reqMark = q.required ? "" : " <em>(opcional)</em>";
-
-      if (q.type === "textarea") {
-        return (
-          '<label class="form-field">' +
-            "<span>" + q.label + reqMark + "</span>" +
-            '<textarea name="' + q.name + '" id="' + fieldId + '" rows="4"' + reqAttr + "></textarea>" +
-          "</label>"
-        );
-      }
-
-      if (q.type === "radio") {
-        var options = q.options.slice();
-        var groupName = idPrefix + "-" + q.name;
-        var optionsHtml = options.map(function (opt, oi) {
-          var optId = fieldId + "-" + oi;
-          return (
-            '<label class="form-radio">' +
-              '<input type="radio" name="' + groupName + '" id="' + optId + '" value="' + opt + '"' + reqAttr + ">" +
-              "<span>" + opt + "</span>" +
-            "</label>"
-          );
-        }).join("");
-        if (q.otherOption) {
-          var otherId = fieldId + "-otros";
-          optionsHtml += (
-            '<label class="form-radio form-radio--other">' +
-              '<input type="radio" name="' + groupName + '" id="' + otherId + '" value="Otros">' +
-              "<span>Otros:</span>" +
-              '<input type="text" class="form-radio-other-input" name="' + q.name + '_otros" aria-label="Especificá otro tipo de ayuda">' +
-            "</label>"
-          );
-        }
-        return (
-          '<div class="form-field form-field--radio">' +
-            "<span>" + q.label + reqMark + "</span>" +
-            '<div class="form-radio-group">' + optionsHtml + "</div>" +
-          "</div>"
-        );
-      }
-
-      return (
-        '<label class="form-field">' +
-          "<span>" + q.label + reqMark + "</span>" +
-          '<input type="' + q.type + '" name="' + q.name + '" id="' + fieldId + '"' +
-          (q.autocomplete ? ' autocomplete="' + q.autocomplete + '"' : "") + reqAttr + ">" +
-        "</label>"
-      );
-    }).join("");
-  }
-
-  function bindContactForm(formEl, errorEl, successEl) {
-    if (!formEl) return;
-    formEl.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!formEl.checkValidity()) {
-        if (errorEl) errorEl.hidden = false;
-        if (successEl) successEl.hidden = true;
-        return;
-      }
-      if (errorEl) errorEl.hidden = true;
-      if (successEl) successEl.hidden = false;
-      formEl.reset();
-      /* NOTA: conectar a un endpoint propio, Formspree o Resend para recibir los envíos por email. */
-    });
-  }
-
   var FAQ = [
     { q: "¿Cuánto sale un proyecto de marca?", a: "Depende del alcance: un logotipo puntual no es lo mismo que una identidad visual completa con manual y aplicaciones. Después de una llamada de 20 minutos te envío una propuesta cerrada, con etapas, plazos y precio final sin sorpresas." },
     { q: "¿Cuánto tarda?", a: "Entre 3 y 6 semanas según complejidad y velocidad de feedback. La agenda se reserva por orden de seña y trabajo un máximo de 2 proyectos por mes para no bajar el nivel de dedicación." },
@@ -320,13 +232,6 @@
   }
 
   renderFaq();
-
-  /* ---------------------------------------------------------------------
-     Formulario de contacto
-     --------------------------------------------------------------------- */
-
-  renderFormFields($("#contact-form-fields"), "contact");
-  bindContactForm($("#contact-form"), $("#contact-form-error"), $("#contact-form-success"));
 
   /* ---------------------------------------------------------------------
      Brief (formulario del popup "Empezar proyecto")
