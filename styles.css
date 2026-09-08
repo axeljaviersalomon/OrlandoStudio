@@ -1237,6 +1237,7 @@ section[id] { scroll-margin-top: 100px; }
 .contact-social:hover { border-color: var(--mint); background: rgba(243,242,243,.06); color: var(--ink-dark); }
 
 .contact-cta { font-size: 1.05rem; padding: 18px 34px; }
+.contact-logo { height: 30px; width: auto; opacity: .8; margin-top: clamp(8px,1.5vw,16px); }
 
 .form-error {
   font-size: .85rem;
