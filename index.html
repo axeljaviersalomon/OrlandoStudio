@@ -67,7 +67,7 @@
     </nav>
 
     <div class="header-actions">
-      <a href="#contacto" class="btn btn-primary btn-header">Empezar proyecto</a>
+      <a href="#contacto" class="btn btn-primary btn-header" data-modal-trigger>Empezar proyecto</a>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
         <span></span><span></span><span></span>
       </button>
@@ -83,7 +83,7 @@
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#estudio">Estudio</a></li>
       <li><a href="#voces">Clientes</a></li>
-      <li><a href="#contacto" class="btn btn-primary btn-hero">Empezar proyecto</a></li>
+      <li><a href="#contacto" class="btn btn-primary btn-hero" data-modal-trigger>Empezar proyecto</a></li>
     </ul>
   </nav>
 </div>
@@ -444,31 +444,10 @@
         </div>
 
         <form class="contact-form" id="contact-form" data-reveal novalidate>
-          <label class="form-field">
-            <span>Nombre y apellido</span>
-            <input type="text" name="nombre" id="field-nombre" autocomplete="name" required>
-          </label>
-          <label class="form-field">
-            <span>Email</span>
-            <input type="email" name="email" id="field-email" autocomplete="email" required>
-          </label>
-          <label class="form-field">
-            <span>Tipo de proyecto</span>
-            <select name="tipo" id="field-tipo" required>
-              <option value="logo">Diseño de logotipo</option>
-              <option value="identidad">Identidad visual completa</option>
-              <option value="manual">Manual de marca</option>
-              <option value="aplicaciones">Aplicación de marca</option>
-              <option value="otro">Otro / todavía no sé</option>
-            </select>
-          </label>
-          <label class="form-field">
-            <span>Contame sobre tu marca</span>
-            <textarea name="mensaje" id="field-mensaje" rows="4" required></textarea>
-          </label>
-          <button type="submit" class="btn form-submit">Enviar mensaje <span>→</span></button>
-          <p class="form-error" id="form-error" hidden>Revisá los campos marcados antes de enviar.</p>
-          <p class="form-success" id="form-success" hidden>Mensaje enviado. Te respondo dentro de las próximas 24 h hábiles.</p>
+          <div id="contact-form-fields"></div>
+          <button type="submit" class="btn form-submit">Enviar formulario <span>→</span></button>
+          <p class="form-error" id="contact-form-error" hidden>Revisá los campos marcados antes de enviar.</p>
+          <p class="form-success" id="contact-form-success" hidden>Formulario enviado. Te respondo dentro de las próximas 24 h hábiles.</p>
         </form>
       </div>
     </div>
@@ -499,6 +478,26 @@
 <div class="floating-dock" id="floating-dock">
   <span class="floating-dock-text">Agenda abierta · 2 cupos</span>
   <a href="#contacto" class="btn btn-primary">Empezar</a>
+</div>
+
+<!-- ============ MODAL: EMPEZAR PROYECTO ============ -->
+<div class="modal-overlay" id="project-modal" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar formulario">
+      <span aria-hidden="true">×</span>
+    </button>
+    <div class="modal-scroll">
+      <p class="eyebrow">Empecemos</p>
+      <h2 class="h2 modal-title" id="modal-title">Contame tu proyecto</h2>
+      <p class="modal-sub">Respondo en un plazo de 3 días — revisá spam si no ves mi mensaje.</p>
+      <form class="contact-form modal-form" id="modal-form" novalidate>
+        <div id="modal-form-fields"></div>
+        <button type="submit" class="btn form-submit">Enviar formulario <span>→</span></button>
+        <p class="form-error" id="modal-form-error" hidden>Revisá los campos marcados antes de enviar.</p>
+        <p class="form-success" id="modal-form-success" hidden>Formulario enviado. Te respondo dentro de las próximas 24 h hábiles.</p>
+      </form>
+    </div>
+  </div>
 </div>
 
 <script src="main.js"></script>
