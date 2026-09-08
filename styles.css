@@ -30,13 +30,14 @@
   --dark-text-tertiary: rgba(243,242,243,.62);
   --dark-text-tertiary-2: rgba(243,242,243,.66);
   --dark-text-mute: rgba(243,242,243,.5);
-  --dark-placeholder: rgba(243,242,243,.35);
+  --dark-placeholder: rgba(243,242,243,.42);
   --dark-hairline: rgba(243,242,243,.1);
   --dark-divider: rgba(243,242,243,.12);
   --dark-border: rgba(243,242,243,.16);
   --dark-border-2: rgba(243,242,243,.2);
   --dark-border-3: rgba(243,242,243,.26);
-  --dark-input-bg: rgba(243,242,243,.05);
+  --dark-input-bg: rgba(243,242,243,.09);
+  --dark-input-border: rgba(243,242,243,.3);
   --dark-row-hover: rgba(243,242,243,.05);
 
   /* Alphas sobre claro */
@@ -1250,18 +1251,19 @@ section[id] { scroll-margin-top: 100px; }
 .form-field textarea,
 .form-field select {
   background: var(--dark-input-bg);
-  border: 1px solid var(--dark-border);
+  border: 1px solid var(--dark-input-border);
   border-radius: var(--r-input);
   padding: 14px 16px;
   font-size: 1rem;
+  color: var(--ink-dark);
   transition: border-color .3s, background .3s;
 }
-.form-field select { background: var(--bg-dark); }
+.form-field select { background: var(--dark-input-bg); }
 .form-field input:focus,
 .form-field textarea:focus,
 .form-field select:focus {
   border-color: var(--brand-2);
-  background: rgba(243,242,243,.09);
+  background: rgba(243,242,243,.14);
   outline: none;
 }
 .form-field textarea { resize: vertical; }
@@ -1460,21 +1462,21 @@ section[id] { scroll-margin-top: 100px; }
 .brief-field input,
 .brief-field textarea {
   width: 100%;
-  background: transparent;
+  background: var(--dark-input-bg);
   border: none;
-  border-bottom: 1px solid var(--dark-border-3);
-  border-radius: 0;
+  border-bottom: 1px solid var(--dark-input-border);
+  border-radius: 4px 4px 0 0;
   color: var(--ink-dark);
   font-family: var(--font-display);
   font-size: 1rem;
-  padding: 10px 2px 12px;
-  transition: border-color .2s ease;
+  padding: 12px 12px 13px;
+  transition: border-color .2s ease, background .2s ease;
 }
 .brief-field textarea { resize: vertical; min-height: 96px; }
 .brief-field input:focus,
-.brief-field textarea:focus { outline: none; border-color: var(--brand-2); }
+.brief-field textarea:focus { outline: none; border-color: var(--brand-2); background: rgba(243,242,243,.14); }
 .brief-field input::placeholder,
-.brief-field textarea::placeholder { color: var(--dark-text-mute); opacity: 1; }
+.brief-field textarea::placeholder { color: var(--dark-placeholder); opacity: 1; }
 
 .brief-budget-label { margin-bottom: 16px; }
 .brief-budget-options { display: grid; gap: 12px; }
