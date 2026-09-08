@@ -328,8 +328,141 @@
   renderFormFields($("#contact-form-fields"), "contact");
   bindContactForm($("#contact-form"), $("#contact-form-error"), $("#contact-form-success"));
 
-  renderFormFields($("#modal-form-fields"), "modal");
-  bindContactForm($("#modal-form"), $("#modal-form-error"), $("#modal-form-success"));
+  /* ---------------------------------------------------------------------
+     Brief (formulario del popup "Empezar proyecto")
+     --------------------------------------------------------------------- */
+
+  var BUDGET_OPTIONS = [
+    { value: "750-1200", label: "De 750 - 1200 USD" },
+    { value: "1200-1800", label: "De 1200 - 1800 USD" },
+    { value: "1800-2900", label: "De 1800 - 2900 USD" },
+    { value: "3000+", label: "Más de 3000 USD" }
+  ];
+
+  function renderBriefFields(container) {
+    if (!container) return;
+    var budgetHtml = BUDGET_OPTIONS.map(function (opt) {
+      return (
+        '<label class="brief-budget-option">' +
+          '<span class="brief-budget-dot"><span class="brief-budget-dot-inner"></span></span>' +
+          '<input type="radio" name="budget" value="' + opt.value + '">' +
+          "<span>" + opt.label + "</span>" +
+        "</label>"
+      );
+    }).join("");
+
+    container.innerHTML =
+      '<div class="brief-section">' +
+        '<div class="brief-section-head">' +
+          '<span class="brief-section-num">01</span>' +
+          '<span class="brief-section-label">Tus datos</span>' +
+          '<span class="brief-section-line"></span>' +
+        "</div>" +
+        '<div class="brief-fields">' +
+          '<label class="brief-field">' +
+            "<span>¿Cuál es tu nombre y apellido?</span>" +
+            '<input type="text" name="fullName" placeholder="Nombre completo" autocomplete="name" required>' +
+          "</label>" +
+          '<div class="brief-row">' +
+            '<label class="brief-field">' +
+              "<span>Mail que utilices</span>" +
+              '<input type="email" name="email" placeholder="tu@email.com" autocomplete="email" required>' +
+            "</label>" +
+            '<label class="brief-field">' +
+              "<span>Número de teléfono</span>" +
+              '<input type="tel" name="phone" placeholder="+54 9 11 ..." autocomplete="tel">' +
+            "</label>" +
+          "</div>" +
+          '<div class="brief-row">' +
+            '<label class="brief-field">' +
+              "<span>¿Desde qué país te contactás?</span>" +
+              '<input type="text" name="country" placeholder="Argentina">' +
+            "</label>" +
+            '<label class="brief-field">' +
+              "<span>¿Cuál es el nombre de tu negocio?</span>" +
+              '<input type="text" name="business" placeholder="Nombre de tu marca">' +
+            "</label>" +
+          "</div>" +
+          '<label class="brief-field">' +
+            "<span>¿Tenés enlaces a redes sociales que te gustaría compartir? <em>(opcional)</em></span>" +
+            '<input type="text" name="social" placeholder="instagram.com/tumarca">' +
+          "</label>" +
+        "</div>" +
+      "</div>" +
+      '<div class="brief-section">' +
+        '<div class="brief-section-head">' +
+          '<span class="brief-section-num brief-section-num--light">02</span>' +
+          '<span class="brief-section-label">Inversión</span>' +
+          '<span class="brief-section-line"></span>' +
+        "</div>" +
+        '<span class="brief-field-label brief-budget-label">¿Cuánto invertirías en un proceso para que tu marca se vuelva inolvidable?</span>' +
+        '<div class="brief-budget-options">' + budgetHtml + "</div>" +
+      "</div>" +
+      '<div class="brief-section">' +
+        '<div class="brief-section-head">' +
+          '<span class="brief-section-num">03</span>' +
+          '<span class="brief-section-label">El proyecto</span>' +
+          '<span class="brief-section-line"></span>' +
+        "</div>" +
+        '<div class="brief-fields">' +
+          '<label class="brief-field">' +
+            "<span>¿Qué te atrajo de mi trabajo y por qué creés que encajaríamos bien?</span>" +
+            '<textarea name="fit" rows="4" placeholder="Contame con tus palabras..."></textarea>' +
+          "</label>" +
+          '<label class="brief-field brief-field--narrow">' +
+            "<span>¿Cuándo planeás (re)lanzar tu marca? <em>(opcional)</em></span>" +
+            '<input type="date" name="deadline">' +
+          "</label>" +
+        "</div>" +
+      "</div>";
+
+    container.querySelectorAll(".brief-budget-option").forEach(function (label) {
+      var input = label.querySelector("input");
+      input.addEventListener("change", function () {
+        container.querySelectorAll(".brief-budget-option").forEach(function (l) {
+          l.classList.toggle("is-selected", l === label);
+        });
+      });
+    });
+  }
+
+  var modalFormFields = $("#modal-form-fields");
+  renderBriefFields(modalFormFields);
+
+  var briefForm = $("#modal-form");
+  var briefErrorEl = $("#modal-form-error");
+  var briefStepForm = $("#brief-step-form");
+  var briefStepThanks = $("#brief-step-thanks");
+  var briefThanksTitle = $("#brief-thanks-title");
+
+  function resetBrief() {
+    if (briefForm) briefForm.reset();
+    if (modalFormFields) {
+      modalFormFields.querySelectorAll(".brief-budget-option").forEach(function (l) {
+        l.classList.remove("is-selected");
+      });
+    }
+    if (briefErrorEl) briefErrorEl.hidden = true;
+    if (briefStepForm) briefStepForm.hidden = false;
+    if (briefStepThanks) briefStepThanks.hidden = true;
+  }
+
+  if (briefForm) {
+    briefForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!briefForm.checkValidity()) {
+        if (briefErrorEl) briefErrorEl.hidden = false;
+        return;
+      }
+      if (briefErrorEl) briefErrorEl.hidden = true;
+      var fullName = (briefForm.elements.fullName && briefForm.elements.fullName.value || "").trim();
+      var firstName = fullName.split(" ")[0] || "crack";
+      if (briefThanksTitle) briefThanksTitle.textContent = "Gracias, " + firstName + ".";
+      if (briefStepForm) briefStepForm.hidden = true;
+      if (briefStepThanks) briefStepThanks.hidden = false;
+      /* NOTA: conectar a un endpoint propio, Formspree o Resend para recibir los envíos por email. */
+    });
+  }
 
   /* ---------------------------------------------------------------------
      Modal "Empezar proyecto"
@@ -357,6 +490,7 @@
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     if (lastFocused && lastFocused.focus) lastFocused.focus();
+    resetBrief();
   }
 
   modalTriggers.forEach(function (btn) { btn.addEventListener("click", openModal); });

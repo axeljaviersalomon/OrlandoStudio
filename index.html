@@ -20,7 +20,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css?v=20260907">
 
@@ -482,20 +482,39 @@
 
 <!-- ============ MODAL: EMPEZAR PROYECTO ============ -->
 <div class="modal-overlay" id="project-modal" aria-hidden="true">
-  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-panel modal-panel--brief" role="dialog" aria-modal="true" aria-labelledby="brief-title">
     <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar formulario">
       <span aria-hidden="true">×</span>
     </button>
-    <div class="modal-scroll">
-      <p class="eyebrow">Empecemos</p>
-      <h2 class="h2 modal-title" id="modal-title">Contame tu proyecto</h2>
-      <p class="modal-sub">Respondo en un plazo de 3 días — revisá spam si no ves mi mensaje.</p>
-      <form class="contact-form modal-form" id="modal-form" novalidate>
-        <div id="modal-form-fields"></div>
-        <button type="submit" class="btn form-submit">Enviar formulario <span>→</span></button>
-        <p class="form-error" id="modal-form-error" hidden>Revisá los campos marcados antes de enviar.</p>
-        <p class="form-success" id="modal-form-success" hidden>Formulario enviado. Te respondo dentro de las próximas 24 h hábiles.</p>
-      </form>
+    <div class="modal-scroll brief-scroll">
+      <div class="brief">
+        <div class="brief-brand">
+          <img src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio™" class="brief-logo">
+        </div>
+
+        <div class="brief-step" id="brief-step-form">
+          <p class="brief-eyebrow">Empecemos</p>
+          <h2 class="brief-title" id="brief-title">Contame tu proyecto</h2>
+          <blockquote class="brief-quote">"¡Hola! ¿Cómo estás? Bienvenido/a a OrlandoStudio™. Mi misión es ayudarte a construir una identidad visual que conecte con tu audiencia y transforme tu negocio. Cuanto más compartas acá, mejor voy a poder capturar tu esencia. Me muero de ganas de empezar a crear algo imposible de ignorar."</blockquote>
+
+          <form class="brief-form" id="modal-form" novalidate>
+            <div id="modal-form-fields"></div>
+            <p class="brief-note">Te respondo en un plazo máximo de 3 días — ojo con la carpeta de spam.</p>
+            <button type="submit" class="brief-submit">
+              <span>Enviar formulario</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <p class="form-error brief-error" id="modal-form-error" hidden>Revisá los campos marcados antes de enviar.</p>
+          </form>
+        </div>
+
+        <div class="brief-step brief-thanks" id="brief-step-thanks" hidden>
+          <div class="brief-check" aria-hidden="true">&#10003;</div>
+          <p class="brief-eyebrow">Listo</p>
+          <h2 class="brief-title" id="brief-thanks-title">Gracias.</h2>
+          <p class="brief-thanks-text">Recibí tu proyecto. Te voy a responder en un plazo máximo de 3 días — revisá también spam.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
