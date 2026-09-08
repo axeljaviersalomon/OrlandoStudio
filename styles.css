@@ -1329,6 +1329,7 @@ section[id] { scroll-margin-top: 100px; }
 .modal-form { background: transparent; border: none; padding: 0; }
 .modal-close {
   position: absolute;
+  z-index: 2;
   top: 16px;
   right: 16px;
   width: 38px;
@@ -1499,19 +1500,7 @@ section[id] { scroll-margin-top: 100px; }
 .brief-submit:hover { opacity: .88; transform: translateY(-1px); }
 .brief-error { margin-top: 16px; }
 
-.brief-thanks { min-height: 40vh; display: flex; flex-direction: column; justify-content: center; }
-.brief-check {
-  width: 56px;
-  height: 56px;
-  border: 1px solid var(--brand-2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--brand-2);
-  font-size: 1.3rem;
-  margin-bottom: 28px;
-}
+.brief-thanks:not([hidden]) { display: flex; flex-direction: column; justify-content: center; min-height: 40vh; }
 .brief-thanks-text {
   font-family: 'Newsreader', Georgia, serif;
   font-style: italic;
