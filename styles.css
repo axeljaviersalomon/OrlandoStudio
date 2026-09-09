@@ -709,8 +709,9 @@ section[id] { scroll-margin-top: 100px; }
 .section-dark-2 { background: var(--bg-dark-2); padding: clamp(72px,10vw,150px) 0; }
 
 .eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: .7rem;
+  line-height: 1.7;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--dark-text-mute);
@@ -988,8 +989,9 @@ section[id] { scroll-margin-top: 100px; }
 }
 .pullquote-content { position: relative; text-align: center; }
 .pullquote-eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: .7rem;
+  line-height: 1.7;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--dark-text-mute);
@@ -1414,8 +1416,9 @@ section[id] { scroll-margin-top: 100px; }
 .brief-logo { height: 22px; width: auto; display: block; }
 
 .brief-eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: .72rem;
+  line-height: 1.7;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--brand-2);
