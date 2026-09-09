@@ -265,22 +265,30 @@
   function renderFaq() {
     if (!faqList) return;
     faqList.innerHTML = FAQ.map(function (f, i) {
-      var isOpen = i === openFaq;
       return (
-        '<div class="faq-item">' +
-          '<button type="button" class="faq-question" data-index="' + i + '" aria-expanded="' + isOpen + '" aria-controls="faq-panel-' + i + '" id="faq-btn-' + i + '">' +
+        '<div class="faq-item" data-index="' + i + '">' +
+          '<button type="button" class="faq-question" data-index="' + i + '" aria-expanded="false" aria-controls="faq-panel-' + i + '" id="faq-btn-' + i + '">' +
             "<span>" + f.q + "</span>" +
-            '<span class="faq-icon" aria-hidden="true">' + (isOpen ? "−" : "+") + "</span>" +
+            '<span class="faq-icon" aria-hidden="true">+</span>' +
           "</button>" +
-          (isOpen ? '<p class="faq-answer" id="faq-panel-' + i + '" role="region" aria-labelledby="faq-btn-' + i + '">' + f.a + "</p>" : "") +
+          '<div class="faq-answer-wrap" id="faq-panel-' + i + '" role="region" aria-labelledby="faq-btn-' + i + '">' +
+            '<div class="faq-answer-inner"><p class="faq-answer">' + f.a + "</p></div>" +
+          "</div>" +
         "</div>"
       );
     }).join("");
+    var items = $all(".faq-item", faqList);
     $all(".faq-question", faqList).forEach(function (btn) {
       btn.addEventListener("click", function () {
         var i = Number(btn.dataset.index);
-        openFaq = openFaq === i ? -1 : i;
-        renderFaq();
+        var willOpen = openFaq !== i;
+        openFaq = willOpen ? i : -1;
+        items.forEach(function (item) {
+          var itemIndex = Number(item.dataset.index);
+          var isOpen = itemIndex === openFaq;
+          item.classList.toggle("is-open", isOpen);
+          $(".faq-question", item).setAttribute("aria-expanded", isOpen);
+        });
       });
     });
   }
