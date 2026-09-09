@@ -108,6 +108,7 @@ h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
 section[id] { scroll-margin-top: 100px; }
+#contacto-focus { scroll-margin-top: 100px; }
 
 .skip-link {
   position: absolute;
