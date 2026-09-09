@@ -1439,7 +1439,8 @@ section[id] { scroll-margin-top: 100px; }
   border-left: 2px solid var(--brand-2);
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1rem,3.6vw,1.15rem);
+  font-weight: 300;
+  font-size: clamp(0.97rem,3.5vw,1.1rem);
   line-height: 1.65;
   color: var(--dark-text-secondary);
 }
