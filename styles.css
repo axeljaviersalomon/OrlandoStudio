@@ -1425,7 +1425,7 @@ section[id] { scroll-margin-top: 100px; }
   margin: 0 0 16px;
 }
 .brief-title {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem,5vw,3.1rem);
   font-weight: 500;
   line-height: 1.05;
@@ -1437,7 +1437,7 @@ section[id] { scroll-margin-top: 100px; }
   margin: 0 0 44px;
   padding-left: clamp(16px,4vw,24px);
   border-left: 2px solid var(--brand-2);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-display);
   font-style: italic;
   font-size: clamp(1rem,3.6vw,1.15rem);
   line-height: 1.65;
