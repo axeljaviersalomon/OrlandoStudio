@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://orlandostudio.com.ar/sitemap.xml
+Sitemap: https://axeljaviersalomon.github.io/OrlandoStudio/sitemap.xml
