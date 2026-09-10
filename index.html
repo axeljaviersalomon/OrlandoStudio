@@ -32,8 +32,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20260910j">
+<link rel="stylesheet" href="styles.css?v=20260910l">
 
+<!-- JSON-LD del estudio. Ojo: "areaServed" es la MISMA lista de países que
+     aparece en la sección 02 de sobre-mi.html y en la respuesta del FAQ de
+     main.js (const FAQ, "¿Trabajás con marcas de otros países?"). Los tres
+     lugares se actualizan a mano — si cambia uno, cambiar los otros dos.
+     Lista confirmada por Julián el 2026-09-10: AR, ES, MX, GT, CL, UY.
+     (JSON-LD no admite comentarios adentro, por eso esta nota va acá.) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,7 +55,7 @@
     "addressLocality": "Buenos Aires",
     "addressCountry": "AR"
   },
-  "areaServed": "AR",
+  "areaServed": ["AR", "ES", "MX", "GT", "CL", "UY"],
   "url": "https://axeljaviersalomon.github.io/OrlandoStudio/",
   "email": "julianorlando.dg@gmail.com",
   "knowsAbout": ["Diseño de logotipos", "Identidad visual", "Branding", "Manual de marca"],
@@ -60,6 +66,11 @@
   ]
 }
 </script>
+<!-- Este FAQPage DUPLICA palabra por palabra el array FAQ de main.js (que es
+     el que se renderiza en pantalla). Es a propósito: Google necesita el
+     marcado en el HTML servido, no el inyectado por JS. Si editás una
+     pregunta o respuesta en main.js, copiala también acá o el rich result
+     queda desincronizado del texto visible. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -94,7 +105,7 @@
       "name": "¿Trabajás con marcas de otros países?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, México y España sin diferencia de calidad ni de plazos."
+        "text": "Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, España, México, Guatemala, Chile y Uruguay sin diferencia de calidad ni de plazos."
       }
     },
     {
@@ -123,12 +134,18 @@
       <img class="brand-logo" src="assets/brand/OrlandoStudio_LogoOficialWeb.svg" alt="OrlandoStudio" width="152" height="25">
     </a>
 
+    <!-- 2026-09-10: "Estudio" (#estudio) fue REEMPLAZADO por "Sobre mí"
+         (sobre-mi.html) en vez de sumar un sexto item al nav. La sección
+         #estudio sigue existiendo más abajo y ahora es el teaser que linkea
+         a la página completa. Mismo cambio en .mobile-menu. Si algún día se
+         quieren los 6 items, agregar "Estudio" de nuevo acá y en el menú
+         mobile (y renumerar los data-index del mobile: 01..06). -->
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       <ul>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#trabajos">Trabajos</a></li>
         <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#estudio">Estudio</a></li>
+        <li><a href="sobre-mi.html">Sobre mí</a></li>
         <li><a href="#voces">Clientes</a></li>
       </ul>
     </nav>
@@ -156,7 +173,7 @@
         <li><a href="#servicios"><span class="mobile-nav-index">01</span><span class="mobile-nav-label">Servicios</span></a></li>
         <li><a href="#trabajos"><span class="mobile-nav-index">02</span><span class="mobile-nav-label">Trabajos</span></a></li>
         <li><a href="#proceso"><span class="mobile-nav-index">03</span><span class="mobile-nav-label">Proceso</span></a></li>
-        <li><a href="#estudio"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Estudio</span></a></li>
+        <li><a href="sobre-mi.html"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Sobre mí</span></a></li>
         <li><a href="#voces"><span class="mobile-nav-index">05</span><span class="mobile-nav-label">Clientes</span></a></li>
       </ol>
     </nav>
@@ -440,7 +457,15 @@
           <p class="eyebrow">05 — Quién está detrás</p>
           <h2 class="h2">Un solo diseñador. Sin intermediarios, sin plantillas.</h2>
           <p>Soy Julián Orlando. Cada proyecto que sale de OrlandoStudio pasa por mis manos de principio a fin — hablás conmigo, no con un account manager ni con un equipo rotativo. Por eso cada marca tiene una mirada consistente, no un collage de decisiones de distintas personas.</p>
+          <!-- Esta sección es el TEASER de sobre-mi.html: el titular y el
+               retrato de acá NO se repiten en el hero de esa página, a
+               propósito (ver la nota de IMÁGENES en sobre-mi.html). Si
+               cambiás el titular o la foto de acá, revisá que sigan siendo
+               distintos de los de allá.
+               .studio-link-cta solo existe para igualar el tamaño de este
+               botón al de los .btn-ghost-sm que lo acompañan en la fila. -->
           <div class="studio-links">
+            <a href="sobre-mi.html" class="btn btn-primary studio-link-cta">Conocé más sobre mí <span>→</span></a>
             <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="btn btn-ghost-sm">Instagram <span>↗</span></a>
             <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Behance <span>↗</span></a>
           </div>
@@ -608,6 +633,6 @@
   </div>
 </div>
 
-<script src="main.js?v=20260910e"></script>
+<script src="main.js?v=20260910f"></script>
 </body>
 </html>

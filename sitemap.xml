@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- El sitio es estático y sin build: este sitemap se mantiene A MANO.
+     Si se agrega una página .html nueva, sumar su <url> acá.
+     El dominio de estas URLs (GitHub Pages) sigue siendo PROVISORIO — cuando
+     se compre el dominio real hay que reemplazarlo acá, en robots.txt y en
+     los canonical/OG de index.html y sobre-mi.html. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://axeljaviersalomon.github.io/OrlandoStudio/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://axeljaviersalomon.github.io/OrlandoStudio/sobre-mi.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

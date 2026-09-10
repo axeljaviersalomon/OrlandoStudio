@@ -55,7 +55,13 @@
     { q: "¿Cuánto sale un proyecto de marca?", a: "Depende del alcance: un logotipo puntual no es lo mismo que una identidad visual completa con manual y aplicaciones. Después de una llamada de 20 minutos te envío una propuesta cerrada, con etapas, plazos y precio final sin sorpresas." },
     { q: "¿Cuánto tarda?", a: "Entre 3 y 6 semanas según complejidad y velocidad de feedback. La agenda se reserva por orden de seña y trabajo un máximo de 2 proyectos por mes para no bajar el nivel de dedicación." },
     { q: "¿Qué recibo al final?", a: "Logotipo en todas sus versiones y formatos productivos (vectorial y mapa de bits), sistema visual completo, manual de marca en PDF y las aplicaciones acordadas listas para imprimir o publicar." },
-    { q: "¿Trabajás con marcas de otros países?", a: "Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, México y España sin diferencia de calidad ni de plazos." },
+    /* La lista de países de esta respuesta está replicada en otros dos lados
+       (se actualizan a mano): el "areaServed" del JSON-LD de index.html y la
+       sección 02 de sobre-mi.html. Confirmada por Julián el 2026-09-10:
+       unificó su texto nuevo con el FAQ viejo, así que van los seis países.
+       Además, TODO este array FAQ está duplicado como JSON-LD FAQPage en
+       index.html — si editás una pregunta acá, copiala allá también. */
+    { q: "¿Trabajás con marcas de otros países?", a: "Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, España, México, Guatemala, Chile y Uruguay sin diferencia de calidad ni de plazos." },
     { q: "¿Y si no me gusta la propuesta?", a: "Cada etapa se aprueba antes de avanzar y las rondas de corrección se definen en la propuesta inicial. No hay entregas sorpresa: vas viendo y validando el camino conmigo." }
   ];
 
