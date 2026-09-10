@@ -544,6 +544,7 @@ section[id] { scroll-margin-top: 100px; }
 
 .hero-sub {
   max-width: 52ch;
+  font-family: var(--font-display);
   font-size: clamp(1.02rem,1.35vw,1.24rem);
   line-height: 1.62;
   color: var(--dark-text-secondary);
@@ -1678,14 +1679,12 @@ section[id] { scroll-margin-top: 100px; }
 }
 .footer-top {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 28px;
-  align-items: center;
-  justify-content: space-between;
   padding-bottom: 28px;
   border-bottom: 1px solid var(--dark-hairline);
 }
-.footer-logo { height: 34px; width: auto; }
+.footer-logo { display: block; width: 100%; height: auto; }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 20px; }
 .footer-nav a {
   color: rgba(243,242,243,.6);
@@ -1814,6 +1813,14 @@ section[id] { scroll-margin-top: 100px; }
    de volver arriba para que no quede tapado detrás suyo */
 @media (max-width: 640px) {
   .back-to-top { right: 16px; bottom: 90px; width: 42px; height: 42px; }
+  .hero-sub { font-size: .95rem; font-weight: 340; }
+}
+
+/* La fila de meta del hero (badge + separador + ubicación) no entra en una
+   sola línea en pantallas angostas: se corta el texto en vez de ajustarse. */
+@media (max-width: 480px) {
+  .hero-meta-row { flex-wrap: wrap; row-gap: 10px; }
+  .hero-meta-line, .hero-meta-location { display: none; }
 }
 
 /* El preview que sigue al cursor no tiene sentido en touch */
