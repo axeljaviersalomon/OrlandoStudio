@@ -1802,6 +1802,9 @@ section[id] { scroll-margin-top: 100px; }
   .header-actions .btn-header { display: inline-flex; }
   .nav-toggle { display: none; }
   .mobile-menu { display: none; }
+
+  .footer-top { flex-direction: row; align-items: center; justify-content: space-between; }
+  .footer-logo { align-self: center; }
 }
 
 /* La columna sticky del proceso solo tiene sentido con suficiente alto/ancho */

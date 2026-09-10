@@ -137,10 +137,8 @@
 
 <!-- ============ HEADER ============ -->
 <!-- Copia del header de index.html con dos diferencias: los links de sección
-     van a index.html#ancla (son anclas de OTRA página) y "Sobre mí" lleva
-     aria-current="page". En index.html este item reemplazó a "Estudio" para
-     no llegar a 6 items de nav; la sección #estudio del home sigue existiendo
-     y ahora es el teaser que linkea acá. -->
+     (incluido "Inicio") van a index.html#ancla (son anclas de OTRA página) y
+     "Sobre mí" lleva aria-current="page" en vez de link. -->
 <header class="site-header">
   <div class="header-inner">
     <a href="index.html" class="brand" aria-label="OrlandoStudio, inicio">
@@ -149,6 +147,7 @@
 
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       <ul>
+        <li><a href="index.html#top">Inicio</a></li>
         <li><a href="index.html#servicios">Servicios</a></li>
         <li><a href="index.html#trabajos">Trabajos</a></li>
         <li><a href="index.html#proceso">Proceso</a></li>
@@ -177,11 +176,12 @@
   <div class="mobile-menu-inner">
     <nav class="mobile-nav" aria-label="Navegación móvil">
       <ol>
-        <li><a href="index.html#servicios"><span class="mobile-nav-index">01</span><span class="mobile-nav-label">Servicios</span></a></li>
-        <li><a href="index.html#trabajos"><span class="mobile-nav-index">02</span><span class="mobile-nav-label">Trabajos</span></a></li>
-        <li><a href="index.html#proceso"><span class="mobile-nav-index">03</span><span class="mobile-nav-label">Proceso</span></a></li>
-        <li><a href="sobre-mi.html" aria-current="page"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Sobre mí</span></a></li>
-        <li><a href="index.html#voces"><span class="mobile-nav-index">05</span><span class="mobile-nav-label">Clientes</span></a></li>
+        <li><a href="index.html#top"><span class="mobile-nav-index">01</span><span class="mobile-nav-label">Inicio</span></a></li>
+        <li><a href="index.html#servicios"><span class="mobile-nav-index">02</span><span class="mobile-nav-label">Servicios</span></a></li>
+        <li><a href="index.html#trabajos"><span class="mobile-nav-index">03</span><span class="mobile-nav-label">Trabajos</span></a></li>
+        <li><a href="index.html#proceso"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Proceso</span></a></li>
+        <li><a href="sobre-mi.html" aria-current="page"><span class="mobile-nav-index">05</span><span class="mobile-nav-label">Sobre mí</span></a></li>
+        <li><a href="index.html#voces"><span class="mobile-nav-index">06</span><span class="mobile-nav-label">Clientes</span></a></li>
       </ol>
     </nav>
 

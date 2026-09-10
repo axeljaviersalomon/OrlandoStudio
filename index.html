@@ -135,11 +135,11 @@
     </a>
 
     <!-- 2026-09-10: "Estudio" (#estudio) fue REEMPLAZADO por "Sobre mí"
-         (sobre-mi.html) en vez de sumar un sexto item al nav. La sección
-         #estudio sigue existiendo más abajo y ahora es el teaser que linkea
-         a la página completa. Mismo cambio en .mobile-menu. Si algún día se
-         quieren los 6 items, agregar "Estudio" de nuevo acá y en el menú
-         mobile (y renumerar los data-index del mobile: 01..06). -->
+         (sobre-mi.html). La sección #estudio sigue existiendo más abajo y
+         ahora es el teaser que linkea a la página completa. Mismo cambio en
+         .mobile-menu. sobre-mi.html tiene una copia de este nav (con
+         aria-current="page" en "Sobre mí" en vez de link): mantener ambas
+         listas en sync. -->
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       <ul>
         <li><a href="#top">Inicio</a></li>
@@ -573,10 +573,12 @@
     <div class="footer-top">
       <img class="footer-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio">
       <nav class="footer-nav">
+        <a href="#top">Inicio</a>
         <a href="#servicios">Servicios</a>
         <a href="#trabajos">Trabajos</a>
         <a href="#proceso">Proceso</a>
-        <a href="#contacto">Contacto</a>
+        <a href="sobre-mi.html">Sobre mí</a>
+        <a href="#voces">Clientes</a>
       </nav>
     </div>
     <div class="footer-bottom">
