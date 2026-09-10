@@ -581,13 +581,12 @@ section[id] { scroll-margin-top: 100px; }
     min-height: min(680px, calc(100vh - 260px));
     min-height: min(680px, calc(100svh - 260px));
   }
-  .hero-grid > :first-child { padding-right: calc(var(--seal-size) + 40px); }
+  .hero-grid > :first-child { padding-right: calc(var(--seal-size) + 64px); }
   .hero-seal-wrap {
     position: absolute;
-    top: 50%;
-    right: 0;
+    top: 0;
+    right: -16px;
     width: var(--seal-size);
-    transform: translateY(-50%);
     margin: 0;
   }
 }
