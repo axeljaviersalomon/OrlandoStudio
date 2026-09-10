@@ -567,7 +567,7 @@ section[id] { scroll-margin-top: 100px; }
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: clamp(12px,3vw,32px);
+  padding: clamp(8px,2vw,18px);
 }
 
 /* A partir de acá el sello se saca del flujo del grid y se centra
@@ -577,9 +577,9 @@ section[id] { scroll-margin-top: 100px; }
    para que nunca se superpongan, en cualquier ancho de pantalla. */
 @media (min-width: 680px) {
   .hero-grid {
-    --seal-size: clamp(260px, 34vw, 460px);
-    min-height: min(620px, calc(100vh - 260px));
-    min-height: min(620px, calc(100svh - 260px));
+    --seal-size: clamp(260px, 34vw, 500px);
+    min-height: min(680px, calc(100vh - 260px));
+    min-height: min(680px, calc(100svh - 260px));
   }
   .hero-grid > :first-child { padding-right: calc(var(--seal-size) + 40px); }
   .hero-seal-wrap {
@@ -596,7 +596,7 @@ section[id] { scroll-margin-top: 100px; }
   border-radius: 50%;
 }
 .seal-ring--spin {
-  width: min(420px,88%);
+  width: min(500px,96%);
   aspect-ratio: 1;
   border: 1px solid rgba(243,242,243,.1);
   animation: osSpin 46s linear infinite;
@@ -612,13 +612,13 @@ section[id] { scroll-margin-top: 100px; }
   transform: translateX(-50%);
 }
 .seal-ring--dashed {
-  width: min(300px,64%);
+  width: min(430px,82%);
   aspect-ratio: 1;
   border: 1px dashed rgba(194,220,175,.16);
 }
 .hero-seal {
   position: relative;
-  width: min(300px,66%);
+  width: min(460px,87%);
   height: auto;
   animation: osFade 1.4s ease .3s both;
 }
@@ -929,6 +929,21 @@ section[id] { scroll-margin-top: 100px; }
   font-weight: 560;
   letter-spacing: -.035em;
   line-height: 1.1;
+}
+.work-row-logo {
+  height: clamp(38px,5.6vw,68px);
+  width: auto;
+  max-width: clamp(160px,28vw,320px);
+  object-fit: contain;
+  object-position: left center;
+}
+.work-row-logo--sm {
+  height: clamp(24px,3.6vw,43px);
+  max-width: clamp(100px,19vw,205px);
+}
+.work-row-logo--lg {
+  height: clamp(43px,6.3vw,77px);
+  max-width: clamp(180px,31vw,360px);
 }
 .work-row-right {
   display: flex;

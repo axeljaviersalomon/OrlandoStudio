@@ -26,19 +26,15 @@
      --------------------------------------------------------------------- */
 
   var PROJECTS = [
-    { name: "The Outdoor Project", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/outdoor-project.jpg", url: "https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" },
-    { name: "Iron Lab", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/iron-lab.jpg", url: "https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" },
-    { name: "BulaVinaka", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/bulavinaka.jpg", url: "https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" },
-    { name: "HomeBoyz", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/homeboyz.jpg", url: "https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" },
-    { name: "Salentein", tag: "Branding", cat: "branding", img: "assets/img/portfolio/salentein.jpg", url: "https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" },
-    { name: "EtherCore", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/ethercore.jpg", url: "https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" },
-    { name: "Libema", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/libema.jpg", url: "https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" },
-    { name: "33usd", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/33usd.jpg", url: "https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" },
-    { name: "ArmonyDrinks", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/armonydrinks.jpg", url: "https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" },
-    { name: "La Pelota No Se Mancha", tag: "Campaña Social", cat: "social", img: "assets/img/portfolio/la-pelota-no-se-mancha.jpg", url: null },
-    { name: "Hawaiian Tropic — Tattoo Line", tag: "Packaging", cat: "packaging", img: "assets/img/portfolio/hawaiian-tropic.jpg", url: null },
-    { name: "RE-EVOLUCIÓN", tag: "Sistema de Vinilos", cat: "packaging", img: "assets/img/portfolio/re-evolucion.jpg", url: null },
-    { name: "INSURGENTE", tag: "Packaging", cat: "packaging", img: "assets/img/portfolio/insurgente.jpg", url: null }
+    { name: "The Outdoor Project", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/outdoor-project.jpg", logo: "assets/img/portfolio/logos/outdoor-project.svg", url: "https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" },
+    { name: "Iron Lab", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/iron-lab.jpg", logo: "assets/img/portfolio/logos/iron-lab.svg", url: "https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" },
+    { name: "BulaVinaka", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/bulavinaka.jpg", logo: "assets/img/portfolio/logos/bulavinaka.svg", url: "https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" },
+    { name: "HomeBoyz", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/homeboyz.jpg", logo: "assets/img/portfolio/logos/homeboyz.svg", url: "https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" },
+    { name: "Salentein", tag: "Branding", cat: "branding", img: "assets/img/portfolio/salentein.jpg", logo: "assets/img/portfolio/logos/salentein.svg", url: "https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" },
+    { name: "EtherCore", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/ethercore.jpg", logo: "assets/img/portfolio/logos/ethercore.svg", url: "https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" },
+    { name: "Libema", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/libema.jpg", logo: "assets/img/portfolio/logos/libema.svg", url: "https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" },
+    { name: "33usd", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/33usd.jpg", logo: "assets/img/portfolio/logos/33usd.svg", url: "https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" },
+    { name: "ArmonyDrinks", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/armonydrinks.jpg", logo: "assets/img/portfolio/logos/armonydrinks.svg", url: "https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" }
   ];
 
   var FAQ = [
@@ -237,11 +233,15 @@
       var linkAttrs = p.url
         ? 'href="' + p.url + '" target="_blank" rel="noopener"'
         : "";
+      var logoClass = "work-row-logo" + (p.name === "Iron Lab" ? " work-row-logo--sm" : p.name === "The Outdoor Project" ? " work-row-logo--lg" : "");
+      var nameHtml = p.logo
+        ? '<img class="' + logoClass + '" src="' + p.logo + '" alt="' + p.name + '" loading="lazy">'
+        : '<span class="work-row-name">' + p.name + "</span>";
       return (
         '<a ' + linkAttrs + ' class="work-row' + (p.url ? "" : " work-row-disabled") + '" data-img="' + p.img + '" data-name="' + p.name + '">' +
           '<span class="work-row-left">' +
             '<span class="work-row-num">' + num + "</span>" +
-            '<span class="work-row-name">' + p.name + "</span>" +
+            nameHtml +
           "</span>" +
           '<span class="work-row-right">' +
             '<span class="work-row-tag">' + p.tag + "</span>" +
