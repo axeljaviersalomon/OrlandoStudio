@@ -396,7 +396,8 @@ section[id] { scroll-margin-top: 100px; }
   padding: clamp(96px,16vh,128px) 28px clamp(28px,5vh,40px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
 .mobile-nav ol { display: flex; flex-direction: column; }
@@ -425,12 +426,12 @@ section[id] { scroll-margin-top: 100px; }
 .mobile-nav a:active { gap: 22px; color: var(--brand-2); }
 .mobile-nav-index {
   font-family: var(--font-display);
-  font-size: .72rem;
+  font-size: .68rem;
   letter-spacing: .1em;
   color: var(--dark-text-mute);
 }
 .mobile-nav-label {
-  font-size: clamp(1.7rem,7vw,2.3rem);
+  font-size: clamp(1.5rem,6.2vw,2.05rem);
   font-weight: 600;
   letter-spacing: -.03em;
 }
@@ -438,6 +439,7 @@ section[id] { scroll-margin-top: 100px; }
 .mobile-menu-bottom {
   opacity: 0;
   transform: translateY(18px);
+  margin-top: clamp(28px,5vh,40px);
 }
 .mobile-menu.is-open .mobile-menu-bottom { animation: osRise .6s var(--ease-main) .58s both; }
 .mobile-menu-cta { width: 100%; justify-content: center; margin-top: 8px; }
@@ -1818,6 +1820,19 @@ section[id] { scroll-margin-top: 100px; }
 @media (max-width: 640px) {
   .back-to-top { right: 16px; bottom: 90px; width: 42px; height: 42px; }
   .hero-sub { font-size: .95rem; font-weight: 340; }
+}
+
+/* Filas de botones que envuelven en mobile: en vez de quedar sueltas con
+   anchos dispares, se apilan a ancho completo y centradas. */
+@media (max-width: 640px) {
+  .hero-ctas, .studio-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-ctas .btn, .studio-links .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* La fila de meta del hero (badge + separador + ubicación) no entra en una
