@@ -101,6 +101,44 @@
   }
 
   /* ---------------------------------------------------------------------
+     Línea de tiempo — Proceso
+     Sin animación: la línea y los puntos ya están completos en el HTML/CSS
+     (progressive enhancement). Con JS, se resetean a 0 y se "dibujan" de
+     nuevo a medida que el bloque entra en pantalla, calculando el progreso
+     con getBoundingClientRect en cada scroll (sin dependencias externas).
+     --------------------------------------------------------------------- */
+
+  var timelineWrap = $(".process-timeline-wrap");
+  var timelineProgress = $(".process-timeline-progress", timelineWrap);
+  var timelineSteps = $all(".process-step", timelineWrap);
+
+  if (timelineWrap && timelineProgress && timelineSteps.length) {
+    if (reducedMotion) {
+      timelineSteps.forEach(function (step) { step.classList.add("is-lit"); });
+    } else {
+      timelineWrap.classList.add("has-timeline-anim");
+
+      var updateTimeline = function () {
+        var rect = timelineWrap.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var start = vh * 0.8;
+        var span = rect.height + start - vh * 0.25;
+        var pct = span > 0 ? Math.max(0, Math.min(1, (start - rect.top) / span)) : 0;
+        timelineProgress.style.transform = "scaleY(" + pct + ")";
+
+        timelineSteps.forEach(function (step) {
+          var lit = step.getBoundingClientRect().top < vh * 0.78;
+          step.classList.toggle("is-lit", lit);
+        });
+      };
+
+      window.addEventListener("scroll", updateTimeline, { passive: true });
+      window.addEventListener("resize", updateTimeline);
+      updateTimeline();
+    }
+  }
+
+  /* ---------------------------------------------------------------------
      Contadores (hero stats)
      --------------------------------------------------------------------- */
 

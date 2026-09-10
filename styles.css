@@ -1032,16 +1032,59 @@ section[id] { scroll-margin-top: 100px; }
 }
 .process-left .btn-light { margin-top: 30px; }
 
-.process-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--light-hairline);
-  border: 1px solid var(--light-hairline);
-  border-radius: var(--r-card);
-  overflow: hidden;
+/* Línea de tiempo vertical: borde izquierdo de la lista como pista,
+   más una segunda línea de color (.process-timeline-progress) que se
+   "dibuja" de arriba hacia abajo a medida que se scrollea (ver main.js,
+   updateProcessTimeline). Por defecto, sin JS, la línea y los puntos
+   ya están completos: nunca depende de JS para mostrar contenido. */
+.process-timeline-wrap { position: relative; }
+
+.process-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 clamp(28px,4vw,40px);
+  border-left: 1px solid var(--light-hairline-2);
+  display: grid;
+  gap: clamp(2.25rem,5vw,3.25rem);
 }
-.process-step { background: var(--paper); padding: clamp(24px,3vw,36px); }
+
+.process-timeline-progress {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--brand);
+  transform-origin: top;
+  transform: scaleY(1);
+  pointer-events: none;
+}
+.has-timeline-anim .process-timeline-progress { transform: scaleY(0); }
+
+.process-step {
+  position: relative;
+  padding: 0;
+}
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * clamp(28px,4vw,40px) - 6px);
+  top: .45rem;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 5px rgba(0,131,88,.14);
+  transition: background .35s var(--ease-main), box-shadow .35s var(--ease-main);
+}
+.has-timeline-anim .process-step::before {
+  background: var(--paper);
+  box-shadow: 0 0 0 5px transparent, inset 0 0 0 2px var(--light-hairline-2);
+}
+.has-timeline-anim .process-step.is-lit::before {
+  background: var(--brand);
+  box-shadow: 0 0 0 5px rgba(0,131,88,.14);
+}
+
 .process-step-head {
   display: flex;
   align-items: center;
