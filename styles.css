@@ -177,7 +177,7 @@ section[id] { scroll-margin-top: 100px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   [data-reveal], [data-reveal-child] { opacity: 1 !important; transform: none !important; animation: none !important; }
-  .marquee-track, .seal-ring--spin { animation: none !important; }
+  .marquee-track, .seal-ring--spin, .manifesto-logo { animation: none !important; }
   * { transition-duration: .01ms !important; }
 }
 
@@ -214,14 +214,7 @@ section[id] { scroll-margin-top: 100px; }
   color: var(--ink-dark);
   flex-shrink: 0;
 }
-.brand-mark { height: 26px; width: auto; }
-.brand-name {
-  font-weight: 640;
-  letter-spacing: -.02em;
-  font-size: 1.02rem;
-}
-.brand-accent { color: var(--brand-2); }
-.brand-name sup { font-size: .5em; top: -.7em; position: relative; opacity: .7; }
+.brand-logo { height: 26px; width: auto; display: block; }
 
 /* Nav de escritorio: oculta por defecto (mobile-first), se activa desde 901px */
 .main-nav { display: none; }
@@ -727,6 +720,48 @@ section[id] { scroll-margin-top: 100px; }
 }
 
 /* Manifesto */
+.manifesto-section {
+  position: relative;
+  overflow: hidden;
+  --manifesto-dance-x: clamp(24px, 4vw, 60px);
+}
+.manifesto-section .container { position: relative; z-index: 1; }
+.manifesto-logo {
+  position: absolute;
+  width: clamp(120px, 13vw, 190px);
+  height: auto;
+  opacity: .05;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, top, bottom;
+}
+.manifesto-logo-1 {
+  right: -2%;
+  animation: manifestoDanceA 34s ease-in-out infinite;
+}
+.manifesto-logo-2 {
+  left: -2%;
+  width: clamp(100px, 10vw, 150px);
+  animation: manifestoDanceB 40s ease-in-out infinite;
+}
+/* Recorre de arriba a abajo del sector sin nunca salir de él (top/bottom
+   se mueven en % del alto de la sección, que varía con el contenido; los
+   costados sí pueden asomarse un poco vía translateX, contenido por el
+   overflow:hidden del padre). */
+@keyframes manifestoDanceA {
+  0%   { top: 6%;  transform: translateX(0); }
+  25%  { top: 26%; transform: translateX(calc(var(--manifesto-dance-x) * -1)); }
+  50%  { top: 52%; transform: translateX(0); }
+  75%  { top: 26%; transform: translateX(var(--manifesto-dance-x)); }
+  100% { top: 6%;  transform: translateX(0); }
+}
+@keyframes manifestoDanceB {
+  0%   { bottom: 6%;  transform: translateX(0); }
+  25%  { bottom: 26%; transform: translateX(var(--manifesto-dance-x)); }
+  50%  { bottom: 52%; transform: translateX(0); }
+  75%  { bottom: 26%; transform: translateX(calc(var(--manifesto-dance-x) * -1)); }
+  100% { bottom: 6%;  transform: translateX(0); }
+}
 .manifesto-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
@@ -867,6 +902,16 @@ section[id] { scroll-margin-top: 100px; }
 .work-row:hover {
   background: var(--dark-row-hover);
   padding-left: clamp(14px,2.6vw,38px);
+}
+.work-row-disabled {
+  cursor: default;
+}
+.work-row-disabled:hover {
+  background: none;
+  padding-left: clamp(4px,1.6vw,22px);
+}
+.work-row-disabled .work-row-arrow {
+  opacity: .35;
 }
 .work-row-left {
   display: flex;
