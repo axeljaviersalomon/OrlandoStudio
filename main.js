@@ -9,13 +9,27 @@
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
   }
-  if (!location.hash) {
-    window.scrollTo(0, 0);
+
+  function forceScrollTop() {
+    if (!location.hash && window.scrollY > 0) {
+      window.scrollTo(0, 0);
+    }
   }
+
+  forceScrollTop();
   window.addEventListener("pageshow", function (e) {
     if (!location.hash && (e.persisted || window.scrollY > 0)) {
       window.scrollTo(0, 0);
     }
+  });
+
+  /* El navegador interno de WhatsApp (y otros in-app browsers) desplaza la
+     página unos pixeles DESPUES de que este script corre, una vez termina
+     de animar su propia barra superior. Reintentamos varias veces durante
+     el primer segundo para forzar el top incluso en ese caso. */
+  window.addEventListener("load", forceScrollTop);
+  [0, 50, 150, 300, 600, 1000].forEach(function (delay) {
+    setTimeout(forceScrollTop, delay);
   });
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
