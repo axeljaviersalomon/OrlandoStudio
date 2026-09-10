@@ -552,6 +552,10 @@ section[id] { scroll-margin-top: 100px; }
   animation: osRise 1s var(--ease-main) .3s both;
 }
 
+@media (min-width: 641px) {
+  .hero-sub { font-weight: 260; }
+}
+
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
