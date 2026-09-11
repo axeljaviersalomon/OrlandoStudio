@@ -522,7 +522,7 @@ section[id] { scroll-margin-top: 100px; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
   gap: clamp(32px,5vw,72px);
-  align-items: end;
+  align-items: start;
 }
 
 .hero-title {
