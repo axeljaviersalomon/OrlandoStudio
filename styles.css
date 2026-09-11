@@ -577,16 +577,15 @@ section[id] { scroll-margin-top: 100px; }
   padding: clamp(8px,2vw,18px);
 }
 
-/* A partir de acá el sello se saca del flujo del grid y se centra
-   respecto a la altura visible de pantalla, no respecto al bloque de
-   texto (que es más alto y lo empujaba hacia abajo). El padding
-   reservado en el texto usa la MISMA medida que el ancho del sello
-   para que nunca se superpongan, en cualquier ancho de pantalla. */
+/* El sello se saca del flujo del grid y se ancla arriba (top:0),
+   así la altura del bloque hero-grid la define solo el texto (que
+   es más alto que el sello) y no queda espacio vacío antes de los
+   4 recuadros de stats. El padding reservado en el texto usa la
+   MISMA medida que el ancho del sello para que nunca se superpongan,
+   en cualquier ancho de pantalla. */
 @media (min-width: 680px) {
   .hero-grid {
     --seal-size: clamp(260px, 34vw, 500px);
-    min-height: min(680px, calc(100vh - 260px));
-    min-height: min(680px, calc(100svh - 260px));
   }
   .hero-grid > :first-child { padding-right: calc(var(--seal-size) + 64px); }
   .hero-seal-wrap {
