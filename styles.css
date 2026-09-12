@@ -1844,6 +1844,15 @@ section[id] { scroll-margin-top: 100px; }
   .hero-meta-line, .hero-meta-location { display: none; }
 }
 
+/* En mobile el clamp() de los logos de marca en "Trabajos" queda pegado a
+   su piso (el 5.6vw no llega a superarlo en pantallas angostas): subimos
+   ese piso un poco para que no se vean chicos, sin tocar el techo desktop. */
+@media (max-width: 640px) {
+  .work-row-logo { height: clamp(46px,11vw,68px); }
+  .work-row-logo--sm { height: clamp(29px,7vw,43px); }
+  .work-row-logo--lg { height: clamp(52px,12.5vw,77px); }
+}
+
 /* El preview que sigue al cursor no tiene sentido en touch */
 @media (pointer: coarse) {
   .work-preview { display: none; }
