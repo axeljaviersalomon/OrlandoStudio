@@ -2144,6 +2144,7 @@ body.page-about { background: var(--bg); color: var(--ink); }
 .about-figure--map {
   display: flex;
   align-items: center;
+  background: transparent;
 }
 .about-figure--map img.about-map {
   display: block;
