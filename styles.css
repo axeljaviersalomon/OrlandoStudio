@@ -2142,11 +2142,17 @@ body.page-about { background: var(--bg); color: var(--ink); }
 
 /* Mapa de alcance (sección 02, reemplaza la imagen genérica de bocetos) */
 .about-figure--map {
-  background: var(--deep);
-  border-radius: var(--r-card);
-  padding: clamp(10px,1.4vw,16px);
+  display: flex;
+  align-items: center;
 }
-.about-map { display: block; width: 100%; height: auto; }
+.about-figure--map img.about-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  border-radius: 0;
+}
 
 /* --------------------------------------------------------------------------
    Cita destacada — corte abrupto a fondo oscuro
