@@ -2146,15 +2146,7 @@ body.page-about { background: var(--bg); color: var(--ink); }
   border-radius: var(--r-card);
   padding: clamp(10px,1.4vw,16px);
 }
-.about-map { display: block; width: 100%; height: auto; aspect-ratio: 1160/498; }
-.about-map text {
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 26px;
-  font-weight: 560;
-  fill: var(--deep);
-  letter-spacing: -.01em;
-}
-.about-map-pin { cursor: default; }
+.about-map { display: block; width: 100%; height: auto; }
 
 /* --------------------------------------------------------------------------
    Cita destacada — corte abrupto a fondo oscuro
