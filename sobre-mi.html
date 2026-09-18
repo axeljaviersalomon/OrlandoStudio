@@ -84,7 +84,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20260910m">
+<link rel="stylesheet" href="styles.css?v=20260918k">
 
 <script type="application/ld+json">
 {
@@ -238,6 +238,21 @@
       </div>
 
       <div class="about-portrait-wrap">
+        <!-- Abanico de bocetos detrás del retrato: al hacer hover se abren
+             como un mazo de cartas (ver .about-sketch en styles.css). El
+             ángulo de cada hoja sale de --i (su índice), así que para sumar
+             una hoja nueva alcanza con agregar otro <img class="about-sketch">
+             con style="--i:N" siguiendo el orden (0, 1, 2…) — no hace falta
+             tocar el CSS.
+             PLACEHOLDER: hoy usan bocetos.jpg (único boceto que Julián pasó)
+             duplicado con distinto encuadre. Reemplazar src/alt por los
+             bocetos reales (BulaVinaka, HomeBoyz, etc.) en cuanto Julián los
+             envíe. -->
+        <div class="about-sketches">
+          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto BulaVinaka" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:0; object-position: top;">
+          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto HomeBoyz" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:1; object-position: center;">
+          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto Genesis" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:2; object-position: bottom;">
+        </div>
         <img class="about-portrait" src="assets/img/sobre-mi/hero-julian.jpg" alt="Julián Orlando bocetando a lápiz un logotipo en su libreta" width="1100" height="1375" fetchpriority="high">
         <div class="about-portrait-badge">
           <span class="about-portrait-role">Fundador · OrlandoStudio™</span>
