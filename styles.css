@@ -2375,6 +2375,8 @@ body.page-about { background: var(--bg); color: var(--ink); }
   aspect-ratio: auto;
   object-fit: contain;
   border-radius: 0;
+  transform: scale(1.28);
+  transform-origin: center;
 }
 
 /* --------------------------------------------------------------------------
