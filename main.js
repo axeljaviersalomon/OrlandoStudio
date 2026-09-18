@@ -531,4 +531,77 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal && modal.classList.contains("is-open")) closeModal();
   });
+
+  /* ---------------------------------------------------------------------
+     Lightbox de bocetos (solo sobre-mi.html — null-check en el primer nodo)
+     --------------------------------------------------------------------- */
+
+  var sketches = $all(".about-sketch");
+  var sketchLightbox = $("#sketch-lightbox");
+
+  if (sketches.length && sketchLightbox) {
+    var sketchImg = $("#sketch-lightbox-img");
+    var sketchTitle = $("#sketch-lightbox-title");
+    var sketchCount = $("#sketch-lightbox-count");
+    var sketchClose = $("#sketch-lightbox-close");
+    var sketchPrev = $("#sketch-lightbox-prev");
+    var sketchNext = $("#sketch-lightbox-next");
+    var sketchIndex = 0;
+    var sketchLastFocused = null;
+
+    function renderSketch() {
+      var sketch = sketches[sketchIndex];
+      sketchImg.src = sketch.src;
+      sketchImg.alt = sketch.alt;
+      sketchTitle.textContent = sketch.alt;
+      sketchCount.textContent = (sketchIndex + 1) + " / " + sketches.length;
+    }
+
+    function openSketch(i) {
+      sketchIndex = i;
+      sketchLastFocused = document.activeElement;
+      renderSketch();
+      sketchLightbox.classList.add("is-open");
+      sketchLightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if (sketchClose) sketchClose.focus();
+    }
+
+    function closeSketch() {
+      sketchLightbox.classList.remove("is-open");
+      sketchLightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (sketchLastFocused && sketchLastFocused.focus) sketchLastFocused.focus();
+    }
+
+    function stepSketch(dir) {
+      sketchIndex = (sketchIndex + dir + sketches.length) % sketches.length;
+      renderSketch();
+    }
+
+    sketches.forEach(function (sketch, i) {
+      sketch.addEventListener("click", function () { openSketch(i); });
+      sketch.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openSketch(i);
+        }
+      });
+    });
+
+    if (sketchClose) sketchClose.addEventListener("click", closeSketch);
+    if (sketchPrev) sketchPrev.addEventListener("click", function () { stepSketch(-1); });
+    if (sketchNext) sketchNext.addEventListener("click", function () { stepSketch(1); });
+
+    sketchLightbox.addEventListener("click", function (e) {
+      if (e.target === sketchLightbox) closeSketch();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!sketchLightbox.classList.contains("is-open")) return;
+      if (e.key === "Escape") closeSketch();
+      else if (e.key === "ArrowLeft") stepSketch(-1);
+      else if (e.key === "ArrowRight") stepSketch(1);
+    });
+  }
 })();

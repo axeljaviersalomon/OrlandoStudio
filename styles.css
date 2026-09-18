@@ -2069,9 +2069,10 @@ body.page-about { background: var(--bg); color: var(--ink); }
   transform-origin: 50% 50%;
   z-index: calc(3 - var(--i, 0));
   transform: translate(-50%, -50%) translate(var(--rest-x), var(--rest-y)) rotate(var(--rest-rot));
-  transition: transform .6s var(--sheet-ease, cubic-bezier(.22,.85,.32,1));
+  transition: transform .6s var(--sheet-ease, cubic-bezier(.22,.85,.32,1)), box-shadow .35s var(--ease-main);
   transition-delay: var(--sheet-delay, 0s);
   will-change: transform;
+  cursor: pointer;
 }
 .about-sketch:nth-of-type(1) {
   --rest-rot: -2deg; --rest-x: -3%; --rest-y: 1.5%;
@@ -2104,6 +2105,18 @@ body.page-about { background: var(--bg); color: var(--ink); }
   }
   .about-portrait-wrap:hover .about-sketch {
     transform: translate(-50%, -50%) translate(var(--hover-x), var(--hover-y)) rotate(var(--hover-rot)) scale(.8);
+  }
+
+  /* Dentro del abanico ya desplegado, pasar el mouse sobre UN boceto puntual
+     lo levanta apenas hacia arriba (como si alguien lo tomara de una punta
+     con los dedos) sin tocar su z-index ni superponerlo a los demás — solo
+     translateY + una sombra más marcada para vender el "despegue" del papel.
+     transition-delay se resetea a 0 así responde al instante, sin heredar
+     el delay escalonado del despliegue general. */
+  .about-portrait-wrap:hover .about-sketch:hover {
+    transition-delay: 0s;
+    transform: translate(-50%, -50%) translate(var(--hover-x), var(--hover-y)) translateY(-5%) rotate(var(--hover-rot)) scale(.8);
+    box-shadow: 0 40px 60px -22px rgba(36,51,58,.5);
   }
 }
 
@@ -2149,6 +2162,128 @@ body.page-about { background: var(--bg); color: var(--ink); }
   margin-top: 2px;
   font-size: .8rem;
   color: var(--dark-text-tertiary);
+}
+
+/* --------------------------------------------------------------------------
+   Lightbox de bocetos — mismo lenguaje visual que .modal-overlay/.modal-panel
+   (overlay oscuro con blur, panel que entra con scale+fade) pero pensado
+   para una imagen suelta: sin card de fondo detrás de la figura, botón de
+   cerrar siempre a la vista arriba a la derecha y flechas prev/next a los
+   costados. Un solo overlay reutilizado para los 3 bocetos (ver main.js).
+   -------------------------------------------------------------------------- */
+.sketch-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px,6vw,64px);
+  background: rgba(27,39,44,.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s var(--ease-main), visibility 0s linear .35s;
+}
+.sketch-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .35s var(--ease-main), visibility 0s;
+}
+.sketch-lightbox-figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(640px, 86vw);
+  margin: 0;
+  transform: translateY(18px) scale(.97);
+  opacity: 0;
+  transition: transform .4s var(--ease-main), opacity .4s var(--ease-main);
+}
+.sketch-lightbox.is-open .sketch-lightbox-figure { transform: translateY(0) scale(1); opacity: 1; }
+.sketch-lightbox-img {
+  max-width: 100%;
+  max-height: 74vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-lg);
+  box-shadow: 0 50px 100px -24px rgba(0,0,0,.6), 0 0 0 1px rgba(243,242,243,.06);
+  background: var(--bg-dark-2);
+}
+.sketch-lightbox-caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: .85rem;
+  color: var(--dark-text-secondary);
+  text-align: center;
+}
+.sketch-lightbox-count {
+  padding: 3px 10px;
+  border: 1px solid var(--dark-border);
+  border-radius: 100px;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  color: var(--dark-text-tertiary);
+  white-space: nowrap;
+}
+.sketch-lightbox-close {
+  position: fixed;
+  z-index: 2;
+  top: clamp(16px,3vw,32px);
+  right: clamp(16px,3vw,32px);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--dark-border);
+  background: var(--bg-dark);
+  color: var(--ink-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.sketch-lightbox-close:hover { border-color: var(--mint); background: var(--bg-dark-2); transform: rotate(90deg); }
+.sketch-lightbox-nav {
+  position: fixed;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--dark-border);
+  background: var(--bg-dark);
+  color: var(--ink-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.sketch-lightbox-nav:hover { border-color: var(--mint); background: var(--bg-dark-2); }
+.sketch-lightbox-prev { left: clamp(12px,3vw,40px); }
+.sketch-lightbox-prev:hover { transform: translateY(-50%) translateX(-3px); }
+.sketch-lightbox-next { right: clamp(12px,3vw,40px); }
+.sketch-lightbox-next:hover { transform: translateY(-50%) translateX(3px); }
+
+@media (max-width: 640px) {
+  .sketch-lightbox-nav { width: 40px; height: 40px; }
+  .sketch-lightbox-prev { left: 8px; }
+  .sketch-lightbox-next { right: 8px; }
+  .sketch-lightbox-close { width: 38px; height: 38px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sketch-lightbox,
+  .sketch-lightbox-figure,
+  .sketch-lightbox-close,
+  .sketch-lightbox-nav { transition: none; }
 }
 
 /* --------------------------------------------------------------------------

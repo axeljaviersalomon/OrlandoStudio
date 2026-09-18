@@ -9,9 +9,11 @@
   ===========================
   Esta página NO tiene CSS ni JS propios: usa `styles.css` y `main.js` tal
   cual. Todo lo específico vive en el bloque `Página "Sobre mí"` al final de
-  styles.css. main.js no necesitó ni una línea nueva porque todos sus módulos
-  están protegidos con null-checks: los que no encuentran su nodo (portfolio,
-  FAQ, contadores del hero, marquesina) simplemente no hacen nada acá.
+  styles.css. Los módulos de main.js que no aplican acá (portfolio, FAQ,
+  contadores del hero, marquesina) están protegidos con null-checks y no
+  hacen nada. La única pieza de JS que SÍ es específica de esta página es el
+  módulo "Lightbox de bocetos" (también null-checked, no rompe nada en
+  index.html donde el nodo #sketch-lightbox no existe).
 
   Hay markup DUPLICADO de index.html que debe mantenerse en sync a mano:
     · <header> + .mobile-menu   (con los links apuntando a index.html#ancla)
@@ -84,7 +86,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20260918k">
+<link rel="stylesheet" href="styles.css?v=20260918n">
 
 <script type="application/ld+json">
 {
@@ -249,9 +251,9 @@
              bocetos reales (BulaVinaka, HomeBoyz, etc.) en cuanto Julián los
              envíe. -->
         <div class="about-sketches">
-          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto BulaVinaka" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:0; object-position: top;">
-          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto HomeBoyz" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:1; object-position: center;">
-          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto Genesis" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:2; object-position: bottom;">
+          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto BulaVinaka" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:0; object-position: top;" role="button" tabindex="0" aria-label="Ver boceto BulaVinaka en grande">
+          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto HomeBoyz" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:1; object-position: center;" role="button" tabindex="0" aria-label="Ver boceto HomeBoyz en grande">
+          <img class="about-sketch" src="assets/img/sobre-mi/bocetos.jpg" alt="Hoja de bocetos a lápiz de un logotipo, boceto Genesis" width="900" height="1125" decoding="async" fetchpriority="low" style="--i:2; object-position: bottom;" role="button" tabindex="0" aria-label="Ver boceto Genesis en grande">
         </div>
         <img class="about-portrait" src="assets/img/sobre-mi/hero-julian.jpg" alt="Julián Orlando bocetando a lápiz un logotipo en su libreta" width="1100" height="1375" fetchpriority="high">
         <div class="about-portrait-badge">
@@ -263,6 +265,29 @@
 
     </div>
   </section>
+
+  <!-- Lightbox de bocetos: se abre al clickear cualquier .about-sketch
+       (ver módulo "Lightbox de bocetos" en main.js). Un único overlay
+       reutilizado para los 3 — el JS solo cambia src/alt/contador al
+       navegar con ← →. -->
+  <div class="sketch-lightbox" id="sketch-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vista ampliada del boceto">
+    <button class="sketch-lightbox-close" id="sketch-lightbox-close" type="button" aria-label="Cerrar vista ampliada">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M1.5 1.5L16.5 16.5M16.5 1.5L1.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <button class="sketch-lightbox-nav sketch-lightbox-prev" id="sketch-lightbox-prev" type="button" aria-label="Boceto anterior">
+      <svg width="11" height="18" viewBox="0 0 11 18" fill="none" aria-hidden="true"><path d="M9.5 1.5L1.5 9L9.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <figure class="sketch-lightbox-figure">
+      <img class="sketch-lightbox-img" id="sketch-lightbox-img" src="" alt="">
+      <figcaption class="sketch-lightbox-caption">
+        <span id="sketch-lightbox-title"></span>
+        <span class="sketch-lightbox-count" id="sketch-lightbox-count"></span>
+      </figcaption>
+    </figure>
+    <button class="sketch-lightbox-nav sketch-lightbox-next" id="sketch-lightbox-next" type="button" aria-label="Boceto siguiente">
+      <svg width="11" height="18" viewBox="0 0 11 18" fill="none" aria-hidden="true"><path d="M1.5 1.5L9.5 9L1.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
 
   <!-- ============ 01 — CÓMO TRABAJO ============ -->
   <!-- Acá vive el retrato sobre fondo verde, en recorte CUADRADO (el home lo
@@ -537,6 +562,6 @@
 <!-- El ?v= es cache-busting manual: SUBIRLO en index.html Y acá cada vez que
      se edite main.js o styles.css, o los cambios no llegan a quien ya visitó
      el sitio. Ambas páginas tienen que apuntar a la misma versión. -->
-<script src="main.js?v=20260910f"></script>
+<script src="main.js?v=20260910g"></script>
 </body>
 </html>
