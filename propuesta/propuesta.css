@@ -622,18 +622,18 @@ p { text-wrap: pretty; }
   background: rgba(243,242,243,.05);
   border: 1px solid var(--dark-border);
   overflow: hidden;
-  transition: transform .55s var(--ease-main), border-color .35s, box-shadow .55s var(--ease-main), background .35s;
+  transition: transform .6s cubic-bezier(.22,.61,.36,1), border-color .5s ease, box-shadow .6s cubic-bezier(.22,.61,.36,1), background .5s ease;
 }
 .pack-meta-cell::before {
   content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
   background: linear-gradient(180deg, var(--brand-2), var(--mint));
-  transition: width .55s var(--ease-main), opacity .4s;
+  transition: width .6s cubic-bezier(.22,.61,.36,1), opacity .5s ease;
 }
 /* Foco de luz que sigue al puntero dentro de la card (--x/--y por JS) */
 .pack-meta-cell::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(194,220,175,.26), rgba(0,167,112,.10) 35%, transparent 65%);
-  opacity: 0; transition: opacity .45s;
+  opacity: 0; transition: opacity .55s ease;
 }
 .pack-meta-cell:hover { transform: translateY(-5px) scale(1.015); border-color: rgba(194,220,175,.55); box-shadow: 0 26px 60px rgba(0,0,0,.28), inset 0 0 0 1px rgba(194,220,175,.12); background: rgba(243,242,243,.08); }
 .pack-meta-cell:hover::before { width: 100%; opacity: .12; }
