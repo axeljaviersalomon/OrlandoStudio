@@ -66,6 +66,8 @@
 
   /* Easings */
   --ease-main: cubic-bezier(.16,1,.3,1);
+  --ease-menu-open: cubic-bezier(.19,1,.22,1);
+  --ease-menu-close: cubic-bezier(.55,0,.1,1);
 
   /* Layout */
   --container-max: 1320px;
@@ -330,10 +332,10 @@ section[id] { scroll-margin-top: 100px; }
   height: 2px;
   margin-inline: auto;
   background: var(--ink-dark);
-  transition: transform .3s, opacity .3s;
+  transition: transform .45s var(--ease-main), opacity .25s ease;
 }
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; transition: opacity .15s ease; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ==========================================================================
@@ -354,12 +356,17 @@ section[id] { scroll-margin-top: 100px; }
   flex-direction: column;
   visibility: hidden;
   clip-path: circle(3% at calc(100% - 38px) 36px);
-  transition: clip-path .65s var(--ease-main), visibility 0s .65s;
+  will-change: clip-path;
+  transition: clip-path .6s var(--ease-menu-close), visibility 0s .6s;
 }
 .mobile-menu.is-open {
   visibility: visible;
   clip-path: circle(150% at calc(100% - 38px) 36px);
-  transition: clip-path .65s var(--ease-main);
+  transition: clip-path .75s var(--ease-menu-open);
+}
+.mobile-menu.is-closing {
+  clip-path: circle(3% at calc(100% - 38px) 36px);
+  transition: clip-path .5s var(--ease-menu-close), visibility 0s .5s;
 }
 
 .mobile-menu-brand {
@@ -384,7 +391,7 @@ section[id] { scroll-margin-top: 100px; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color .3s, background .3s, transform .4s var(--ease-main);
+  transition: border-color .3s, background .3s, transform .45s var(--ease-main);
 }
 .mobile-menu-close:hover { border-color: var(--mint); background: rgba(243,242,243,.07); transform: rotate(90deg); }
 
@@ -405,14 +412,21 @@ section[id] { scroll-margin-top: 100px; }
   border-top: 1px solid var(--dark-hairline);
   opacity: 0;
   transform: translateY(18px);
+  transition: opacity .3s ease, transform .35s var(--ease-main);
 }
 .mobile-nav li:last-child { border-bottom: 1px solid var(--dark-hairline); }
-.mobile-menu.is-open .mobile-nav li { animation: osRise .6s var(--ease-main) both; }
-.mobile-menu.is-open .mobile-nav li:nth-child(1) { animation-delay: .2s; }
-.mobile-menu.is-open .mobile-nav li:nth-child(2) { animation-delay: .27s; }
-.mobile-menu.is-open .mobile-nav li:nth-child(3) { animation-delay: .34s; }
-.mobile-menu.is-open .mobile-nav li:nth-child(4) { animation-delay: .41s; }
-.mobile-menu.is-open .mobile-nav li:nth-child(5) { animation-delay: .48s; }
+.mobile-menu.is-open .mobile-nav li { animation: osRise .65s var(--ease-menu-open) both; }
+.mobile-menu.is-open .mobile-nav li:nth-child(1) { animation-delay: .22s; }
+.mobile-menu.is-open .mobile-nav li:nth-child(2) { animation-delay: .29s; }
+.mobile-menu.is-open .mobile-nav li:nth-child(3) { animation-delay: .36s; }
+.mobile-menu.is-open .mobile-nav li:nth-child(4) { animation-delay: .43s; }
+.mobile-menu.is-open .mobile-nav li:nth-child(5) { animation-delay: .5s; }
+.mobile-menu.is-closing .mobile-nav li {
+  animation: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .22s ease, transform .26s var(--ease-menu-close);
+}
 
 .mobile-nav a {
   display: flex;
@@ -440,8 +454,15 @@ section[id] { scroll-margin-top: 100px; }
   opacity: 0;
   transform: translateY(18px);
   margin-top: clamp(28px,5vh,40px);
+  transition: opacity .3s ease, transform .35s var(--ease-main);
 }
-.mobile-menu.is-open .mobile-menu-bottom { animation: osRise .6s var(--ease-main) .58s both; }
+.mobile-menu.is-open .mobile-menu-bottom { animation: osRise .65s var(--ease-menu-open) .57s both; }
+.mobile-menu.is-closing .mobile-menu-bottom {
+  animation: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .2s ease, transform .24s var(--ease-menu-close);
+}
 .mobile-menu-cta { width: 100%; justify-content: center; margin-top: 8px; }
 
 /* ==========================================================================

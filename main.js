@@ -40,15 +40,15 @@
      --------------------------------------------------------------------- */
 
   var PROJECTS = [
-    { name: "The Outdoor Project", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/outdoor-project.jpg", logo: "assets/img/portfolio/logos/outdoor-project.svg", url: "https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" },
-    { name: "Iron Lab", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/iron-lab.jpg", logo: "assets/img/portfolio/logos/iron-lab.svg", url: "https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" },
-    { name: "BulaVinaka", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/bulavinaka.jpg", logo: "assets/img/portfolio/logos/bulavinaka.svg", url: "https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" },
-    { name: "HomeBoyz", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/homeboyz.jpg", logo: "assets/img/portfolio/logos/homeboyz.svg", url: "https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" },
-    { name: "Salentein", tag: "Branding", cat: "branding", img: "assets/img/portfolio/salentein.jpg", logo: "assets/img/portfolio/logos/salentein.svg", url: "https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" },
-    { name: "EtherCore", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/ethercore.jpg", logo: "assets/img/portfolio/logos/ethercore.svg", url: "https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" },
-    { name: "Libema", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/libema.jpg", logo: "assets/img/portfolio/logos/libema.svg", url: "https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" },
-    { name: "33usd", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/33usd.jpg", logo: "assets/img/portfolio/logos/33usd.svg", url: "https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" },
-    { name: "ArmonyDrinks", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/armonydrinks.jpg", logo: "assets/img/portfolio/logos/armonydrinks.svg", url: "https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" }
+    { name: "The Outdoor Project", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/outdoor-project.webp", logo: "assets/img/portfolio/logos/outdoor-project.svg", url: "https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" },
+    { name: "Iron Lab", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/iron-lab.webp", logo: "assets/img/portfolio/logos/iron-lab.svg", url: "https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" },
+    { name: "BulaVinaka", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/bulavinaka.webp", logo: "assets/img/portfolio/logos/bulavinaka.svg", url: "https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" },
+    { name: "HomeBoyz", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/homeboyz.webp", logo: "assets/img/portfolio/logos/homeboyz.svg", url: "https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" },
+    { name: "Salentein", tag: "Branding", cat: "branding", img: "assets/img/portfolio/salentein.webp", logo: "assets/img/portfolio/logos/salentein.svg", url: "https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" },
+    { name: "EtherCore", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/ethercore.webp", logo: "assets/img/portfolio/logos/ethercore.svg", url: "https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" },
+    { name: "Libema", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/libema.webp", logo: "assets/img/portfolio/logos/libema.svg", url: "https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" },
+    { name: "33usd", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/33usd.webp", logo: "assets/img/portfolio/logos/33usd.svg", url: "https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" },
+    { name: "ArmonyDrinks", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/armonydrinks.webp", logo: "assets/img/portfolio/logos/armonydrinks.svg", url: "https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" }
   ];
 
   var FAQ = [
@@ -206,15 +206,28 @@
   var mobileMenu = $("#mobile-menu");
   var mobileMenuClose = $("#mobile-menu-close");
   if (navToggle && mobileMenu) {
+    var menuCloseTimer = null;
     var closeMenu = function () {
+      if (!mobileMenu.classList.contains("is-open")) return;
+      window.clearTimeout(menuCloseTimer);
       mobileMenu.classList.remove("is-open");
+      mobileMenu.classList.add("is-closing");
       navToggle.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
+      menuCloseTimer = window.setTimeout(function () {
+        mobileMenu.classList.remove("is-closing");
+      }, 500);
     };
     navToggle.addEventListener("click", function () {
-      var open = mobileMenu.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      document.body.style.overflow = open ? "hidden" : "";
+      if (mobileMenu.classList.contains("is-open")) {
+        closeMenu();
+        return;
+      }
+      window.clearTimeout(menuCloseTimer);
+      mobileMenu.classList.remove("is-closing");
+      mobileMenu.classList.add("is-open");
+      navToggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
     });
     if (mobileMenuClose) mobileMenuClose.addEventListener("click", closeMenu);
     $all("a", mobileMenu).forEach(function (a) {
