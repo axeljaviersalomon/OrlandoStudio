@@ -170,7 +170,7 @@
   safe(function () {
     slides.forEach(function (slide) {
       $$('[data-reveal]', slide).forEach(function (el, i) {
-        el.style.setProperty('--d', (Math.min(i, 10) * 0.07) + 's');
+        el.style.setProperty('--d', (Math.min(i, 6) * 0.035) + 's');
       });
       // Ítems en cascada dentro de su contenedor (heredan el --d del padre)
       $$('.pack-list, .rules, .pack-results ul, .compare tbody, .pack-meta', slide).forEach(function (list) {

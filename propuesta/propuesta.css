@@ -191,7 +191,7 @@ p { text-wrap: pretty; }
 /* Cada palabra sube desde detrás de su propia máscara, girando apenas desde
    la esquina inferior izquierda y asentándose con easing largo (expo-out):
    el clásico "mask reveal" de tipografía editorial. */
-.is-visible .wi { animation: wordUp 1.15s var(--ease-main) forwards; animation-delay: calc(var(--wd, 0) * 42ms + var(--d, 0s)); }
+.is-visible .wi { animation: wordUp .9s var(--ease-main) forwards; animation-delay: calc(var(--wd, 0) * 26ms + var(--d, 0s)); }
 
 /* --------------------------------------------------------------------------
    Fondo ambiental: glows que derivan + siguen al puntero + retícula
@@ -546,7 +546,7 @@ p { text-wrap: pretty; }
   background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: shimmer 7s linear infinite;
 }
-.is-visible .cover-title .line--accent .wi { animation: wordUp 1.15s var(--ease-main) forwards, shimmer 7s linear infinite; animation-delay: calc(var(--wd, 0) * 42ms + var(--d, 0s)), 0s; }
+.is-visible .cover-title .line--accent .wi { animation: wordUp .9s var(--ease-main) forwards, shimmer 7s linear infinite; animation-delay: calc(var(--wd, 0) * 26ms + var(--d, 0s)), 0s; }
 .cover-sub { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: var(--dark-text-secondary); max-width: 56ch; margin-bottom: 48px; }
 .cover-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 52px; }
 .cover-author {
@@ -808,8 +808,8 @@ p { text-wrap: pretty; }
 .compare i.tick span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .compare i.tick svg { width: 15px; height: 15px; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .compare i.tick path { stroke-dasharray: 24; stroke-dashoffset: 24; }
-.is-visible .compare i.tick { animation: popIn .55s var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 45ms + .5s); }
-.is-visible .compare i.tick path { animation: drawTick .45s var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 45ms + .75s); }
+.is-visible .compare i.tick { animation: popIn .55s var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 28ms + .25s); }
+.is-visible .compare i.tick path { animation: drawTick .45s var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 28ms + .4s); }
 .compare i.yes {
   background: linear-gradient(145deg, var(--brand-2), var(--brand) 70%);
   box-shadow: 0 6px 16px rgba(0,131,88,.28), inset 0 1px 0 rgba(255,255,255,.35);
@@ -991,7 +991,7 @@ p { text-wrap: pretty; }
      se funden lento y en escala, sin llamar la atención. */
 [data-reveal] {
   opacity: 0; transform: translateY(28px);
-  transition: opacity .9s var(--ease-out), transform 1.3s var(--ease-main), letter-spacing 1.4s var(--ease-main);
+  transition: opacity .65s var(--ease-out), transform 1s var(--ease-main), letter-spacing 1.1s var(--ease-main);
   transition-delay: var(--d, 0s);
 }
 .slide.is-visible [data-reveal] { opacity: 1; transform: none; }
@@ -1006,17 +1006,17 @@ p { text-wrap: pretty; }
 /* Cascada de ítems dentro de un contenedor ya revelado */
 .pack-list li, .rules li, .pack-results li, .compare tbody tr, .pack-meta-cell { opacity: 0; }
 .slide.is-visible .pack-list li, .slide.is-visible .rules li, .slide.is-visible .pack-results li, .slide.is-visible .pack-meta-cell {
-  animation: itemIn .95s var(--ease-main) both;
-  animation-delay: calc(var(--d, 0s) + .18s + var(--i, 0) * 45ms);
+  animation: itemIn .7s var(--ease-main) both;
+  animation-delay: calc(var(--d, 0s) + .08s + var(--i, 0) * 28ms);
 }
 .slide.is-visible .compare tbody tr {
-  animation: rowIn .8s var(--ease-out) both;
-  animation-delay: calc(var(--d, 0s) + .25s + var(--i, 0) * 55ms);
+  animation: rowIn .6s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0s) + .1s + var(--i, 0) * 32ms);
 }
 /* Hairline de la cabecera de la tabla: se dibuja de izquierda a derecha */
 .compare thead th { position: relative; }
 .compare thead th::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--brand); transform: scaleX(0); transform-origin: left; }
-.slide.is-visible .compare thead th::after { animation: lineIn 1.1s var(--ease-main) both; animation-delay: calc(var(--d, 0s) + .2s); }
+.slide.is-visible .compare thead th::after { animation: lineIn .85s var(--ease-main) both; animation-delay: calc(var(--d, 0s) + .1s); }
 
 /* Decorados de fondo */
 .slide-bignum { opacity: 0; transition: opacity 1.8s var(--ease-out) .25s; }
@@ -1026,7 +1026,7 @@ p { text-wrap: pretty; }
 .slide.is-visible .slide-seal { opacity: .2; scale: 1; }
 .pack-watermark { opacity: 0; scale: 1.06; transition: opacity 1.8s var(--ease-out) .3s, scale 2.4s var(--ease-main) .3s; }
 .slide.is-visible .pack-watermark { opacity: .34; scale: 1; }
-.pack-kicker i { transform: scaleX(0); transform-origin: left; transition: transform 1s var(--ease-main) calc(var(--d, 0s) + .3s); }
+.pack-kicker i { transform: scaleX(0); transform-origin: left; transition: transform .8s var(--ease-main) calc(var(--d, 0s) + .12s); }
 .slide.is-visible .pack-kicker i { transform: none; }
 
 /* --------------------------------------------------------------------------
