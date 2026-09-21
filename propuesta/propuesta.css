@@ -237,6 +237,14 @@ p { text-wrap: pretty; }
 .ring--spin b { position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--brand-2); transform: translateX(-50%); box-shadow: 0 0 0 6px rgba(0,167,112,.18); }
 .ring--dashed { inset: 8%; border: 1px dashed rgba(194,220,175,.2); animation: osSpin 80s linear infinite reverse; }
 
+/* En escritorio, el anillo se corre al lado derecho (fondo decorativo
+   detrás del contenido, que queda a la izquierda). En mobile se deja como
+   está: centrado, como pide Julián. Ver también el override de .cover-mark
+   más abajo, junto a su definición. */
+@media (min-width: 960px) {
+  .slide-rings { left: auto; right: 4%; transform: translateY(-50%); }
+}
+
 /* --------------------------------------------------------------------------
    Splash de entrada
    -------------------------------------------------------------------------- */
@@ -430,7 +438,7 @@ p { text-wrap: pretty; }
 .cursor-light {
   position: fixed; left: 0; top: 0; z-index: 44; pointer-events: none;
   width: 720px; height: 720px; margin: -360px 0 0 -360px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(194,220,175,.22) 0%, rgba(194,220,175,.08) 32%, transparent 62%);
+  background: radial-gradient(circle, rgba(194,220,175,.13) 0%, rgba(194,220,175,.05) 32%, transparent 62%);
   mix-blend-mode: screen;
   transform: translate3d(-9999px,-9999px,0);
   will-change: transform;
@@ -439,7 +447,7 @@ p { text-wrap: pretty; }
 .cursor-light.is-on { opacity: 1; }
 .cursor-light.on-light {
   mix-blend-mode: normal;
-  background: radial-gradient(circle, rgba(194,220,175,.34) 0%, rgba(194,220,175,.12) 32%, transparent 62%);
+  background: radial-gradient(circle, rgba(194,220,175,.2) 0%, rgba(194,220,175,.07) 32%, transparent 62%);
 }
 
 /* --------------------------------------------------------------------------
@@ -484,6 +492,9 @@ p { text-wrap: pretty; }
 }
 /* La opacidad va en el img: la animación del figure termina en opacity:1 */
 .cover-mark img { width: 100%; height: auto; opacity: .22; filter: drop-shadow(0 0 60px rgba(0,167,112,.25)); }
+@media (min-width: 960px) {
+  .cover-mark { left: auto; right: 2%; margin-left: 0; }
+}
 .slide-bignum {
   position: absolute; right: 2%; top: 6%; z-index: -1;
   font-family: var(--font-serif); font-style: italic;
@@ -800,7 +811,7 @@ p { text-wrap: pretty; }
 }
 .step {
   position: relative;
-  background: rgba(243,242,243,.05); border: 1px solid var(--dark-border); border-radius: 18px;
+  background: rgba(243,242,243,.05); border: 1px solid var(--dark-border); border-radius: 18px 18px 0 0;
   padding: 28px 24px 30px; display: flex; flex-direction: column; gap: 10px;
   isolation: isolate; /* overflow visible: la contrahuella cuelga por debajo */
   transition: transform .55s var(--ease-main), border-color .3s, background .3s, box-shadow .55s var(--ease-main);
@@ -819,6 +830,9 @@ p { text-wrap: pretty; }
 /* Contrahuella: línea punteada que baja desde la base de la card al escalón anterior */
 .step-riser { position: absolute; left: 0; top: 100%; width: 1px; height: var(--rise); background: repeating-linear-gradient(180deg, rgba(194,220,175,.5) 0 4px, transparent 4px 9px); opacity: 0; transition: opacity .6s .8s; }
 .step:nth-child(3) .step-riser { height: calc(var(--rise) * 2); }
+/* Paso 1 es la base de la escalera: no hay escalón anterior al que bajar,
+   así que no lleva contrahuella (quedaba flotando sobre el texto de abajo). */
+.step:nth-child(1) .step-riser { display: none; }
 .is-visible .step .step-riser { opacity: 1; }
 /* Número fantasma grande al fondo de cada card */
 .step-ghost {
