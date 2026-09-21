@@ -51,8 +51,6 @@
   --gutter: 24px;
 
   /* Posición del puntero (0–1), la actualiza el JS; mueve los glows de fondo */
-  --mx: .5;
-  --my: .5;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -71,6 +69,7 @@ html {
 @media (min-width: 960px) {
   html.js-deck { scroll-snap-type: none; scroll-behavior: auto; }
 }
+
 
 body {
   margin: 0;
@@ -105,7 +104,10 @@ p { text-wrap: pretty; }
 
 .noise-overlay {
   position: fixed; inset: 0; z-index: 60; pointer-events: none;
-  opacity: .05; mix-blend-mode: overlay;
+  /* Sin mix-blend-mode: una capa fija a pantalla completa con blend obliga
+     al compositor a fundir toda la página en cada frame de scroll. Al 5% de
+     opacidad el grano se ve igual con alpha normal. */
+  opacity: .05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -130,7 +132,10 @@ p { text-wrap: pretty; }
   100% { transform: scale(1.9); opacity: 0; }
 }
 @keyframes hintDrop { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(100%); } }
-@keyframes wordUp { from { transform: translateY(110%) rotate(2deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes wordUp { from { transform: translateY(108%) rotate(4deg); opacity: 0; } 35% { opacity: 1; } to { transform: none; opacity: 1; } }
+@keyframes itemIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes rowIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lineIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes strike { to { transform: scaleX(1); } }
 @keyframes popIn { 0% { transform: scale(.4); opacity: 0; } 70% { transform: scale(1.15); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
@@ -181,9 +186,12 @@ p { text-wrap: pretty; }
 
 /* Split-text: el JS envuelve cada palabra en .w > .wi; la palabra sube desde
    abajo con clip. Si el JS no corre, el título es texto normal y visible. */
-.w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; margin-bottom: -.08em; }
-.wi { display: inline-block; transform: translateY(110%); opacity: 0; }
-.is-visible .wi { animation: wordUp .9s var(--ease-out) forwards; animation-delay: calc(var(--wd, 0) * 55ms + var(--d, 0s)); }
+.w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: .06em .04em .1em 0; margin: -.06em -.04em -.1em 0; }
+.wi { display: inline-block; transform: translateY(108%) rotate(4deg); transform-origin: 0 100%; opacity: 0; }
+/* Cada palabra sube desde detrás de su propia máscara, girando apenas desde
+   la esquina inferior izquierda y asentándose con easing largo (expo-out):
+   el clásico "mask reveal" de tipografía editorial. */
+.is-visible .wi { animation: wordUp 1.15s var(--ease-main) forwards; animation-delay: calc(var(--wd, 0) * 42ms + var(--d, 0s)); }
 
 /* --------------------------------------------------------------------------
    Fondo ambiental: glows que derivan + siguen al puntero + retícula
@@ -192,20 +200,25 @@ p { text-wrap: pretty; }
 
 .ambient { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
 .ambient-glow {
-  position: absolute; border-radius: 50%; filter: blur(30px);
+  position: absolute; border-radius: 50%;
+  /* Sin filter:blur — el radial-gradient ya se funde solo, y un blur de 30px
+     sobre un círculo de 900px se re-rasteriza en cada frame de la animación
+     driftA/driftB (scale) en las 9 slides: era el costo #1 del scroll. */
   will-change: transform;
 }
 .ambient-glow--a {
   width: min(920px, 90vw); aspect-ratio: 1; top: -28%; right: -14%;
   background: radial-gradient(circle, rgba(0,167,112,.22), rgba(0,131,88,.06) 46%, transparent 70%);
   animation: driftA 18s ease-in-out infinite;
-  translate: calc((var(--mx) - .5) * -60px) calc((var(--my) - .5) * -40px);
+  /* El corrimiento con el puntero lo escribe el JS como `translate` inline
+     solo en los glows del slide visible (antes era una var en <html>, y cada
+     movimiento del mouse recalculaba el estilo de toda la página: ~60 ms
+     por frame). */
 }
 .ambient-glow--b {
   width: min(700px, 80vw); aspect-ratio: 1; left: -18%; bottom: -34%;
   background: radial-gradient(circle, rgba(194,220,175,.14), transparent 66%);
   animation: driftB 22s ease-in-out infinite;
-  translate: calc((var(--mx) - .5) * 40px) calc((var(--my) - .5) * 30px);
 }
 .slide--light .ambient-glow--a { background: radial-gradient(circle, rgba(0,167,112,.16), rgba(194,220,175,.08) 45%, transparent 70%); }
 .slide--light .ambient-glow--b { background: radial-gradient(circle, rgba(0,131,88,.10), transparent 66%); }
@@ -263,6 +276,7 @@ p { text-wrap: pretty; }
   animation: driftA 8s ease-in-out infinite;
 }
 .splash.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+.splash.is-done::before { animation-play-state: paused; } /* invisible: no gastar frames en su glow */
 .splash-inner { position: relative; display: flex; align-items: center; gap: 28px; flex-direction: column; }
 @media (min-width: 640px) { .splash-inner { flex-direction: row; gap: 40px; } }
 .splash-from {
@@ -438,14 +452,16 @@ p { text-wrap: pretty; }
   position: fixed; left: 0; top: 0; z-index: 44; pointer-events: none;
   width: 720px; height: 720px; margin: -360px 0 0 -360px; border-radius: 50%;
   background: radial-gradient(circle, rgba(194,220,175,.13) 0%, rgba(194,220,175,.05) 32%, transparent 62%);
-  mix-blend-mode: screen;
+  /* Sin mix-blend-mode: con `screen` el compositor tenía que fundir toda la
+     pantalla contra esta capa en cada frame (caro en GPU integrada, y se
+     notaba como scroll trabado). Sobre fondo oscuro, la luz con alpha
+     normal se ve prácticamente igual. */
   transform: translate3d(-9999px,-9999px,0);
   will-change: transform;
   opacity: 0; transition: opacity .8s;
 }
 .cursor-light.is-on { opacity: 1; }
 .cursor-light.on-light {
-  mix-blend-mode: normal;
   background: radial-gradient(circle, rgba(194,220,175,.2) 0%, rgba(194,220,175,.07) 32%, transparent 62%);
 }
 
@@ -460,6 +476,19 @@ p { text-wrap: pretty; }
   padding: calc(var(--header-h) + 40px) 0 64px;
   scroll-snap-align: start; scroll-snap-stop: always;
   overflow: hidden;
+}
+/* Solo en desktop, donde cada slide mide ~100vh: los slides lejos del
+   viewport no se renderizan (ni capas, ni raster, ni animaciones), menos
+   trabajo de GPU por frame durante el scroll. Un slide salteado mide lo
+   último que midió (o 100vh la primera vez). En mobile los slides son mucho
+   más altos que la pantalla y ese placeholder desplazaba el contenido
+   (un link con #hash caía en cualquier lado), así que ahí no se usa. */
+@media (min-width: 960px) {
+  .slide { content-visibility: auto; contain-intrinsic-size: auto 100vh; }
+  /* El slide activo y dos vecinos por lado se mantienen siempre
+     renderizados (lo marca el JS al llegar a un slide): el siguiente ya está
+     listo antes del scroll y ningún layout cae en medio de la transición. */
+  .slide.is-near { content-visibility: visible; }
 }
 .slide--dark {
   background: linear-gradient(160deg, var(--deep) 0%, var(--deep-2) 55%, var(--forest) 130%);
@@ -517,7 +546,7 @@ p { text-wrap: pretty; }
   background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: shimmer 7s linear infinite;
 }
-.is-visible .cover-title .line--accent .wi { animation: wordUp .9s var(--ease-out) forwards, shimmer 7s linear infinite; animation-delay: calc(var(--wd, 0) * 55ms + var(--d, 0s)), 0s; }
+.is-visible .cover-title .line--accent .wi { animation: wordUp 1.15s var(--ease-main) forwards, shimmer 7s linear infinite; animation-delay: calc(var(--wd, 0) * 42ms + var(--d, 0s)), 0s; }
 .cover-sub { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: var(--dark-text-secondary); max-width: 56ch; margin-bottom: 48px; }
 .cover-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 52px; }
 .cover-author {
@@ -949,12 +978,56 @@ p { text-wrap: pretty; }
    Reveal al entrar cada slide
    -------------------------------------------------------------------------- */
 
+/* Coreografía por slide (los delays --d los reparte el JS en orden de
+   documento, 70 ms entre elementos):
+   · Texto: sube 28px y se funde, con la opacidad más corta que el movimiento
+     para que el elemento "aparezca" antes de terminar de asentarse.
+   · Cards y bloques: además arrancan a escala .965 desde su base y se
+     asientan (translateY + scale, ambas en compositor).
+   · Eyebrows: el tracking se cierra de .6em a .4em mientras entran.
+   · Dentro de listas y tablas, cada ítem entra en cascada después de su
+     contenedor (--i lo pone el JS; --d se hereda del contenedor).
+   · Decorados de fondo (número gigante, anillos, sello, marca de agua)
+     se funden lento y en escala, sin llamar la atención. */
 [data-reveal] {
-  opacity: 0; transform: translateY(14px);
-  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s var(--ease-out), transform 1.3s var(--ease-main), letter-spacing 1.4s var(--ease-main);
   transition-delay: var(--d, 0s);
 }
 .slide.is-visible [data-reveal] { opacity: 1; transform: none; }
+
+.pain[data-reveal], .plan[data-reveal], .pack-list-wrap[data-reveal], .table-wrap[data-reveal],
+.pack-meta[data-reveal], .step[data-reveal], .rules[data-reveal], .pack-results[data-reveal], .marquee-band[data-reveal] {
+  transform: translateY(36px) scale(.965); transform-origin: 50% 100%;
+}
+.eyebrow[data-reveal] { letter-spacing: .6em; transform: translateY(12px); }
+.slide.is-visible .eyebrow[data-reveal] { letter-spacing: .4em; }
+
+/* Cascada de ítems dentro de un contenedor ya revelado */
+.pack-list li, .rules li, .pack-results li, .compare tbody tr, .pack-meta-cell { opacity: 0; }
+.slide.is-visible .pack-list li, .slide.is-visible .rules li, .slide.is-visible .pack-results li, .slide.is-visible .pack-meta-cell {
+  animation: itemIn .95s var(--ease-main) both;
+  animation-delay: calc(var(--d, 0s) + .18s + var(--i, 0) * 45ms);
+}
+.slide.is-visible .compare tbody tr {
+  animation: rowIn .8s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0s) + .25s + var(--i, 0) * 55ms);
+}
+/* Hairline de la cabecera de la tabla: se dibuja de izquierda a derecha */
+.compare thead th { position: relative; }
+.compare thead th::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--brand); transform: scaleX(0); transform-origin: left; }
+.slide.is-visible .compare thead th::after { animation: lineIn 1.1s var(--ease-main) both; animation-delay: calc(var(--d, 0s) + .2s); }
+
+/* Decorados de fondo */
+.slide-bignum { opacity: 0; transition: opacity 1.8s var(--ease-out) .25s; }
+.slide.is-visible .slide-bignum { opacity: 1; }
+.slide-rings, .slide-seal { opacity: 0; scale: .9; transition: opacity 1.6s var(--ease-out) .15s, scale 2s var(--ease-main) .15s; }
+.slide.is-visible .slide-rings { opacity: 1; scale: 1; }
+.slide.is-visible .slide-seal { opacity: .2; scale: 1; }
+.pack-watermark { opacity: 0; scale: 1.06; transition: opacity 1.8s var(--ease-out) .3s, scale 2.4s var(--ease-main) .3s; }
+.slide.is-visible .pack-watermark { opacity: .34; scale: 1; }
+.pack-kicker i { transform: scaleX(0); transform-origin: left; transition: transform 1s var(--ease-main) calc(var(--d, 0s) + .3s); }
+.slide.is-visible .pack-kicker i { transform: none; }
 
 /* --------------------------------------------------------------------------
    Responsive
@@ -1025,4 +1098,10 @@ p { text-wrap: pretty; }
   .ambient-glow, .ring, .marquee-track, .badge::before, .scroll-hint i::after, .plan--featured::before, .cover-title .line--accent, .side-dots a.is-active::before, .side-dots a.is-active::after { animation: none; }
   .cursor-light { display: none; }
   .splash::before { animation: none; }
+  /* Reveals solo con opacidad: sin desplazamientos ni escalas */
+  [data-reveal], .pain[data-reveal], .plan[data-reveal], .pack-list-wrap[data-reveal], .table-wrap[data-reveal], .pack-meta[data-reveal], .step[data-reveal], .rules[data-reveal], .pack-results[data-reveal], .marquee-band[data-reveal] { transform: none; letter-spacing: inherit; transition-duration: .5s; }
+  .wi { transform: none; }
+  @keyframes wordUp { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes itemIn { from { opacity: 0; } to { opacity: 1; } }
+  .slide-rings, .slide-seal, .pack-watermark { scale: 1; }
 }

@@ -58,6 +58,7 @@
       amb.setAttribute('aria-hidden', 'true');
       amb.innerHTML = '<i class="ambient-grid"></i><i class="ambient-glow ambient-glow--a"></i><i class="ambient-glow ambient-glow--b"></i>';
       slide.insertBefore(amb, slide.firstChild);
+      slide.glowA = amb.children[1]; slide.glowB = amb.children[2];
     });
   }, 'ambient');
 
@@ -98,8 +99,15 @@
     function tick() {
       cx += (tx - cx) * .08; cy += (ty - cy) * .08;
       lx += (px - lx) * .16; ly += (py - ly) * .16;
-      document.documentElement.style.setProperty('--mx', cx.toFixed(4));
-      document.documentElement.style.setProperty('--my', cy.toFixed(4));
+      // Solo los glows de los slides en pantalla (los demás están congelados).
+      // Antes esto era --mx/--my en <html>: cada frame recalculaba el estilo
+      // de los 750 nodos de la página y el scroll se trababa con el mouse.
+      slides.forEach(function (s) {
+        if (s.offscreen) return;
+        var a = s.glowA, b = s.glowB;
+        if (a) a.style.translate = ((cx - .5) * -60).toFixed(1) + 'px ' + ((cy - .5) * -40).toFixed(1) + 'px';
+        if (b) b.style.translate = ((cx - .5) * 40).toFixed(1) + 'px ' + ((cy - .5) * 30).toFixed(1) + 'px';
+      });
       light.style.transform = 'translate3d(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px,0)';
       if (Math.abs(tx - cx) > .001 || Math.abs(ty - cy) > .001 || Math.abs(px - lx) > .3 || Math.abs(py - ly) > .3) raf = requestAnimationFrame(tick);
       else raf = null;
@@ -162,7 +170,11 @@
   safe(function () {
     slides.forEach(function (slide) {
       $$('[data-reveal]', slide).forEach(function (el, i) {
-        el.style.setProperty('--d', (Math.min(i, 8) * 0.05) + 's');
+        el.style.setProperty('--d', (Math.min(i, 10) * 0.07) + 's');
+      });
+      // Ítems en cascada dentro de su contenedor (heredan el --d del padre)
+      $$('.pack-list, .rules, .pack-results ul, .compare tbody, .pack-meta', slide).forEach(function (list) {
+        Array.prototype.slice.call(list.children).forEach(function (el, i) { el.style.setProperty('--i', i); });
       });
     });
     $$('.compare i.tick').forEach(function (el, i) { el.style.setProperty('--i', i); });
@@ -216,6 +228,54 @@
     }, 6000);
   }, 'reveal');
 
+  /* ---------- Rendimiento: solo anima lo que se ve ----------
+     Cada slide tiene glows, anillos, shimmer, borde cónico, etc. en loop
+     infinito. Nueve slides animando a la vez (aunque ocho estén fuera de
+     pantalla) dejaban la página en ~25 fps incluso quieta, y el cambio de
+     slide se trababa. Acá se pausan con la Web Animations API en vez de una
+     clase CSS: cambiar una clase en <html> o en un slide recalculaba el
+     estilo de toda la página (60-90 ms en un solo frame); pausar/reanudar
+     las animaciones directamente cuesta ~1 ms.
+     - Un slide fuera de pantalla (IntersectionObserver con margen, para que
+       el siguiente "despierte" un poco antes de entrar) queda congelado.
+     - Durante la transición entre slides (animateTo) se congela todo: el
+       único movimiento en pantalla es el scroll.
+     Solo se pausan animaciones `running`, y solo se reanudan las que pausó
+     este código: hacer play() sobre una terminada (wordUp con fill forwards)
+     la reiniciaría desde cero. */
+  function pauseAnims(root) {
+    var list = root.pausedAnims || (root.pausedAnims = []);
+    root.getAnimations({ subtree: true }).forEach(function (a) {
+      // 'pending' = recién creada y todavía sin su primer frame (pasa en la
+      // carga): si no se pausa también, queda corriendo fuera de pantalla.
+      if (a.playState === 'running' || a.playState === 'pending') { a.pause(); list.push(a); }
+    });
+  }
+  function resumeAnims(root) {
+    var list = root.pausedAnims || [];
+    root.pausedAnims = [];
+    list.forEach(function (a) { if (a.playState === 'paused') a.play(); });
+  }
+  function freezeAll() { slides.forEach(function (s) { if (!s.offscreen) pauseAnims(s); }); }
+  function thawAll() { slides.forEach(function (s) { if (!s.offscreen) resumeAnims(s); }); }
+  safe(function () {
+    if (!Element.prototype.getAnimations) return; // navegador viejo: sin gating
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var s = entry.target, off = !entry.isIntersecting;
+        if (s.offscreen === off) return;
+        s.offscreen = off;
+        if (off) pauseAnims(s); else if (!animating) resumeAnims(s);
+      });
+    }, { rootMargin: '25% 0px 25% 0px', threshold: 0 });
+    slides.forEach(function (s) { io.observe(s); });
+    // Segunda pasada tras la carga: animaciones que arrancaron después del
+    // primer callback (fuentes, splash) en slides que ya estaban fuera.
+    window.addEventListener('load', function () {
+      window.setTimeout(function () { slides.forEach(function (s) { if (s.offscreen) pauseAnims(s); }); }, 300);
+    });
+  }, 'offscreen');
+
   /* ---------- Navegación lateral por puntos ---------- */
   safe(function () {
     if (document.querySelector('.side-dots')) return;
@@ -253,12 +313,39 @@
       if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
     sideDots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
+    // En desktop el slide activo cambia a mitad de la transición: los vecinos
+    // se pre-renderizan recién al llegar (ver finish() en animateTo), para
+    // que ese layout no caiga en medio del scroll.
+    if (!deckOn || !animating) preRenderNear(index);
     var sd = document.querySelector('.side-dots');
     if (sd) sd.classList.toggle('on-light', onLight);
     var light = document.querySelector('.cursor-light');
     if (light) light.classList.toggle('on-light', onLight);
 
-    if (history.replaceState) history.replaceState(null, '', '#' + id);
+    scheduleHash(id);
+  }
+
+  /* El hash de la URL se sincroniza recién cuando todo está quieto.
+     history.replaceState en medio del scroll costaba 50-100 ms en el hilo
+     principal (Chrome captura el estado del documento al tocar el historial)
+     y se veía como un tirón justo a mitad de la transición; a 1,5 s del
+     cambio de slide ya terminaron el scroll y las animaciones de entrada. */
+  var hashTimer = null;
+  function scheduleHash(id) {
+    if (!history.replaceState) return;
+    clearTimeout(hashTimer);
+    hashTimer = setTimeout(function () {
+      var write = function () { if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id); };
+      if (window.requestIdleCallback) requestIdleCallback(write, { timeout: 1000 }); else write();
+    }, 1500);
+  }
+
+  /* El activo y dos vecinos por lado quedan siempre renderizados (.is-near
+     anula content-visibility:auto). Dos y no uno: Chrome "despierta" un
+     slide cuando entra en un margen de ~medio viewport, y con un solo vecino
+     el de más allá despertaba (layout de ~35 ms) justo a mitad del scroll. */
+  function preRenderNear(index) {
+    slides.forEach(function (s, i) { s.classList.toggle('is-near', Math.abs(i - index) <= 2); });
   }
 
   /* ---------- Scroll: slide activo + parallax de decorados ---------- */
@@ -289,28 +376,46 @@
   onFrame();
 
   /* ---------- Scroll controlado (desktop) ----------
-     Una rueda = un slide. La transición es una animación propia (rAF, easing
-     largo) y después hay una pausa en la que la rueda se ignora: nadie pasa
-     dos slides de un tirón. Si un slide es más alto que la pantalla (notebook
-     chica), dentro de él se vuelve al scroll nativo hasta tocar su borde.
-     En pantallas <960px o sin JS queda el scroll-snap nativo del CSS. */
-  var deckOn = false, animating = false, lockedUntil = 0, animRaf = null;
-  var DUR = 650, PAUSE = 150;   // ms de animación y de pausa posterior
-  function easeOutExpo(t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+     Una rueda = un slide. El desplazamiento lo hace el navegador con
+     scrollTo({behavior:'smooth'}): esa animación corre en el hilo del
+     compositor, así que avanza a 60 fps aunque el hilo principal esté
+     ocupado (antes se hacía scrollTo(y) frame a frame desde JS, y cada
+     tarea pesada del main thread —recalcular estilos, pintar un slide nuevo—
+     se veía como un tirón en el scroll). Después hay una pausa en la que la
+     rueda se ignora: nadie pasa dos slides de un tirón. Si un slide es más
+     alto que la pantalla (notebook chica), dentro de él se vuelve al scroll
+     nativo hasta tocar su borde. En pantallas <960px o sin JS queda el
+     scroll-snap nativo del CSS. */
+  var deckOn = false, animating = false, lockedUntil = 0;
+  var PAUSE = 150;   // ms de pausa después de llegar
 
   function animateTo(y, done) {
-    if (animRaf) cancelAnimationFrame(animRaf);
-    var from = window.scrollY, dist = y - from, start = null;
-    var dur = reduceMotion ? 0 : Math.min(DUR, Math.max(360, Math.abs(dist) * 0.55));
+    var maxY = document.documentElement.scrollHeight - window.innerHeight;
+    var target = Math.max(0, Math.min(y, maxY));
+    if (Math.abs(window.scrollY - target) < 1) { if (done) done(); return; }
     animating = true;
-    function frame(ts) {
-      if (!start) start = ts;
-      var p = dur ? Math.min(1, (ts - start) / dur) : 1;
-      window.scrollTo(0, from + dist * easeOutExpo(p));
-      if (p < 1) animRaf = requestAnimationFrame(frame);
-      else { animating = false; animRaf = null; lockedUntil = performance.now() + PAUSE; if (done) done(); }
+    // Mientras dura la transición se pausan las demás animaciones: el scroll
+    // es lo único que se mueve en pantalla.
+    freezeAll();
+    var finished = false, still = 0;
+    function finish() {
+      if (finished) return;
+      finished = true;
+      window.removeEventListener('scrollend', finish);
+      clearInterval(poll); clearTimeout(guard);
+      animating = false; lockedUntil = performance.now() + PAUSE;
+      thawAll();
+      preRenderNear(activeIndex);
+      if (done) done();
     }
-    animRaf = requestAnimationFrame(frame);
+    // Fin del scroll: `scrollend` donde existe; si no, cuando queda quieto
+    // en el destino. El guard evita quedar trabado si nada de eso dispara.
+    window.addEventListener('scrollend', finish);
+    var poll = setInterval(function () {
+      if (Math.abs(window.scrollY - target) < 1) { if (++still >= 2) finish(); } else still = 0;
+    }, 50);
+    var guard = setTimeout(finish, 1500);
+    window.scrollTo({ top: target, behavior: reduceMotion ? 'auto' : 'smooth' });
   }
 
   function go(index) {
@@ -438,6 +543,11 @@
     if (target) {
       finishSplash();
       target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      // Otra vez con todo cargado (fuentes, imágenes, slides ya medidos):
+      // si algo cambió de alto, el destino se corrige sin que se note.
+      window.addEventListener('load', function () {
+        requestAnimationFrame(function () { target.scrollIntoView({ behavior: 'auto', block: 'start' }); });
+      });
     }
   }
 })();
