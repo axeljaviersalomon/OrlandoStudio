@@ -24,7 +24,7 @@
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.deck-nav a[data-slide], .mobile-nav a[data-slide]'));
   var sideDots = [];
 
-  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var pad = function (n) { return '' + n; };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   function safe(fn, name) {
     try { fn(); } catch (err) { if (window.console) console.warn('[propuesta] ' + name + ' falló:', err); }
@@ -162,7 +162,7 @@
   safe(function () {
     slides.forEach(function (slide) {
       $$('[data-reveal]', slide).forEach(function (el, i) {
-        el.style.setProperty('--d', (Math.min(i, 8) * 0.08) + 's');
+        el.style.setProperty('--d', (Math.min(i, 8) * 0.05) + 's');
       });
     });
     $$('.compare i.tick').forEach(function (el, i) { el.style.setProperty('--i', i); });
@@ -187,19 +187,32 @@
     requestAnimationFrame(step);
   }
 
-  /* ---------- Reveal por slide ---------- */
+  /* ---------- Reveal por slide ----------
+     En desktop (deckOn) el cambio de slide es una animación propia del
+     scroll: si los elementos se revelan mientras esa animación todavía se
+     mueve, se ven dos movimientos superpuestos (el slide entrando + cada
+     elemento entrando) y la web se siente pesada. Por eso acá el reveal se
+     frena mientras `animating` es true, y quien dispara el reveal real es
+     `go()` una vez que el slide ya llegó a destino. En mobile (sin scroll
+     controlado) el IntersectionObserver revela apenas entra en pantalla,
+     como antes. */
+  function revealSlide(slide) {
+    if (!slide || slide.classList.contains('is-visible')) return;
+    slide.classList.add('is-visible');
+    $$('[data-count]', slide).forEach(runCounter);
+  }
   safe(function () {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        $$('[data-count]', entry.target).forEach(runCounter);
+        if (deckOn && animating) return; // se revela al llegar, no a mitad de camino
+        revealSlide(entry.target);
       });
     }, { threshold: 0.05 });
     slides.forEach(function (s) { io.observe(s); });
     // Red de seguridad: pase lo que pase, a los 6 s todo es visible.
     window.setTimeout(function () {
-      slides.forEach(function (s) { if (s.getBoundingClientRect().top < window.innerHeight) s.classList.add('is-visible'); });
+      slides.forEach(function (s) { if (s.getBoundingClientRect().top < window.innerHeight) revealSlide(s); });
     }, 6000);
   }, 'reveal');
 
@@ -302,7 +315,7 @@
 
   function go(index) {
     var i = Math.max(0, Math.min(slides.length - 1, index));
-    if (deckOn) { animateTo(slides[i].offsetTop); return; }
+    if (deckOn) { animateTo(slides[i].offsetTop, function () { revealSlide(slides[i]); }); return; }
     slides[i].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   }
 
@@ -343,7 +356,8 @@
         slides.forEach(function (s, i) { var d = Math.abs(s.offsetTop - y); if (d < bestD) { bestD = d; best = i; } });
         var s = slides[best];
         if (s.offsetHeight > window.innerHeight + 2 && y >= s.offsetTop && y + window.innerHeight <= s.offsetTop + s.offsetHeight) return;
-        if (bestD > 2) animateTo(s.offsetTop);
+        if (bestD > 2) animateTo(s.offsetTop, function () { revealSlide(s); });
+        else revealSlide(s);
       }, 160);
     }, { passive: true });
 
