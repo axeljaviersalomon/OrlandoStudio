@@ -135,7 +135,6 @@ p { text-wrap: pretty; }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @keyframes conic { to { --angle: 360deg; } }
 @keyframes osRise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
-@keyframes osFade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes breathe { 0%, 100% { opacity: .85; } 50% { opacity: 1; } }
 @keyframes drawTick { to { stroke-dashoffset: 0; } }
 @keyframes sheen { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(220%) skewX(-18deg); } }
@@ -237,12 +236,11 @@ p { text-wrap: pretty; }
 .ring--spin b { position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--brand-2); transform: translateX(-50%); box-shadow: 0 0 0 6px rgba(0,167,112,.18); }
 .ring--dashed { inset: 8%; border: 1px dashed rgba(194,220,175,.2); animation: osSpin 80s linear infinite reverse; }
 
-/* En escritorio, el anillo se corre al lado derecho (fondo decorativo
-   detrás del contenido, que queda a la izquierda). En mobile se deja como
-   está: centrado, como pide Julián. Ver también el override de .cover-mark
-   más abajo, junto a su definición. */
+/* En escritorio, el anillo se corre al lado izquierdo, a la altura del
+   centro del contenido (que ahora va centrado en la slide). En mobile se
+   deja como está: centrado. */
 @media (min-width: 960px) {
-  .slide-rings { left: auto; right: 4%; transform: translateY(-50%); }
+  .slide-rings { left: 4%; transform: translateY(-50%); }
 }
 
 /* --------------------------------------------------------------------------
@@ -481,20 +479,6 @@ p { text-wrap: pretty; }
 
 .slide-foot { position: absolute; left: var(--gutter); bottom: 22px; font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; opacity: .35; }
 
-/* Logo AJS (marca de Axel) centrado y grande, como detalle del fondo de las
-   dos tapas; queda dentro de los anillos. Parallax leve por JS. */
-.cover-mark {
-  position: absolute; left: 50%; top: 50%; z-index: -1; pointer-events: none;
-  width: min(52vh, 480px);
-  margin: calc(min(52vh, 480px) * -.64) 0 0 calc(min(52vh, 480px) * -.5);
-  will-change: transform;
-  animation: osFade 1.6s ease .4s both;
-}
-/* La opacidad va en el img: la animación del figure termina en opacity:1 */
-.cover-mark img { width: 100%; height: auto; opacity: .22; filter: drop-shadow(0 0 60px rgba(0,167,112,.25)); }
-@media (min-width: 960px) {
-  .cover-mark { left: auto; right: 2%; margin-left: 0; }
-}
 .slide-bignum {
   position: absolute; right: 2%; top: 6%; z-index: -1;
   font-family: var(--font-serif); font-style: italic;
@@ -515,8 +499,13 @@ p { text-wrap: pretty; }
 .slide-note { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--light-hairline); max-width: 70ch; color: var(--light-text-secondary); }
 .slide-note strong { color: var(--ink); }
 
-/* Tapas */
-.slide--cover .slide-inner { max-width: 1120px; }
+/* Tapas: hero clásico, centrado. El anillo de fondo queda a la izquierda
+   (ver .slide-rings); acá sólo se centra el contenido en flujo. */
+.slide--cover .slide-inner {
+  max-width: 1120px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+}
 .cover-title { font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 640; letter-spacing: -.03em; line-height: .98; margin-bottom: 30px; }
 .cover-title .line { display: block; }
 .cover-title .line--accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: var(--brand-2); }
@@ -529,14 +518,22 @@ p { text-wrap: pretty; }
 }
 .is-visible .cover-title .line--accent .wi { animation: wordUp .9s var(--ease-out) forwards, shimmer 7s linear infinite; animation-delay: calc(var(--wd, 0) * 55ms + var(--d, 0s)), 0s; }
 .cover-sub { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: var(--dark-text-secondary); max-width: 56ch; margin-bottom: 48px; }
-.cover-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 52px; }
-.cover-author { display: flex; flex-direction: column; gap: 4px; padding-top: 28px; border-top: 1px solid var(--dark-hairline); max-width: 420px; }
+.cover-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 52px; }
+.cover-author {
+  display: flex; align-items: center; gap: 24px;
+  padding-top: 28px; border-top: 1px solid var(--dark-hairline);
+  max-width: 460px; text-align: left;
+}
+.cover-author-text { display: flex; flex-direction: column; gap: 4px; }
 .cover-author-name { font-size: 1.05rem; font-weight: 640; }
 .cover-author-role { margin: 0 0 8px; }
 .cover-author-line { color: var(--dark-text-secondary); font-size: .95rem; }
 .cover-author-link { color: var(--brand-2); font-size: .95rem; font-weight: 600; position: relative; width: max-content; }
 .cover-author-link::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background: var(--mint); transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease-main); }
 .cover-author-link:hover::after { transform: scaleX(1); transform-origin: left; }
+/* Logo AJS (marca de Axel), del mismo alto que el bloque de texto, sin
+   transparentar: es una firma, no un decorado de fondo. */
+.cover-author-logo { height: 78px; width: auto; flex-shrink: 0; opacity: 1; }
 
 .scroll-hint { position: absolute; right: var(--gutter); bottom: 22px; display: flex; align-items: center; gap: 12px; }
 .scroll-hint .eyebrow { margin: 0; }
@@ -622,29 +619,30 @@ p { text-wrap: pretty; }
   background: rgba(243,242,243,.05);
   border: 1px solid var(--dark-border);
   overflow: hidden;
-  transition: transform .6s cubic-bezier(.22,.61,.36,1), border-color .5s ease, box-shadow .6s cubic-bezier(.22,.61,.36,1), background .5s ease;
+  transition: transform .35s cubic-bezier(.22,.61,.36,1), border-color .35s ease, box-shadow .35s cubic-bezier(.22,.61,.36,1), background .35s ease;
 }
+/* Barra de acento fija: sin animación propia, para no pisarse con el resto
+   del hover (antes animaba width + opacity a distinto ritmo que el resto y
+   quedaba, a mitad de camino, un verde saturado que parecía un glitch). */
 .pack-meta-cell::before {
   content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
   background: linear-gradient(180deg, var(--brand-2), var(--mint));
-  transition: width .6s cubic-bezier(.22,.61,.36,1), opacity .5s ease;
 }
 /* Foco de luz que sigue al puntero dentro de la card (--x/--y por JS) */
 .pack-meta-cell::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(194,220,175,.26), rgba(0,167,112,.10) 35%, transparent 65%);
-  opacity: 0; transition: opacity .55s ease;
+  background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(194,220,175,.18), rgba(0,167,112,.07) 35%, transparent 65%);
+  opacity: 0; transition: opacity .35s ease;
 }
-.pack-meta-cell:hover { transform: translateY(-5px) scale(1.015); border-color: rgba(194,220,175,.55); box-shadow: 0 26px 60px rgba(0,0,0,.28), inset 0 0 0 1px rgba(194,220,175,.12); background: rgba(243,242,243,.08); }
-.pack-meta-cell:hover::before { width: 100%; opacity: .12; }
+.pack-meta-cell:hover { transform: translateY(-4px); border-color: rgba(194,220,175,.5); box-shadow: 0 20px 44px rgba(0,0,0,.22), inset 0 0 0 1px rgba(194,220,175,.1); background: rgba(243,242,243,.08); }
 .pack-meta-cell:hover::after { opacity: 1; }
 /* Brillo que barre la card una vez al entrar el puntero */
 .pack-meta-cell .sheen { position: absolute; top: -20%; bottom: -20%; left: 0; width: 45%; z-index: 0; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(243,242,243,.10), transparent); transform: translateX(-120%) skewX(-18deg); }
 .pack-meta-cell:hover .sheen { animation: sheen .9s var(--ease-main) forwards; }
 .pack-meta-cell > :not(.sheen) { position: relative; z-index: 1; }
 .slide--light .pack-meta-cell { background: var(--paper); border-color: var(--light-hairline); }
-.slide--light .pack-meta-cell::after { background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(194,220,175,.55), rgba(0,167,112,.12) 35%, transparent 65%); }
-.slide--light .pack-meta-cell:hover { border-color: rgba(0,131,88,.4); box-shadow: 0 26px 60px rgba(36,51,58,.14); background: var(--paper); }
+.slide--light .pack-meta-cell::after { background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(194,220,175,.32), rgba(0,167,112,.08) 35%, transparent 65%); }
+.slide--light .pack-meta-cell:hover { border-color: rgba(0,131,88,.35); box-shadow: 0 20px 44px rgba(36,51,58,.12); background: var(--paper); }
 .slide--light .pack-meta-cell .sheen { background: linear-gradient(90deg, transparent, rgba(0,131,88,.07), transparent); }
 .pack-meta-cell .eyebrow { margin-bottom: 10px; }
 .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; line-height: 1; }
@@ -967,7 +965,8 @@ p { text-wrap: pretty; }
   .cover-ctas .btn { width: 100%; justify-content: center; }
   .scroll-hint { display: none; }
   .slide-rings { width: 90vw; opacity: .6; }
-  .cover-mark img { opacity: .14; }
+  .cover-author { flex-direction: column; text-align: center; gap: 14px; }
+  .cover-author-text { align-items: center; }
   .slide-seal { display: none; }
   .pack-list li { margin-inline: -8px; padding-left: 34px; }
   .pack-list li::before { left: 8px; }

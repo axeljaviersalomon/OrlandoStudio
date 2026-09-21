@@ -282,18 +282,18 @@
      chica), dentro de él se vuelve al scroll nativo hasta tocar su borde.
      En pantallas <960px o sin JS queda el scroll-snap nativo del CSS. */
   var deckOn = false, animating = false, lockedUntil = 0, animRaf = null;
-  var DUR = 1000, PAUSE = 420;   // ms de animación y de pausa posterior
-  function easeInOutQuint(t) { return t < .5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2; }
+  var DUR = 650, PAUSE = 150;   // ms de animación y de pausa posterior
+  function easeOutExpo(t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); }
 
   function animateTo(y, done) {
     if (animRaf) cancelAnimationFrame(animRaf);
     var from = window.scrollY, dist = y - from, start = null;
-    var dur = reduceMotion ? 0 : Math.min(DUR, Math.max(600, Math.abs(dist) * 0.9));
+    var dur = reduceMotion ? 0 : Math.min(DUR, Math.max(360, Math.abs(dist) * 0.55));
     animating = true;
     function frame(ts) {
       if (!start) start = ts;
       var p = dur ? Math.min(1, (ts - start) / dur) : 1;
-      window.scrollTo(0, from + dist * easeInOutQuint(p));
+      window.scrollTo(0, from + dist * easeOutExpo(p));
       if (p < 1) animRaf = requestAnimationFrame(frame);
       else { animating = false; animRaf = null; lockedUntil = performance.now() + PAUSE; if (done) done(); }
     }
