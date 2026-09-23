@@ -834,11 +834,12 @@ p { text-wrap: pretty; }
    "contrahuella" (línea punteada) une la base de cada card con la del
    siguiente. En pantallas angostas vuelve a ser una columna. */
 .steps {
-  position: relative; display: grid; gap: 18px;
+  position: relative; display: grid; gap: var(--step-gap);
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: end;
+  align-items: stretch;
   margin-bottom: 44px;
-  --rise: clamp(28px, 5vh, 56px);
+  --step-gap: 18px;
+  --rise: clamp(40px, 7vh, 72px);
 }
 .step {
   position: relative;
@@ -846,9 +847,13 @@ p { text-wrap: pretty; }
   padding: 28px 24px 30px; display: flex; flex-direction: column; gap: 10px;
   isolation: isolate; /* overflow visible: la contrahuella cuelga por debajo */
   transition: transform .55s var(--ease-main), border-color .3s, background .3s, box-shadow .55s var(--ease-main);
+/* Mismo alto para las 3 cards: cada una suma 2 × --rise de márgenes
+   (arriba + abajo) repartidos distinto, así el stretch del grid las deja
+   idénticas y solo cambia la altura a la que apoyan. */
 }
-.step:nth-child(2) { margin-bottom: var(--rise); }
-.step:nth-child(3) { margin-bottom: calc(var(--rise) * 2); }
+.step:nth-child(1) { margin: calc(var(--rise) * 2) 0 0; }
+.step:nth-child(2) { margin: var(--rise) 0; }
+.step:nth-child(3) { margin: 0 0 calc(var(--rise) * 2); }
 /* Huella: barra degradé que se dibuja al entrar el slide */
 .step::after {
   content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
@@ -858,9 +863,14 @@ p { text-wrap: pretty; }
 .is-visible .step::after { animation: strike .9s var(--ease-out) forwards; }
 .is-visible .step:nth-child(2)::after { animation-delay: .35s; }
 .is-visible .step:nth-child(3)::after { animation-delay: .7s; }
-/* Contrahuella: línea punteada que baja desde la base de la card al escalón anterior */
-.step-riser { position: absolute; left: 0; top: 100%; width: 1px; height: var(--rise); background: repeating-linear-gradient(180deg, rgba(194,220,175,.5) 0 4px, transparent 4px 9px); opacity: 0; transition: opacity .6s .8s; }
-.step:nth-child(3) .step-riser { height: calc(var(--rise) * 2); }
+/* Contrahuella: perfil de escalón punteado que baja desde la base de la card
+   (un --rise) y cruza el gap hasta la huella del paso anterior. */
+.step-riser {
+  position: absolute; top: 100%; left: calc(-1 * var(--step-gap) - 1px);
+  width: var(--step-gap); height: var(--rise);
+  border-right: 1px dashed rgba(194,220,175,.5); border-bottom: 1px dashed rgba(194,220,175,.5);
+  opacity: 0; transition: opacity .6s .8s; pointer-events: none;
+}
 /* Paso 1 es la base de la escalera: no hay escalón anterior al que bajar,
    así que no lleva contrahuella (quedaba flotando sobre el texto de abajo). */
 .step:nth-child(1) .step-riser { display: none; }
@@ -1082,7 +1092,7 @@ p { text-wrap: pretty; }
   .rules { margin-bottom: 26px; gap: 8px; }
   .marquee-band { padding: 18px 0; margin-top: 16px; }
   .marquee-set img { height: 40px; }
-  .steps { --rise: 22px; }
+  .steps { --rise: 36px; }
   .rules { margin-bottom: 20px; }
   .plan-price { padding-top: 18px; gap: 10px; }
   .plan-price-row + .plan-price-row { padding-top: 12px; }
