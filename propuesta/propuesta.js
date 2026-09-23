@@ -208,8 +208,28 @@
      `go()` una vez que el slide ya llegó a destino. En mobile (sin scroll
      controlado) el IntersectionObserver revela apenas entra en pantalla,
      como antes. */
+  /* Escalera de Camino: se vuelve a armar cada vez que se entra al slide.
+     Al salir de pantalla se nivela sin transición; al volver a revelarse
+     los pasos 2 y 3 suben de nuevo. */
+  function climbSteps(slide) {
+    var steps = slide.querySelector('.steps');
+    if (!steps) return;
+    var r = slide.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < window.innerHeight) steps.classList.add('is-climbed');
+  }
+  safe(function () {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) entry.target.querySelector('.steps').classList.remove('is-climbed');
+      });
+    }, { threshold: 0, rootMargin: '-2px 0px' }); // el margen evita que un slide pegado al borde cuente como visible
+    $$('.steps').forEach(function (st) { io.observe(st.closest('.slide')); });
+  }, 'climb');
+
   function revealSlide(slide) {
-    if (!slide || slide.classList.contains('is-visible')) return;
+    if (!slide) return;
+    climbSteps(slide);
+    if (slide.classList.contains('is-visible')) return;
     slide.classList.add('is-visible');
     $$('[data-count]', slide).forEach(runCounter);
   }
@@ -348,6 +368,50 @@
     slides.forEach(function (s, i) { s.classList.toggle('is-near', Math.abs(i - index) <= 2); });
   }
 
+  /* ---------- Encaje: cada slide entra entero en una pantalla (desktop) ----------
+     Mide el alto natural del contenido de cada slide y, si supera el espacio
+     útil (alto de pantalla menos paddings), fija --fit = espacio / contenido;
+     el CSS lo aplica como zoom. Se itera porque al achicar, el texto vuelve a
+     partir líneas distinto. Solo corre en carga, fuentes listas y resize: nunca
+     durante el scroll. Por debajo de MIN_FIT no se achica más (queda legible)
+     y el slide alto se recorre con scroll nativo (ver tallSlideRoom). */
+  var MIN_FIT = 0.6;
+  var canZoom = !!(window.CSS && CSS.supports && CSS.supports('zoom', '0.5'));
+  function fitSlides() {
+    if (!canZoom) return;
+    if (!deckMQ.matches) { slides.forEach(function (s) { s.style.removeProperty('--fit'); }); return; }
+    var vh = window.innerHeight;
+    var fits = slides.map(function () { return 1; });
+    // Alto natural: sin el min-height de 100vh y con todo renderizado
+    // (content-visibility:auto devolvería el alto del placeholder).
+    slides.forEach(function (s) {
+      s.style.minHeight = '0'; s.style.contentVisibility = 'visible'; s.style.removeProperty('--fit');
+    });
+    var pads = slides.map(function (s) {
+      var cs = getComputedStyle(s); return parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+    });
+    for (var pass = 0; pass < 4; pass++) {
+      var heights = slides.map(function (s) { return s.getBoundingClientRect().height; });
+      var changed = false;
+      slides.forEach(function (s, i) {
+        var room = vh - pads[i], content = heights[i] - pads[i];
+        if (content <= room + 0.5 || fits[i] <= MIN_FIT) return;
+        fits[i] = Math.max(MIN_FIT, fits[i] * (room / content) * 0.995);
+        s.style.setProperty('--fit', fits[i].toFixed(4));
+        changed = true;
+      });
+      if (!changed) break;
+    }
+    slides.forEach(function (s) { s.style.minHeight = ''; });
+    // content-visibility:auto recuerda el último alto renderizado de cada
+    // slide; se deja renderizar un frame con el encaje nuevo para que no
+    // recuerde el de antes (desplazaría los offsetTop de la navegación).
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { slides.forEach(function (s) { s.style.contentVisibility = ''; }); });
+    });
+  }
+  safe(fitSlides, 'fit');
+
   /* ---------- Scroll: slide activo + parallax de decorados ---------- */
   var parallaxEls = $$('.slide-bignum, [data-parallax]');
   var ticking = false;
@@ -473,6 +537,21 @@
     if (deckMQ.addEventListener) deckMQ.addEventListener('change', applyMode); else deckMQ.addListener(applyMode);
     applyMode();
   }, 'deckScroll');
+
+  /* Re-encaje cuando cambian las medidas (ventana, fuentes, imágenes) y
+     re-anclado al slide activo, que con otros altos quedaría a mitad. */
+  safe(function () {
+    var timer = null;
+    function refit() {
+      if (animating) { timer = setTimeout(refit, 200); return; }
+      fitSlides();
+      if (deckOn && slides[activeIndex]) window.scrollTo({ top: slides[activeIndex].offsetTop, behavior: 'instant' });
+      onFrame();
+    }
+    window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(refit, 150); });
+    window.addEventListener('load', refit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
+  }, 'refit');
 
   /* ---------- Links internos (#id): animación propia en vez del salto ---------- */
   safe(function () {

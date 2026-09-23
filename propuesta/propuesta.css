@@ -489,6 +489,12 @@ p { text-wrap: pretty; }
      renderizados (lo marca el JS al llegar a un slide): el siguiente ya está
      listo antes del scroll y ningún layout cae en medio de la transición. */
   .slide.is-near { content-visibility: visible; }
+  /* Encaje: si el contenido no entra en la pantalla, el JS calcula --fit (<1)
+     y el slide entero se reduce en proporción. El max-width se compensa para
+     que el bloque conserve su ancho y solo se achiquen letras y espacios. En
+     pantallas donde ya entra, --fit no se define y todo queda a tamaño real. */
+  .slide > .slide-inner, .slide > .marquee-band { zoom: var(--fit, 1); }
+  .slide > .slide-inner { max-width: calc(var(--container-max) / var(--fit, 1)); }
 }
 .slide--dark {
   background: linear-gradient(160deg, var(--deep) 0%, var(--deep-2) 55%, var(--forest) 130%);
@@ -841,15 +847,15 @@ p { text-wrap: pretty; }
   --step-gap: 18px;
   --rise: clamp(40px, 7vh, 72px);
 }
+/* Mismo alto para las 3 cards: cada una suma 2 × --rise de márgenes
+   (arriba + abajo) repartidos distinto, así el stretch del grid las deja
+   idénticas y solo cambia la altura a la que apoyan. */
 .step {
   position: relative;
   background: rgba(243,242,243,.05); border: 1px solid var(--dark-border); border-radius: 18px 18px 0 0;
   padding: 28px 24px 30px; display: flex; flex-direction: column; gap: 10px;
   isolation: isolate; /* overflow visible: la contrahuella cuelga por debajo */
   transition: transform .55s var(--ease-main), border-color .3s, background .3s, box-shadow .55s var(--ease-main);
-/* Mismo alto para las 3 cards: cada una suma 2 × --rise de márgenes
-   (arriba + abajo) repartidos distinto, así el stretch del grid las deja
-   idénticas y solo cambia la altura a la que apoyan. */
 }
 .step:nth-child(1) { margin: calc(var(--rise) * 2) 0 0; }
 .step:nth-child(2) { margin: var(--rise) 0; }
@@ -1020,13 +1026,20 @@ p { text-wrap: pretty; }
    pulso. La contrahuella aparece recién cuando la escalera quedó armada. */
 .slide .steps .step[data-reveal] {
   transition: opacity .65s var(--ease-out) var(--d, 0s), transform 1s var(--ease-main) var(--d, 0s),
+    border-color .3s, background .3s, box-shadow .55s var(--ease-main);
+}
+/* Solo la subida lleva transición: al salir del slide (el JS quita
+   .is-climbed) vuelven a nivelarse al instante, fuera de pantalla. */
+.slide .steps.is-climbed .step[data-reveal] {
+  transition: opacity .65s var(--ease-out) var(--d, 0s), transform 1s var(--ease-main) var(--d, 0s),
     translate var(--climb, 0s) cubic-bezier(.65,0,.25,1) calc(var(--d, 0s) + .85s),
     border-color .3s, background .3s, box-shadow .55s var(--ease-main);
 }
 .steps .step:nth-child(2) { translate: 0 var(--rise); --climb: 1.5s; }
 .steps .step:nth-child(3) { translate: 0 calc(var(--rise) * 2); --climb: 1.8s; }
-.slide.is-visible .steps .step { translate: none; }
-.steps .step-riser { transition: opacity .7s var(--ease-out) calc(var(--d, 0s) + 2.5s); }
+.steps.is-climbed .step { translate: none; }
+.slide .steps .step .step-riser { opacity: 0; transition: none; }
+.slide .steps.is-climbed .step .step-riser { opacity: 1; transition: opacity .7s var(--ease-out) calc(var(--d, 0s) + 2.5s); }
 
 /* Cascada de ítems dentro de un contenedor ya revelado */
 .pack-list li, .rules li, .pack-results li, .compare tbody tr, .pack-meta-cell { opacity: 0; }
@@ -1113,6 +1126,31 @@ p { text-wrap: pretty; }
   .plan-price-row + .plan-price-row { padding-top: 12px; }
 }
 
+/* Pantallas muy bajas (1366×768, 1280×720…): el espacio fijo se recorta
+   más para que el encaje (--fit) tenga que achicar menos la tipografía. */
+@media (min-width: 960px) and (max-height: 760px) {
+  .slide { padding-top: calc(var(--header-h) + 12px); padding-bottom: 40px; }
+  .slide-foot { bottom: 14px; }
+  .scroll-hint { bottom: 14px; }
+  .slide-head { margin-bottom: 10px; }
+  .slide-lead { margin-bottom: 18px; }
+  .pack-quote { margin-bottom: 16px; }
+  .pack-meta { margin-bottom: 16px; }
+  .pack-list li { padding-block: 7px; }
+  .pack-list li::before { top: 15px; }
+  .pack-list-wrap { padding: 16px 22px 18px; }
+  .pack-list-wrap > .eyebrow, .pack-results > .eyebrow { margin-bottom: 10px; }
+  .slide-note { margin-top: 22px; padding-top: 16px; }
+  .compare th, .compare td { padding: 7px 16px; }
+  .compare thead th { padding-top: 12px; padding-bottom: 10px; }
+  .plan { padding: 20px 24px 22px; gap: 10px; }
+  .cover-title { margin-bottom: 20px; }
+  .cover-sub { margin-bottom: 30px; }
+  .cover-ctas { margin-bottom: 32px; }
+  .cover-author { padding-top: 20px; }
+  .marquee-band { padding: 14px 0; margin-top: 12px; }
+}
+
 /* --------------------------------------------------------------------------
    Movimiento reducido: solo se apaga lo intrusivo (loops infinitos de fondo).
    Reveals, hovers y contadores siguen funcionando: son feedback, no ruido.
@@ -1126,7 +1164,7 @@ p { text-wrap: pretty; }
   /* Reveals solo con opacidad: sin desplazamientos ni escalas */
   [data-reveal], .pain[data-reveal], .plan[data-reveal], .pack-list-wrap[data-reveal], .table-wrap[data-reveal], .pack-meta[data-reveal], .step[data-reveal], .rules[data-reveal], .pack-results[data-reveal], .marquee-band[data-reveal] { transform: none; letter-spacing: inherit; transition-duration: .5s; }
   .steps .step { translate: none !important; }
-  .steps .step-riser { transition-delay: 0s; }
+  .slide .steps.is-climbed .step .step-riser { transition-delay: 0s; }
   .wi { transform: none; }
   @keyframes wordUp { from { opacity: 0; } to { opacity: 1; } }
   @keyframes itemIn { from { opacity: 0; } to { opacity: 1; } }
