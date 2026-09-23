@@ -837,6 +837,44 @@ p { text-wrap: pretty; }
 .compare .row-price b { font-size: 1.35rem; font-weight: 640; letter-spacing: -.02em; }
 .compare .row-price .is-reco b { color: var(--brand); }
 
+/* Mobile: la tabla deja de ser de 4 columnas con scroll horizontal y pasa a
+   una matriz de 3 columnas (un paquete por columna). Cada fila muestra el
+   ítem a lo ancho y debajo sus 3 tildes; la cabecera con los nombres de los
+   paquetes queda pegada bajo el header mientras se recorre la lista, así
+   siempre se sabe qué columna es cuál. overflow: clip (y no hidden) en el
+   slide y la tabla para que no se vuelvan contenedores de scroll y el
+   sticky funcione. */
+@media (max-width: 759px) {
+  #resumen { overflow: clip; }
+  .table-wrap { overflow: visible; margin-inline: 0; padding-inline: 0; padding-bottom: 0; }
+  .compare { display: block; min-width: 0; overflow: clip; font-size: .9rem; box-shadow: 0 20px 44px rgba(36,51,58,.08); }
+  .compare thead, .compare tbody, .compare tfoot { display: block; }
+  .compare tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .compare th, .compare td { padding: 0; border-top: 0; }
+
+  .compare thead { position: sticky; top: var(--header-h); z-index: 2; }
+  .compare thead tr { background: var(--paper); border-bottom: 1px solid var(--light-hairline); }
+  .compare thead th:first-child { display: none; }
+  .compare thead th { display: flex; flex-direction: column; justify-content: flex-end; padding: 16px 6px 14px; font-size: .84rem; line-height: 1.2; letter-spacing: -.01em; }
+  .compare thead th .eyebrow { margin-bottom: 6px; font-size: .55rem; letter-spacing: .22em; }
+  .compare thead th.is-reco { background: linear-gradient(180deg, rgba(0,167,112,.14), rgba(0,131,88,.07)), var(--paper); }
+  .compare .reco-label { display: none; }
+  .compare thead th.is-reco .eyebrow::after { content: " ★"; letter-spacing: 0; color: var(--brand); }
+
+  .compare tbody th, .compare tfoot th { grid-column: 1 / -1; width: auto; padding: 14px 16px 8px; border-top: 1px solid var(--light-hairline); }
+  .compare tbody tr:first-child th { border-top: 0; }
+  .compare tbody th { font-size: .88rem; line-height: 1.4; color: var(--ink); font-weight: 520; text-align: center; }
+  .compare td { padding: 4px 6px 14px; display: flex; justify-content: center; align-items: center; }
+  .compare i.tick { width: 24px; height: 24px; }
+  .compare i.tick svg { width: 14px; height: 14px; }
+
+  .compare tfoot th { padding: 16px 16px 6px; font-size: .6rem; text-align: center; }
+  .compare tfoot td { flex-direction: column; font-size: .88rem; padding-bottom: 16px; }
+  .compare .row-price td { padding-top: 4px; }
+  .compare .row-price s { font-size: .74rem; }
+  .compare .row-price b { font-size: 1.12rem; white-space: nowrap; }
+}
+
 /* --------------------------------------------------------------------------
    07 · Camino
    -------------------------------------------------------------------------- */
@@ -1007,6 +1045,14 @@ p { text-wrap: pretty; }
   margin-top: 4px; padding: 4px 12px; border-radius: var(--r-pill);
   font-family: var(--font-serif); font-style: italic; font-size: .92rem; line-height: 1.3;
   color: var(--mint); background: rgba(194,220,175,.1); box-shadow: inset 0 0 0 1px rgba(194,220,175,.35);
+}
+/* Mobile: el precio va arriba y su descripción debajo, a todo el ancho de la
+   card (lado a lado la descripción quedaba en una columna de 2-3 palabras). */
+@media (max-width: 559px) {
+  .plan { padding: 24px 20px 26px; }
+  .plan h3 { font-size: 1.35rem; }
+  .plan-price-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .plan-price b { font-size: 2.1rem; }
 }
 
 /* --------------------------------------------------------------------------
