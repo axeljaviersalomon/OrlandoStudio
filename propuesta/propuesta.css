@@ -1013,6 +1013,21 @@ p { text-wrap: pretty; }
 .eyebrow[data-reveal] { letter-spacing: .6em; transform: translateY(12px); }
 .slide.is-visible .eyebrow[data-reveal] { letter-spacing: .4em; }
 
+/* Escalera de Camino: las 3 cards entran niveladas a la altura del paso 1
+   (translate independiente del transform del reveal y del hover) y, una vez
+   asentadas, los pasos 2 y 3 ascienden lento hasta su escalón. El 3 recorre
+   el doble, así que tarda un poco más para que ambos suban con el mismo
+   pulso. La contrahuella aparece recién cuando la escalera quedó armada. */
+.slide .steps .step[data-reveal] {
+  transition: opacity .65s var(--ease-out) var(--d, 0s), transform 1s var(--ease-main) var(--d, 0s),
+    translate var(--climb, 0s) cubic-bezier(.65,0,.25,1) calc(var(--d, 0s) + .85s),
+    border-color .3s, background .3s, box-shadow .55s var(--ease-main);
+}
+.steps .step:nth-child(2) { translate: 0 var(--rise); --climb: 1.5s; }
+.steps .step:nth-child(3) { translate: 0 calc(var(--rise) * 2); --climb: 1.8s; }
+.slide.is-visible .steps .step { translate: none; }
+.steps .step-riser { transition: opacity .7s var(--ease-out) calc(var(--d, 0s) + 2.5s); }
+
 /* Cascada de ítems dentro de un contenedor ya revelado */
 .pack-list li, .rules li, .pack-results li, .compare tbody tr, .pack-meta-cell { opacity: 0; }
 .slide.is-visible .pack-list li, .slide.is-visible .rules li, .slide.is-visible .pack-results li, .slide.is-visible .pack-meta-cell {
@@ -1110,6 +1125,8 @@ p { text-wrap: pretty; }
   .splash::before { animation: none; }
   /* Reveals solo con opacidad: sin desplazamientos ni escalas */
   [data-reveal], .pain[data-reveal], .plan[data-reveal], .pack-list-wrap[data-reveal], .table-wrap[data-reveal], .pack-meta[data-reveal], .step[data-reveal], .rules[data-reveal], .pack-results[data-reveal], .marquee-band[data-reveal] { transform: none; letter-spacing: inherit; transition-duration: .5s; }
+  .steps .step { translate: none !important; }
+  .steps .step-riser { transition-delay: 0s; }
   .wi { transform: none; }
   @keyframes wordUp { from { opacity: 0; } to { opacity: 1; } }
   @keyframes itemIn { from { opacity: 0; } to { opacity: 1; } }
