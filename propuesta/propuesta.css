@@ -27,8 +27,10 @@
   --ink: #24333A;
   --ink-dark: #F3F2F3;
 
-  --dark-text-secondary: rgba(243,242,243,.72);
-  --dark-text-mute: rgba(243,242,243,.5);
+  /* Textos sobre verde oscuro: subidos para que se lean sin esfuerzo
+     (secundario ≈ AAA, mute ≈ AA+) sin llegar al blanco pleno del título. */
+  --dark-text-secondary: rgba(243,242,243,.88);
+  --dark-text-mute: rgba(243,242,243,.7);
   --dark-hairline: rgba(243,242,243,.1);
   --dark-border: rgba(243,242,243,.16);
   --dark-border-3: rgba(243,242,243,.26);
@@ -514,6 +516,7 @@ p { text-wrap: pretty; }
 .slide-inner { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--gutter); }
 
 .slide-foot { position: absolute; left: var(--gutter); bottom: 22px; font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; opacity: .35; }
+.slide--dark .slide-foot { opacity: .55; }
 
 .slide-bignum {
   position: absolute; right: 2%; top: 6%; z-index: -1;
@@ -638,7 +641,7 @@ p { text-wrap: pretty; }
   margin: -6px 0 14px;
   font-family: var(--font-serif); font-style: italic; font-weight: 400;
   font-size: clamp(1rem, 1.3vw, 1.15rem); letter-spacing: .01em;
-  color: var(--mint); opacity: .85;
+  color: var(--mint);
 }
 .pack-kicker i { width: 28px; height: 1px; background: linear-gradient(90deg, var(--brand-2), var(--mint)); flex-shrink: 0; }
 .pack-quote { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.15rem, 1.7vw, 1.45rem); line-height: 1.4; color: var(--dark-text-secondary); max-width: 40ch; margin-bottom: 34px; }
@@ -694,6 +697,8 @@ p { text-wrap: pretty; }
 }
 .is-visible .price s::after { animation: strike .5s var(--ease-out) 1.3s forwards; }
 .price-note { display: block; margin-top: 8px; font-size: .78rem; color: var(--brand-2); letter-spacing: .04em; }
+.slide--dark .price-note { color: var(--mint); }
+.slide--dark .price s { opacity: .72; }
 .slide--light .price-note { color: var(--brand); }
 
 .pack-results { padding-top: 6px; }
@@ -708,7 +713,7 @@ p { text-wrap: pretty; }
 
 .pack-list-wrap {
   position: relative;
-  background: rgba(27,39,44,.55);
+  background: rgba(27,39,44,.72);
   border: 1px solid var(--dark-border);
   border-radius: var(--r-panel);
   padding: 28px 28px 30px;
@@ -989,6 +994,20 @@ p { text-wrap: pretty; }
 .plan-price-row > span { font-size: .88rem; line-height: 1.4; color: var(--light-text-secondary); }
 .plan--featured .plan-price-row > span { color: var(--dark-text-secondary); }
 .plan-price small { font-size: .78rem; color: var(--light-text-mute); }
+/* Promo de la Opción B: precio de lista tachado arriba, precio promo abajo */
+.plan-promo { display: grid; justify-items: start; gap: 6px; }
+.plan-promo-old { position: relative; text-decoration: none; font-size: 1rem; font-weight: 500; color: var(--dark-text-mute); }
+.plan-promo-old::after {
+  content: ""; position: absolute; left: -3px; right: -3px; top: 52%; height: 2px;
+  background: var(--brand-2); transform: scaleX(0); transform-origin: left;
+}
+.is-visible .plan-promo-old::after { animation: strike .5s var(--ease-out) .9s forwards; }
+.plan-promo-term { font-size: .85rem; font-weight: 500; color: var(--ink-dark); }
+.plan-promo-note {
+  margin-top: 4px; padding: 4px 12px; border-radius: var(--r-pill);
+  font-family: var(--font-serif); font-style: italic; font-size: .92rem; line-height: 1.3;
+  color: var(--mint); background: rgba(194,220,175,.1); box-shadow: inset 0 0 0 1px rgba(194,220,175,.35);
+}
 
 /* --------------------------------------------------------------------------
    Reveal al entrar cada slide
