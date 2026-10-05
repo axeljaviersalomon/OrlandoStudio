@@ -561,18 +561,18 @@ p { text-wrap: pretty; }
 .cover-author {
   display: flex; align-items: center; gap: 24px;
   padding-top: 28px; border-top: 1px solid var(--dark-hairline);
-  max-width: 460px; text-align: left;
+  max-width: 560px; text-align: left;
 }
 .cover-author-text { display: flex; flex-direction: column; gap: 4px; }
 .cover-author-name { font-size: 1.05rem; font-weight: 640; }
-.cover-author-role { margin: 0 0 8px; }
+.cover-author-role { margin: 0 0 8px; white-space: nowrap; }
 .cover-author-line { color: var(--dark-text-secondary); font-size: .95rem; }
 .cover-author-link { color: var(--brand-2); font-size: .95rem; font-weight: 600; position: relative; width: max-content; }
 .cover-author-link::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background: var(--mint); transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease-main); }
 .cover-author-link:hover::after { transform: scaleX(1); transform-origin: left; }
 /* Logo AJS (marca de Axel), del mismo alto que el bloque de texto, sin
    transparentar: es una firma, no un decorado de fondo. */
-.cover-author-logo { height: 156px; width: auto; flex-shrink: 0; opacity: 1; }
+.cover-author-logo { width: 132px; height: auto; flex-shrink: 0; opacity: 1; }
 
 .scroll-hint { position: absolute; right: var(--gutter); bottom: 22px; display: flex; align-items: center; gap: 12px; }
 .scroll-hint .eyebrow { margin: 0; }
