@@ -94,3 +94,6 @@
 #   RewriteCond %{REQUEST_FILENAME}.html -f
 #   RewriteRule ^(.+?)/?$ $1.html [L]
 # </IfModule>
+
+# ----- Carpetas sin barra final: /propuesta -> /propuesta/ (si no, los CSS/JS relativos dan 404) -----
+DirectorySlash On
