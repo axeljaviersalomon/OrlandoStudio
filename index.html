@@ -1,49 +1,72 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OrlandoStudio™ — Diseño de Logos e Identidad Visual | Buenos Aires</title>
-<meta name="description" content="OrlandoStudio es el estudio de branding de Julián Orlando: diseño de logotipos e identidad visual para marcas que quieren diferenciarse y ser elegidas. +40 marcas diseñadas en 6 años.">
-<meta name="keywords" content="branding, diseño de marca, identidad visual, diseño de logo, manual de marca, diseño gráfico, Buenos Aires, Argentina">
-<meta name="author" content="Julián Orlando — OrlandoStudio">
-<meta name="theme-color" content="#0F3A27">
+<title>Diseño de logos e identidad visual en Buenos Aires | OrlandoStudio</title>
+<meta name="description" content="Estudio de branding de Julián Orlando en Buenos Aires. Diseño de logotipos, identidad visual y manual de marca para marcas que quieren diferenciarse. Más de 40 marcas en 6 años.">
+<meta name="author" content="Julián Orlando">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1B272C">
 <link rel="canonical" href="https://axeljaviersalomon.github.io/OrlandoStudio/">
+<link rel="alternate" hreflang="es" href="https://axeljaviersalomon.github.io/OrlandoStudio/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OrlandoStudio">
-<meta property="og:title" content="OrlandoStudio™ — Diseñando para que tus clientes te elijan">
-<meta property="og:description" content="Diseño de logotipos e identidad visual estratégica. +40 marcas construidas en 6 años por Julián Orlando.">
+<meta property="og:title" content="OrlandoStudio | Diseñando para que tus clientes te elijan">
+<meta property="og:description" content="Diseño de logotipos e identidad visual. Más de 40 marcas construidas en 6 años por Julián Orlando, desde Buenos Aires.">
 <meta property="og:url" content="https://axeljaviersalomon.github.io/OrlandoStudio/">
 <meta property="og:image" content="https://axeljaviersalomon.github.io/OrlandoStudio/assets/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="OrlandoStudio — Branding Studio">
+<meta property="og:image:alt" content="Logo de OrlandoStudio, estudio de branding de Julián Orlando">
 <meta property="og:locale" content="es_AR">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="OrlandoStudio™ — Diseñando para que tus clientes te elijan">
-<meta name="twitter:description" content="Diseño de logotipos e identidad visual estratégica. +40 marcas construidas en 6 años por Julián Orlando.">
+<meta name="twitter:title" content="OrlandoStudio | Diseñando para que tus clientes te elijan">
+<meta name="twitter:description" content="Diseño de logotipos e identidad visual. Más de 40 marcas construidas en 6 años por Julián Orlando, desde Buenos Aires.">
 <meta name="twitter:image" content="https://axeljaviersalomon.github.io/OrlandoStudio/assets/img/og-image.jpg">
+<meta name="twitter:image:alt" content="Logo de OrlandoStudio, estudio de branding de Julián Orlando">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 339.02 394.36'%3E%3Cpath fill='%23008358' d='M237.83,27.72a27.72,27.72,0,1,1,27.72,27.72A27.72,27.72,0,0,1,237.83,27.72Zm47,72.88V224.85A115.29,115.29,0,1,1,167.7,109.61,117.92,117.92,0,0,1,183.31,111V218.15s-.29,24.79-38.4,24.79v51.24s66.44,11.86,86.22-49.76a83.37,83.37,0,0,0,4.4-28.13l-.25-89.63V70.36a168.61,168.61,0,0,0-65.77-14.91v-.11c-.71,0-1.4,0-2.11,0s-1.31,0-2,0v.1C73.7,57.62,0,132.6,0,224.85A169.51,169.51,0,1,0,284.79,100.6Z'/%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20260921a">
+<link rel="stylesheet" href="styles.css?v=20261010e">
+<!-- Preloader: decide ANTES de pintar si se muestra. Aparece en cada carga
+     de la home, salvo con #hash en la URL (el usuario va a una sección) o
+     con prefers-reduced-motion. Markup y secuencia: ver #preloader al abrir
+     <body>. -->
+<script>
+(function () {
+  try {
+    if (location.hash) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.documentElement.classList.add("has-preloader");
+    /* Renderer WebGL de las luces: baja y se prepara en paralelo al parseo
+       del resto del HTML. El script de #preloader espera esta promesa. */
+    window.OSPreloaderGL = new Promise(function (res) {
+      var s = document.createElement("script");
+      s.src = "preloader-gl.js?v=20261010e";
+      s.async = true;
+      s.onload = function () { res(window.OSPreloaderGLInit()); };
+      s.onerror = function () { res(null); };
+      document.head.appendChild(s);
+    });
+  } catch (e) {}
+})();
+</script>
 
 <!-- JSON-LD del estudio. Ojo: "areaServed" es la MISMA lista de países que
-     aparece en la sección 02 de sobre-mi.html y en la respuesta del FAQ de
-     main.js (const FAQ, "¿Trabajás con marcas de otros países?"). Los tres
-     lugares se actualizan a mano — si cambia uno, cambiar los otros dos.
+     aparece en la sección "Alcance" de sobre-mi.html y en la respuesta del
+     FAQ de esta página ("¿Trabajás con marcas de otros países?"). Los tres
+     lugares se actualizan a mano: si cambia uno, cambiar los otros dos.
      Lista confirmada por Julián el 2026-09-10: AR, ES, MX, GT, CL, UY.
      (JSON-LD no admite comentarios adentro, por eso esta nota va acá.) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://axeljaviersalomon.github.io/OrlandoStudio/#estudio",
   "name": "OrlandoStudio",
   "alternateName": "OrlandoStudio™",
   "description": "Estudio de branding especializado en diseño de logotipos e identidad visual para marcas que quieren diferenciarse y ser elegidas.",
@@ -66,11 +89,10 @@
   ]
 }
 </script>
-<!-- Este FAQPage DUPLICA palabra por palabra el array FAQ de main.js (que es
-     el que se renderiza en pantalla). Es a propósito: Google necesita el
-     marcado en el HTML servido, no el inyectado por JS. Si editás una
-     pregunta o respuesta en main.js, copiala también acá o el rich result
-     queda desincronizado del texto visible. -->
+<!-- Este FAQPage DUPLICA palabra por palabra el FAQ visible (#faq-list, más
+     abajo en este mismo archivo). Si editás una pregunta o respuesta allá,
+     copiala también acá o el rich result queda desincronizado del texto
+     visible. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -122,10 +144,279 @@
 </head>
 <body>
 
+<!-- ============ PRELOADER ============
+     Sello del hero "estampado" con luz: grano de película, fugas de luz
+     verticales en verdes de marca, separación de color, un frame invertido
+     y un barrido especular. Con WebGL (preloader-gl.js, lo carga el script
+     del <head>) se suman overspray de stencil y pared de hormigón; sin WebGL
+     se usa esta versión con capas DOM. Al final el sello viaja hasta su lugar
+     exacto en el hero. Dura 2,5 s; click/tecla lo adelanta. Estilos:
+     "Preloader" en styles.css. -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <svg width="0" height="0" style="position:absolute" focusable="false">
+    <filter id="pl-rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence id="pl-turb" type="fractalNoise" baseFrequency="0.11" numOctaves="2" seed="1" result="t"/>
+      <feDisplacementMap id="pl-disp" in="SourceGraphic" in2="t" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div class="pl-glow"></div>
+  <div class="pl-blob"></div>
+  <div class="pl-leaks"></div>
+  <div class="pl-flash"></div>
+  <div class="pl-stage">
+    <div class="pl-seal pl-seal--g"></div>
+    <div class="pl-seal pl-seal--m"></div>
+    <div class="pl-seal pl-seal--main"></div>
+  </div>
+  <div class="pl-scan"></div>
+  <div class="pl-grain"></div>
+  <div class="pl-hud">
+    <span class="pl-mark pl-mark--tl"></span><span class="pl-mark pl-mark--tr"></span>
+    <span class="pl-mark pl-mark--bl"></span><span class="pl-mark pl-mark--br"></span>
+    <span class="pl-label">OrlandoStudio<span>, Buenos Aires</span></span>
+    <span class="pl-count">000</span>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var pl = document.getElementById("preloader");
+  if (!root.classList.contains("has-preloader") || !pl || !pl.animate) {
+    if (pl) pl.remove();
+    root.classList.remove("has-preloader");
+    return;
+  }
+
+  var SHOW = 2000, EXIT = 500; /* 2,5 s en total */
+  var $ = function (s) { return pl.querySelector(s); };
+  var stage = $(".pl-stage"), main = $(".pl-seal--main");
+  var copyG = $(".pl-seal--g"), copyM = $(".pl-seal--m");
+  var glow = $(".pl-glow"), blob = $(".pl-blob"), flash = $(".pl-flash");
+  var leaks = $(".pl-leaks"), hud = $(".pl-hud"), count = $(".pl-count");
+  var turb = document.getElementById("pl-turb"), disp = document.getElementById("pl-disp");
+  var gl = null;
+  var anims = [];
+  function A(el, frames, opts) {
+    opts.fill = "both";
+    var a = el.animate(frames, opts);
+    anims.push(a);
+    return a;
+  }
+  /* Saltos secos entre keyframes (en WAAPI el easing de las opciones se
+     aplica a toda la animación, por eso va en cada keyframe). */
+  function hold(k) { k.easing = "steps(1,end)"; return k; }
+
+  /* Fugas de luz: columnas verticales con núcleo caliente, solo verdes de
+     marca + blanco cálido. Dos ráfagas (como los "burns" de la referencia). */
+  var COLORS = ["0,167,112", "194,220,175", "0,131,88", "243,242,243"];
+  function makeLeaks(n, burst) {
+    for (var i = 0; i < n; i++) {
+      var d = document.createElement("span");
+      var c = COLORS[(i + burst) % COLORS.length];
+      var w = 2 + Math.random() * 7;
+      d.className = "pl-leak";
+      d.style.left = (Math.random() * 100 - w / 2) + "vw";
+      d.style.width = w + "vw";
+      d.style.filter = "blur(" + (3 + Math.random() * 10) + "px)";
+      d.style.background = "linear-gradient(to top, transparent, rgba(" + c + ",.85) 28%, rgba(255,255,255,.9) 52%, rgba(" + c + ",.7) 72%, transparent)";
+      leaks.appendChild(d);
+      var dx = (Math.random() - .5) * 6;
+      A(d, [
+        { opacity: 0, transform: "translateX(0) scaleY(.15)" },
+        { opacity: 1, transform: "translateX(" + dx / 2 + "vw) scaleY(1)", offset: .35 },
+        { opacity: 0, transform: "translateX(" + dx + "vw) scaleY(1.1)" }
+      ], {
+        delay: (burst ? 1180 : 430) + Math.random() * 140,
+        duration: 260 + Math.random() * 260,
+        easing: "cubic-bezier(.2,.7,.3,1)"
+      });
+    }
+  }
+
+  function run() {
+    var t0 = performance.now();
+    var done = false;
+
+    /* Encendido del sello: parpadeo tipo tubo de neón, con jitter. */
+    A(main, [
+      { opacity: 0, transform: "scale(.94)" },
+      { opacity: 1, transform: "scale(.97) translate(-3px,2px)", offset: .1 },
+      { opacity: .08, transform: "scale(.97)", offset: .16 },
+      { opacity: .9, transform: "scale(.98) translate(2px,-1px)", offset: .26 },
+      { opacity: .3, transform: "scale(.98)", offset: .32 },
+      { opacity: 1, transform: "scale(.99) translate(-1px,0)", offset: .5 },
+      { opacity: 1, transform: "scale(1) translate(4px,-2px)", offset: .62 },
+      { opacity: 1, transform: "scale(1)", offset: .66 },
+      { opacity: 1, transform: "scale(1)" }
+    ].map(hold), { delay: 150, duration: 900 });
+
+    /* Barrido especular sobre el sello (dos pasadas). */
+    A(main, [
+      { backgroundPosition: "120% 0" },
+      { backgroundPosition: "-20% 0", offset: .4 },
+      { backgroundPosition: "120% 0", offset: .41 },
+      { backgroundPosition: "-20% 0" }
+    ], { delay: 700, duration: 1300, easing: "cubic-bezier(.45,0,.2,1)" });
+
+    /* Separación de color (verde / menta) durante cada ráfaga. */
+    [[copyG, -1], [copyM, 1]].forEach(function (p) {
+      var el = p[0], s = p[1];
+      A(el, [
+        { opacity: 0, transform: "translate(0,0)" },
+        { opacity: .9, transform: "translate(" + 9 * s + "px," + -3 * s + "px)", offset: .08 },
+        { opacity: .7, transform: "translate(" + 4 * s + "px,0)", offset: .2 },
+        { opacity: 0, transform: "translate(0,0)", offset: .32 },
+        { opacity: 0, transform: "translate(0,0)", offset: .6 },
+        { opacity: .95, transform: "translate(" + 14 * s + "px," + 2 * s + "px)", offset: .66 },
+        { opacity: .8, transform: "translate(" + -6 * s + "px,0)", offset: .76 },
+        { opacity: .4, transform: "translate(" + 2 * s + "px,0)", offset: .86 },
+        { opacity: 0, transform: "translate(0,0)" }
+      ].map(hold), { delay: 440, duration: 1200 });
+    });
+
+    /* Halo verde detrás del sello: titila con el encendido y queda. */
+    A(glow, [
+      { opacity: 0, transform: "scale(.7)" },
+      { opacity: .9, transform: "scale(.9)", offset: .12 },
+      { opacity: .2, transform: "scale(.92)", offset: .2 },
+      { opacity: 1, transform: "scale(1)", offset: .45 },
+      { opacity: .75, transform: "scale(1.05)" }
+    ], { delay: 150, duration: 1850, easing: "ease-out" });
+    A(blob, [
+      { opacity: 0, transform: "translate(0,0) scale(.8)" },
+      { opacity: 1, transform: "translate(4vw,3vh) scale(1)", offset: .3 },
+      { opacity: .5, transform: "translate(10vw,6vh) scale(1.1)", offset: .7 },
+      { opacity: 0, transform: "translate(14vw,8vh) scale(1.2)" }
+    ], { duration: 1600, easing: "ease-in-out" });
+
+    if (gl) {
+      pl.classList.add("is-gl");
+      gl.layout(stage.getBoundingClientRect());
+      window.addEventListener("resize", relayout);
+    } else {
+      makeLeaks(6, 0);
+      makeLeaks(9, 1);
+    }
+
+    /* Frame invertido en blanco entre las dos ráfagas. */
+    A(flash, [{ opacity: 0 }, { opacity: 1, offset: .01 }, { opacity: 1, offset: .55 }, { opacity: 0 }],
+      { delay: 1090, duration: 110 });
+
+    A(hud, [{ opacity: 0 }, { opacity: 1 }], { delay: 200, duration: 400, easing: "ease-out" });
+
+    /* Loop por frame: textura "boil" a 12 fps que se va limpiando, frame
+       invertido y contador. */
+    var lastBoil = -1;
+    function tick(now) {
+      if (done) return;
+      var t = now - t0;
+      var f = Math.floor(t / 83); /* ~12 fps, look stop-motion */
+      if (gl) gl.render(t / 1000);
+      else if (f !== lastBoil) {
+        lastBoil = f;
+        var rough = t < 150 ? 9 : Math.max(0, 9 * (1 - (t - 150) / 1300));
+        if (t > 1180 && t < 1450) rough = Math.max(rough, 5);
+        disp.setAttribute("scale", rough.toFixed(1));
+        turb.setAttribute("seed", String(f % 7 + 1));
+      }
+      pl.classList.toggle("is-flash", t >= 1090 && t < 1150);
+      var p = Math.min(1, t / SHOW);
+      count.textContent = ("00" + Math.round(100 * (1 - Math.pow(1 - p, 2.2)))).slice(-3);
+      if (t < SHOW) requestAnimationFrame(tick);
+      else exit();
+    }
+    requestAnimationFrame(tick);
+
+    function exit() {
+      done = true;
+      disp.setAttribute("scale", "0");
+      stage.style.filter = "none"; /* el FLIP no necesita el filtro y así va más fluido */
+      if (gl) {
+        window.removeEventListener("resize", relayout);
+        pl.classList.add("gl-exit");
+        gl.canvas.animate([{ opacity: 1 }, { opacity: 0 }], { duration: EXIT * .4, fill: "forwards", easing: "ease-out" });
+      }
+      pl.classList.remove("is-flash");
+      anims.forEach(function (a) { a.finish(); });
+      count.textContent = "100";
+      window.scrollTo(0, 0);
+
+      /* FLIP: el sello viaja hasta el .hero-seal real. Si en mobile el sello
+         del hero queda fuera de pantalla, sale con un zoom + fade. */
+      var target = document.querySelector(".hero-seal");
+      var from = stage.getBoundingClientRect();
+      var to = target ? target.getBoundingClientRect() : null;
+      var visible = to && to.width > 0 && to.top < innerHeight * .8 && to.bottom > 0;
+      var out = [{ opacity: 1 }, { opacity: 0 }];
+      [glow, blob, leaks, flash, hud, $(".pl-scan")].forEach(function (el) {
+        el.animate(out, { duration: EXIT * .6, fill: "forwards", easing: "ease-out" });
+      });
+      var move;
+      if (visible) {
+        var dx = (to.left + to.width / 2) - (from.left + from.width / 2);
+        var dy = (to.top + to.height / 2) - (from.top + from.height / 2);
+        var s = to.width / from.width;
+        move = stage.animate([
+          { transform: "none" },
+          { transform: "translate(" + dx + "px," + dy + "px) scale(" + s + ")" }
+        ], { duration: EXIT, easing: "cubic-bezier(.7,0,.2,1)", fill: "forwards" });
+        pl.style.background = "var(--bg-dark-2)";
+        pl.animate([{ backgroundColor: "#1B272C" }, { backgroundColor: "rgba(27,39,44,0)" }],
+          { duration: EXIT, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" });
+        $(".pl-grain").animate(out, { duration: EXIT, fill: "forwards" });
+      } else {
+        move = stage.animate([
+          { transform: "none", opacity: 1 },
+          { transform: "scale(1.25)", opacity: 0 }
+        ], { duration: EXIT, easing: "cubic-bezier(.6,0,.3,1)", fill: "forwards" });
+        pl.animate(out, { duration: EXIT, easing: "ease-in-out", fill: "forwards" });
+      }
+      move.onfinish = function () {
+        if (target) target.style.transition = "none";
+        root.classList.add("preloader-done");
+        requestAnimationFrame(function () {
+          if (gl) gl.destroy();
+          pl.remove();
+          if (target) target.style.transition = "";
+        });
+      };
+    }
+
+    /* Click o tecla: salta directo a la salida. */
+    function skip() { if (!done) t0 = performance.now() - SHOW; }
+    pl.addEventListener("click", skip);
+    window.addEventListener("keydown", skip, { once: true });
+  }
+
+  function relayout() { gl.layout(stage.getBoundingClientRect()); }
+
+  /* Arranca cuando están listos la máscara del sello y el renderer WebGL
+     (que se empezó a preparar desde el <head>). Tope de 800 ms: si WebGL no
+     llegó, se cancela su preparación y sigue la versión DOM. */
+  var started = false, pending = 2;
+  function go() {
+    if (started) return;
+    started = true;
+    if (!gl && window.OSPreloaderGLInit) window.OSPreloaderGLInit.cancel();
+    run();
+  }
+  function ready() { if (--pending === 0) go(); }
+  var img = new Image();
+  img.onload = img.onerror = ready;
+  img.src = "assets/brand/OrlandoDesignCO_Negativo.svg";
+  (window.OSPreloaderGL || Promise.resolve(null)).then(function (r) {
+    if (r && !started) { gl = r; pl.insertBefore(r.canvas, stage); }
+    else if (r) r.destroy();
+    ready();
+  });
+  setTimeout(go, 800);
+})();
+</script>
+
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <div class="noise-overlay" aria-hidden="true"></div>
-<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header">
@@ -170,18 +461,18 @@
 
   <div class="mobile-menu-inner">
     <nav class="mobile-nav" aria-label="Navegación móvil">
-      <ol>
-        <li><a href="#top"><span class="mobile-nav-index">01</span><span class="mobile-nav-label">Inicio</span></a></li>
-        <li><a href="#servicios"><span class="mobile-nav-index">02</span><span class="mobile-nav-label">Servicios</span></a></li>
-        <li><a href="#trabajos"><span class="mobile-nav-index">03</span><span class="mobile-nav-label">Trabajos</span></a></li>
-        <li><a href="#proceso"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Proceso</span></a></li>
-        <li><a href="sobre-mi.html"><span class="mobile-nav-index">05</span><span class="mobile-nav-label">Sobre mí</span></a></li>
-        <li><a href="#voces"><span class="mobile-nav-index">06</span><span class="mobile-nav-label">Clientes</span></a></li>
-      </ol>
+      <ul>
+        <li><a href="#top"><span class="mobile-nav-label">Inicio</span></a></li>
+        <li><a href="#servicios"><span class="mobile-nav-label">Servicios</span></a></li>
+        <li><a href="#trabajos"><span class="mobile-nav-label">Trabajos</span></a></li>
+        <li><a href="#proceso"><span class="mobile-nav-label">Proceso</span></a></li>
+        <li><a href="sobre-mi.html"><span class="mobile-nav-label">Sobre mí</span></a></li>
+        <li><a href="#voces"><span class="mobile-nav-label">Clientes</span></a></li>
+      </ul>
     </nav>
 
     <div class="mobile-menu-bottom">
-      <a href="#contacto" class="btn btn-primary btn-hero mobile-menu-cta" data-modal-trigger>Empezar proyecto <span aria-hidden="true">→</span></a>
+      <a href="#contacto" class="btn btn-primary btn-hero mobile-menu-cta" data-modal-trigger>Empezar proyecto</a>
     </div>
   </div>
 </div>
@@ -190,16 +481,11 @@
 
   <!-- ============ HERO ============ -->
   <section id="top" class="hero">
-    <div class="hero-glow-1" aria-hidden="true"></div>
-    <div class="hero-glow-2" aria-hidden="true"></div>
-
     <div class="container hero-content">
       <div class="hero-meta-row">
-        <span class="hero-badge">
-          <span class="hero-badge-dot"></span>Agenda abierta · 2 cupos Q4
-        </span>
-        <span class="hero-meta-line"></span>
-        <span class="hero-meta-location">BUENOS AIRES · AR</span>
+        <span class="hero-badge">Agenda abierta: 2 cupos este trimestre</span>
+        <span class="hero-meta-line" aria-hidden="true"></span>
+        <span class="hero-meta-location">Buenos Aires, Argentina</span>
       </div>
 
       <div class="hero-grid">
@@ -209,41 +495,37 @@
             <span class="line">que tus clientes</span>
             <span class="line line--accent">te elijan.</span>
           </h1>
-          <p class="hero-sub">Branding e identidad visual para marcas que necesitan verse a la altura. Transformo ideas en marcas coherentes y auténticas.<br><br>
-             Identidades con las que las personas conectan, creen y eligen otra vez.</p>
+          <p class="hero-sub">Diseño logotipos e identidades visuales para marcas que ya son buenas en lo que hacen y necesitan que se note. Marcas que la gente reconoce, recuerda y vuelve a elegir.</p>
           <div class="hero-ctas">
-            <a href="#contacto-focus" class="btn btn-primary btn-hero">Empezar mi proyecto <span>→</span></a>
+            <a href="#contacto-focus" class="btn btn-primary btn-hero">Empezar mi proyecto</a>
             <a href="#trabajos" class="btn btn-ghost">Ver mis trabajos</a>
           </div>
         </div>
 
         <div class="hero-seal-wrap">
-          <div class="seal-ring seal-ring--spin" aria-hidden="true">
-            <span class="seal-ring-dot"></span>
-          </div>
-          <div class="seal-ring seal-ring--dashed" aria-hidden="true"></div>
-          <img class="hero-seal" src="assets/brand/OrlandoDesignCO_Negativo.svg" alt="Sello OrlandoDesignCo, la marca de Julián Orlando" width="407" height="409" fetchpriority="high">
+          <div class="seal-ring" aria-hidden="true"></div>
+          <img class="hero-seal" src="assets/brand/OrlandoDesignCO_Negativo.svg" alt="Sello de OrlandoDesignCo, la marca de Julián Orlando" width="407" height="409" fetchpriority="high">
         </div>
       </div>
 
-      <div class="stats-grid" data-reveal>
+      <dl class="stats-grid" data-reveal>
         <div class="stat-cell">
-          <span class="stat-num" id="stat-0">0</span>
-          <span class="stat-label">Marcas construidas</span>
+          <dt class="stat-label">Marcas construidas</dt>
+          <dd class="stat-num">+40</dd>
         </div>
         <div class="stat-cell">
-          <span class="stat-num" id="stat-1">0</span>
-          <span class="stat-label">Años de trayectoria</span>
+          <dt class="stat-label">Años de trayectoria</dt>
+          <dd class="stat-num">6</dd>
         </div>
         <div class="stat-cell">
-          <span class="stat-num" id="stat-2">0</span>
-          <span class="stat-label">Proyectos a medida</span>
+          <dt class="stat-label">Países con clientes</dt>
+          <dd class="stat-num">6</dd>
         </div>
         <div class="stat-cell">
-          <span class="stat-num stat-num--accent">1</span>
-          <span class="stat-label">Diseñador detrás de cada marca</span>
+          <dt class="stat-label">Diseñador detrás de cada marca</dt>
+          <dd class="stat-num stat-num--accent">1</dd>
         </div>
-      </div>
+      </dl>
     </div>
   </section>
 
@@ -295,13 +577,13 @@
   </section>
 
   <!-- ============ MANIFESTO ============ -->
-  <section class="section-light manifesto-section">
+  <section class="section-light manifesto-section" aria-labelledby="manifesto-title">
     <img class="manifesto-logo manifesto-logo-1" src="assets/brand/JO_Positivo.svg" alt="" aria-hidden="true" width="339" height="394">
     <img class="manifesto-logo manifesto-logo-2" src="assets/brand/JO_Positivo.svg" alt="" aria-hidden="true" width="339" height="394">
     <div class="container manifesto-grid">
       <div data-reveal>
-        <p class="eyebrow eyebrow--light">01 — El problema real</p>
-        <h2 class="h2">Tu público te ve gratis.<br>Pero elige y paga según lo que percibe.</h2>
+        <p class="eyebrow eyebrow--light">El problema real</p>
+        <h2 class="h2" id="manifesto-title">Tu público te ve gratis.<br>Pero elige y paga según lo que percibe.</h2>
       </div>
       <div class="manifesto-right" data-reveal>
         <p class="manifesto-lead">No vendo logos. Vendo el motivo por el que te van a elegir: una marca que se lee como profesional antes de que digas una palabra, que sostiene tu precio y que no se confunde con la competencia.</p>
@@ -328,36 +610,33 @@
     <div class="container">
       <div class="services-header" data-reveal>
         <div>
-          <p class="eyebrow">02 — Servicios</p>
-          <h2 class="h2">Un especialista en marca, no un generalista.</h2>
+          <p class="eyebrow">Servicios</p>
+          <h2 class="h2">Solo hago marcas, y las hago completas.</h2>
         </div>
-        <p class="services-lead">Diseño de logotipos e identidad visual de punta a punta. Sin distraerme en disciplinas que no domino.</p>
+        <p class="services-lead">Diseño de logotipos e identidad visual de punta a punta, sin distraerme en disciplinas que no domino.</p>
       </div>
 
       <div class="hairline-grid-4" data-reveal>
-        <article class="service-card">
-          <span class="service-num">01</span>
+        <article class="service-card service-card--lead">
+          <span class="service-kicker">Mi especialidad</span>
           <h3>Diseño de logotipos</h3>
-          <p>Mi especialidad. Signos marcarios distintivos, memorables y construidos para funcionar en cualquier tamaño y soporte.</p>
+          <p>Signos marcarios distintivos y memorables, construidos para funcionar en cualquier tamaño y soporte.</p>
         </article>
         <article class="service-card">
-          <span class="service-num">02</span>
           <h3>Identidad visual</h3>
           <p>Paleta cromática, tipografías y sistema visual completo para que la marca se vea igual de sólida en todos lados.</p>
         </article>
         <article class="service-card">
-          <span class="service-num">03</span>
           <h3>Manual de marca</h3>
           <p>Especificaciones técnicas documentadas, para que cualquier proveedor aplique tu identidad sin romperla.</p>
         </article>
         <article class="service-card">
-          <span class="service-num">04</span>
           <h3>Aplicación de marca</h3>
           <p>Papelería, packaging, vidriera y piezas para redes, todo coherente con el sistema.</p>
         </article>
       </div>
 
-      <p class="services-note" data-reveal><strong>Lo que no hago:</strong> diseño web, apps, UX/UI ni audiovisual — así puedo enfocarme al 100% en construir la identidad de tu marca.</p>
+      <p class="services-note" data-reveal><strong>Lo que no hago:</strong> diseño web, apps, UX/UI ni audiovisual. Prefiero hacer una sola cosa y hacerla bien.</p>
     </div>
   </section>
 
@@ -366,19 +645,60 @@
     <div class="container">
       <div class="works-header" data-reveal>
         <div>
-          <p class="eyebrow">03 — Trabajos</p>
-          <h2 class="h2">Proyectos que hablan por sí solos.</h2>
+          <p class="eyebrow">Trabajos</p>
+          <h2 class="h2">Marcas que ya están en la calle.</h2>
         </div>
-        <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Ver todo en Behance <span>↗</span></a>
+        <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Ver todo en Behance <span aria-hidden="true">↗</span><span class="sr-only">(se abre en una pestaña nueva)</span></a>
       </div>
 
-      <div class="filters" role="tablist" aria-label="Filtrar por categoría" id="filters">
-        <button type="button" role="tab" class="filter-pill" data-value="all" aria-selected="true">Todos</button>
-        <button type="button" role="tab" class="filter-pill" data-value="identidad" aria-selected="false">Identidad Visual</button>
-        <button type="button" role="tab" class="filter-pill" data-value="branding" aria-selected="false">Branding</button>
+      <div class="filters" role="group" aria-label="Filtrar trabajos por categoría" id="filters">
+        <button type="button" class="filter-pill" data-value="all" aria-pressed="true">Todos</button>
+        <button type="button" class="filter-pill" data-value="identidad" aria-pressed="false">Identidad visual</button>
+        <button type="button" class="filter-pill" data-value="branding" aria-pressed="false">Branding</button>
       </div>
 
-      <div class="works-rows" id="works-rows"></div>
+      <!-- Las filas se escriben acá en el HTML (para que buscadores y lectores
+           de pantalla vean los proyectos sin depender de JS). main.js las lee
+           al cargar para filtrar y paginar: para sumar un proyecto, agregá
+           otro <a class="work-row"> con data-cat, data-img y data-name. -->
+      <div class="works-rows" id="works-rows">
+        <a href="https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/outdoor-project.webp" data-name="The Outdoor Project">
+          <span class="work-row-left"><img class="work-row-logo work-row-logo--lg" src="assets/img/portfolio/logos/outdoor-project.svg" alt="The Outdoor Project" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/iron-lab.webp" data-name="Iron Lab">
+          <span class="work-row-left"><img class="work-row-logo work-row-logo--sm" src="assets/img/portfolio/logos/iron-lab.svg" alt="Iron Lab" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/bulavinaka.webp" data-name="BulaVinaka">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/bulavinaka.svg" alt="BulaVinaka" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/homeboyz.webp" data-name="HomeBoyz">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/homeboyz.svg" alt="HomeBoyz" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" target="_blank" rel="noopener" class="work-row" data-cat="branding" data-img="assets/img/portfolio/salentein.webp" data-name="Salentein">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/salentein.svg" alt="Salentein" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Branding</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/ethercore.webp" data-name="EtherCore">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/ethercore.svg" alt="EtherCore" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/libema.webp" data-name="Libema">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/libema.svg" alt="Libema" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/33usd.webp" data-name="33usd">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/33usd.svg" alt="33usd" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+        <a href="https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" target="_blank" rel="noopener" class="work-row" data-cat="identidad" data-img="assets/img/portfolio/armonydrinks.webp" data-name="ArmonyDrinks">
+          <span class="work-row-left"><img class="work-row-logo" src="assets/img/portfolio/logos/armonydrinks.svg" alt="ArmonyDrinks" loading="lazy"></span>
+          <span class="work-row-right"><span class="work-row-tag">Identidad visual</span><span class="work-row-arrow" aria-hidden="true">↗</span></span>
+        </a>
+      </div>
 
       <div class="works-load-more-wrap" id="works-load-more-wrap">
         <button type="button" class="btn btn-ghost works-load-more" id="works-load-more">Cargar más</button>
@@ -391,11 +711,10 @@
   </section>
 
   <!-- ============ PULL QUOTE ============ -->
-  <section class="pullquote-section">
-    <div class="pullquote-glow" aria-hidden="true"></div>
+  <section class="pullquote-section" aria-label="Objetivo del estudio">
     <div class="container pullquote-content" data-reveal>
       <p class="pullquote-eyebrow">Objetivo</p>
-      <blockquote class="pullquote">"Diseño la percepción<br class="pullquote-break"> que hace que te elijan."</blockquote>
+      <p class="pullquote">Diseño la percepción<br class="pullquote-break"> que hace que te&nbsp;elijan.</p>
       <p class="pullquote-sub">Que tu negocio empiece a percibirse como lo que realmente vale.</p>
     </div>
   </section>
@@ -404,10 +723,10 @@
   <section id="proceso" class="section-light">
     <div class="container process-grid">
       <div class="process-left" data-reveal>
-        <p class="eyebrow eyebrow--light">04 — Proceso</p>
+        <p class="eyebrow eyebrow--light">Proceso</p>
         <h2 class="h2">De la estrategia a la entrega, en 3 a 6 semanas.</h2>
         <p>Plazos estimativos según complejidad y alcance. Trabajás directo conmigo en cada etapa, con rondas de corrección definidas de antemano.</p>
-        <a href="#contacto" class="btn btn-light">Reservar una llamada <span>→</span></a>
+        <a href="#contacto" class="btn btn-light">Reservar una llamada</a>
       </div>
 
       <div class="process-timeline-wrap">
@@ -415,32 +734,32 @@
         <ol class="process-timeline">
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">ETAPA 01</span>
-              <span class="process-duration">1 semana</span>
+              <span class="process-stage">Etapa 1</span>
+              <span class="process-duration">Semana 1</span>
             </div>
             <h3>Estrategia e investigación</h3>
             <p>Definidos los objetivos, empieza la investigación y el análisis competitivo que sostienen cada decisión gráfica del proyecto.</p>
           </li>
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">ETAPA 02</span>
-              <span class="process-duration">2–3 semanas</span>
+              <span class="process-stage">Etapa 2</span>
+              <span class="process-duration">Semanas 2 a 3</span>
             </div>
             <h3>Conceptualización</h3>
             <p>Desarrollo creativo del signo marcario y de una identidad visual alineada a la esencia y personalidad de la marca.</p>
           </li>
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">ETAPA 03</span>
-              <span class="process-duration">3–4 semanas</span>
+              <span class="process-stage">Etapa 3</span>
+              <span class="process-duration">Semanas 3 a 4</span>
             </div>
             <h3>Refinamiento y feedback</h3>
             <p>Ajustes identitarios del logo y del sistema visual, con instancias de revisión pautadas para llegar a la versión definitiva.</p>
           </li>
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">ETAPA 04</span>
-              <span class="process-duration">4–6 semanas</span>
+              <span class="process-stage">Etapa 4</span>
+              <span class="process-duration">Semanas 4 a 6</span>
             </div>
             <h3>Entrega</h3>
             <p>Manual de marca con las especificaciones técnicas y todos los archivos productivos listos para usar.</p>
@@ -454,11 +773,11 @@
   <section id="estudio" class="section-dark-2">
     <div class="container studio-grid">
       <div class="studio-left" data-reveal>
-        <img class="studio-watermark" src="assets/img/julian-studio-watermark.webp" alt="" aria-hidden="true">
+        <img class="studio-watermark" src="assets/img/julian-studio-watermark.webp" alt="" aria-hidden="true" loading="lazy">
         <div class="studio-left-inner">
-          <p class="eyebrow">05 — Quién está detrás</p>
-          <h2 class="h2">Un solo diseñador. Sin intermediarios, sin plantillas.</h2>
-          <p>Soy Julián Orlando. Cada proyecto que sale de OrlandoStudio pasa por mis manos de principio a fin — hablás conmigo, no con un account manager ni con un equipo rotativo. Por eso cada marca tiene una mirada consistente, no un collage de decisiones de distintas personas.</p>
+          <p class="eyebrow">Quién está detrás</p>
+          <h2 class="h2">Hablás con la misma persona que diseña tu marca.</h2>
+          <p>Soy Julián Orlando. Cada proyecto que sale de OrlandoStudio pasa por mis manos de principio a fin: hablás conmigo, no con un account manager ni con un equipo rotativo. Por eso cada marca tiene una mirada consistente, no un collage de decisiones de distintas personas.</p>
           <!-- Esta sección es el TEASER de sobre-mi.html: el titular y el
                retrato de acá NO se repiten en el hero de esa página, a
                propósito (ver la nota de IMÁGENES en sobre-mi.html). Si
@@ -467,100 +786,162 @@
                .studio-link-cta solo existe para igualar el tamaño de este
                botón al de los .btn-ghost-sm que lo acompañan en la fila. -->
           <div class="studio-links">
-            <a href="sobre-mi.html" class="btn btn-primary studio-link-cta">Conocé más sobre mí <span>→</span></a>
-            <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="btn btn-ghost-sm">Instagram <span>↗</span></a>
-            <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Behance <span>↗</span></a>
+            <a href="sobre-mi.html" class="btn btn-primary studio-link-cta">Conocé más sobre mí</a>
+            <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="btn btn-ghost-sm">Instagram <span aria-hidden="true">↗</span><span class="sr-only">(se abre en una pestaña nueva)</span></a>
+            <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="btn btn-ghost-sm">Behance <span aria-hidden="true">↗</span><span class="sr-only">(se abre en una pestaña nueva)</span></a>
           </div>
         </div>
       </div>
-      <div class="studio-portrait-wrap" data-reveal>
-        <img class="studio-portrait" src="assets/img/julian-orlando-portrait.webp" alt="Julián Orlando, fundador de OrlandoStudio" loading="lazy" width="880" height="1100">
-        <div class="studio-badge">
-          <span class="studio-badge-role">Fundador · Diseñador</span>
+      <figure class="studio-portrait-wrap" data-reveal>
+        <img class="studio-portrait" src="assets/img/julian-orlando-portrait.webp" alt="Retrato de Julián Orlando, fundador de OrlandoStudio" loading="lazy" width="880" height="1100">
+        <figcaption class="studio-badge">
+          <span class="studio-badge-role">Fundador y diseñador</span>
           <span class="studio-badge-name">Julián Orlando</span>
-        </div>
-      </div>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
   <!-- ============ TESTIMONIOS ============ -->
   <section id="voces" class="section-dark">
     <div class="container">
-      <div style="margin-bottom:clamp(36px,4.5vw,60px);" data-reveal>
-        <p class="eyebrow">06 — Clientes</p>
-        <h2 class="h2" style="max-width:26ch;">Lo que dicen las marcas que ya trabajaron conmigo.</h2>
+      <div class="testimonials-head" data-reveal>
+        <p class="eyebrow">Clientes</p>
+        <h2 class="h2">Lo que dicen las marcas que ya trabajaron conmigo.</h2>
       </div>
       <div class="testimonials-grid">
-        <blockquote class="testimonial" data-reveal>
-          <span class="testimonial-mark" aria-hidden="true">"</span>
-          <p>Por fin podemos mostrar una imagen igual de profesional que nuestro trabajo. A nuestros pacientes les encanta ver los colores: el espacio se integra y comunica, algo fundamental en salud infantil.</p>
-          <footer class="testimonial-foot">
-            <span class="testimonial-avatar" aria-hidden="true">FG</span>
-            <span><cite>Florencia G.</cite><span class="role">Fundadora · Libema</span></span>
-          </footer>
-        </blockquote>
-        <blockquote class="testimonial" data-reveal>
-          <span class="testimonial-mark" aria-hidden="true">"</span>
-          <p>Siempre me costó identificarme con mi marca, y hoy mi indumentaria compite con las primeras marcas de skateboarding a nivel internacional. La vidriera quedó increíble.</p>
-          <footer class="testimonial-foot">
-            <span class="testimonial-avatar" aria-hidden="true">JA</span>
-            <span><cite>Juan A.</cite><span class="role">Fundador · BulaVinaka®</span></span>
-          </footer>
-        </blockquote>
-        <blockquote class="testimonial" data-reveal>
-          <span class="testimonial-mark" aria-hidden="true">"</span>
-          <p>Crear una submarca para un segmento difícil era un desafío importante. Hoy nos diferenciamos de la competencia no solo con nuestros muebles, también desde lo visual.</p>
-          <footer class="testimonial-foot">
-            <span class="testimonial-avatar" aria-hidden="true">BB</span>
-            <span><cite>Belén B.</cite><span class="role">Co-fundadora · The Outdoor Project®</span></span>
-          </footer>
-        </blockquote>
+        <figure class="testimonial" data-reveal>
+          <blockquote>
+            <p>Por fin podemos mostrar una imagen igual de profesional que nuestro trabajo. A nuestros pacientes les encanta ver los colores: el espacio se integra y comunica, algo fundamental en salud infantil.</p>
+          </blockquote>
+          <figcaption class="testimonial-foot">
+            <cite>Florencia G.</cite>
+            <span class="role">Fundadora de <span class="testimonial-brand">Libema</span></span>
+          </figcaption>
+        </figure>
+        <figure class="testimonial" data-reveal>
+          <blockquote>
+            <p>Siempre me costó identificarme con mi marca, y hoy mi indumentaria compite con las primeras marcas de skateboarding a nivel internacional. La vidriera quedó increíble.</p>
+          </blockquote>
+          <figcaption class="testimonial-foot">
+            <cite>Juan A.</cite>
+            <span class="role">Fundador de <span class="testimonial-brand">BulaVinaka®</span></span>
+          </figcaption>
+        </figure>
+        <figure class="testimonial" data-reveal>
+          <blockquote>
+            <p>Crear una submarca para un segmento difícil era un desafío importante. Hoy nos diferenciamos de la competencia no solo con nuestros muebles, también desde lo visual.</p>
+          </blockquote>
+          <figcaption class="testimonial-foot">
+            <cite>Belén B.</cite>
+            <span class="role">Cofundadora de <span class="testimonial-brand">The Outdoor Project®</span></span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="section-light">
+  <!-- Preguntas escritas en el HTML (no inyectadas por JS) para que Google y
+       los lectores de pantalla las lean siempre. main.js solo maneja el
+       abrir/cerrar. Si editás una, copiala también al JSON-LD FAQPage del
+       <head>. La de países repite la lista de sobre-mi.html y "areaServed". -->
+  <section class="section-light" aria-labelledby="faq-title">
     <div class="container faq-grid">
       <div class="faq-left" data-reveal>
-        <p class="eyebrow eyebrow--light">07 — Preguntas</p>
-        <h2 class="h2">Antes de escribirme, quizá esto te resuelve.</h2>
+        <p class="eyebrow eyebrow--light">Preguntas frecuentes</p>
+        <h2 class="h2" id="faq-title">Antes de escribirme, quizá esto te resuelve.</h2>
       </div>
-      <div class="faq-list" id="faq-list"></div>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item is-open">
+          <h3 class="faq-heading">
+            <button type="button" class="faq-question" aria-expanded="true" aria-controls="faq-panel-0" id="faq-btn-0">
+              <span>¿Cuánto sale un proyecto de marca?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer-wrap" id="faq-panel-0" role="region" aria-labelledby="faq-btn-0">
+            <div class="faq-answer-inner"><p class="faq-answer">Depende del alcance: un logotipo puntual no es lo mismo que una identidad visual completa con manual y aplicaciones. Después de una llamada de 20 minutos te envío una propuesta cerrada, con etapas, plazos y precio final sin sorpresas.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-heading">
+            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-panel-1" id="faq-btn-1">
+              <span>¿Cuánto tarda?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer-wrap" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+            <div class="faq-answer-inner"><p class="faq-answer">Entre 3 y 6 semanas según complejidad y velocidad de feedback. La agenda se reserva por orden de seña y trabajo un máximo de 2 proyectos por mes para no bajar el nivel de dedicación.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-heading">
+            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+              <span>¿Qué recibo al final?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer-wrap" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
+            <div class="faq-answer-inner"><p class="faq-answer">Logotipo en todas sus versiones y formatos productivos (vectorial y mapa de bits), sistema visual completo, manual de marca en PDF y las aplicaciones acordadas listas para imprimir o publicar.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-heading">
+            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+              <span>¿Trabajás con marcas de otros países?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer-wrap" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
+            <div class="faq-answer-inner"><p class="faq-answer">Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, España, México, Guatemala, Chile y Uruguay sin diferencia de calidad ni de plazos.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-heading">
+            <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+              <span>¿Y si no me gusta la propuesta?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer-wrap" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
+            <div class="faq-answer-inner"><p class="faq-answer">Cada etapa se aprueba antes de avanzar y las rondas de corrección se definen en la propuesta inicial. No hay entregas sorpresa: vas viendo y validando el camino conmigo.</p></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ============ CONTACTO ============ -->
-  <section id="contacto" class="section-dark contact-section">
-    <div class="contact-glow" aria-hidden="true"></div>
+  <section id="contacto" class="section-dark contact-section" aria-labelledby="contacto-title">
     <div class="container">
       <div class="contact-wrap">
         <div class="contact-intro" data-reveal>
-          <p class="eyebrow">08 — Contacto</p>
-          <h2 class="h2">Contame tu proyecto. Respondo en menos de 24 h hábiles.</h2>
+          <p class="eyebrow">Contacto</p>
+          <h2 class="h2" id="contacto-title">Contame tu proyecto. Respondo en menos de 24&nbsp;h hábiles.</h2>
           <a href="mailto:julianorlando.dg@gmail.com" id="contacto-focus" class="contact-email">julianorlando.dg@gmail.com</a>
         </div>
 
-        <div class="contact-info" data-reveal>
+        <dl class="contact-info" data-reveal>
           <div class="contact-info-cell">
-            <span class="contact-info-label">Estudio</span>
-            <span>OrlandoStudio™ — Buenos Aires, Argentina</span>
+            <dt class="contact-info-label">Estudio</dt>
+            <dd>OrlandoStudio, Buenos Aires, Argentina</dd>
           </div>
           <div class="contact-info-cell">
-            <span class="contact-info-label">Disponibilidad</span>
-            <span>Agenda abierta · 2 proyectos por mes</span>
+            <dt class="contact-info-label">Disponibilidad</dt>
+            <dd>Agenda abierta, con un máximo de 2 proyectos por mes</dd>
           </div>
           <div class="contact-info-cell">
-            <span class="contact-info-label">Redes</span>
-            <span class="contact-socials">
-              <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="contact-social">@julianorlando.dg</a>
-              <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener" class="contact-social">TikTok</a>
-              <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="contact-social">Behance</a>
-            </span>
+            <dt class="contact-info-label">Redes</dt>
+            <dd class="contact-socials">
+              <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener" class="contact-social" aria-label="Instagram @julianorlando.dg (se abre en una pestaña nueva)">Instagram</a>
+              <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener" class="contact-social" aria-label="TikTok (se abre en una pestaña nueva)">TikTok</a>
+              <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener" class="contact-social" aria-label="Behance (se abre en una pestaña nueva)">Behance</a>
+            </dd>
           </div>
-        </div>
+        </dl>
 
-        <a href="#contacto" class="btn btn-primary contact-cta" data-modal-trigger data-reveal>Trabajemos juntos <span>→</span></a>
+        <a href="#contacto" class="btn btn-primary contact-cta" data-modal-trigger data-reveal>Trabajemos juntos</a>
       </div>
     </div>
   </section>
@@ -571,8 +952,8 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
-      <img class="footer-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio">
-      <nav class="footer-nav">
+      <img class="footer-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio" width="152" height="26" loading="lazy">
+      <nav class="footer-nav" aria-label="Navegación del pie de página">
         <a href="#top">Inicio</a>
         <a href="#servicios">Servicios</a>
         <a href="#trabajos">Trabajos</a>
@@ -582,7 +963,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 OrlandoStudio™ — Branding &amp; Design</p>
+      <p>© 2026 OrlandoStudio™. Branding y diseño de identidad visual.</p>
       <p>Diseñando para que tus clientes te elijan</p>
       <p>Web desarrollada por <a href="https://axeljaviersalomon.github.io/Portfolio/" target="_blank" rel="noopener">Axel Salomon</a></p>
     </div>
@@ -591,8 +972,8 @@
 
 <!-- ============ DOCK FLOTANTE ============ -->
 <div class="floating-dock" id="floating-dock">
-  <span class="floating-dock-text">Agenda abierta · 2 cupos</span>
-  <a href="#contacto" class="btn btn-primary">Empezar</a>
+  <span class="floating-dock-text">Quedan 2 cupos este trimestre</span>
+  <a href="#contacto" class="btn btn-primary">Empezar proyecto</a>
 </div>
 
 <!-- ============ VOLVER ARRIBA ============ -->
@@ -609,34 +990,31 @@
     <div class="modal-scroll brief-scroll">
       <div class="brief">
         <div class="brief-brand">
-          <img src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio™" class="brief-logo">
+          <img src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio" class="brief-logo" width="128" height="22" loading="lazy">
         </div>
 
         <div class="brief-step" id="brief-step-form">
           <p class="brief-eyebrow">Empecemos</p>
           <h2 class="brief-title" id="brief-title">Contame tu proyecto</h2>
-          <blockquote class="brief-quote">"¡Hola! ¿Cómo estás? Bienvenido/a a OrlandoStudio™. Mi misión es ayudarte a construir una identidad visual que conecte con tu audiencia y transforme tu negocio. Cuanto más compartas acá, mejor voy a poder capturar tu esencia. Me muero de ganas de empezar a crear algo imposible de ignorar."</blockquote>
+          <p class="brief-intro">¡Hola! Cuanto más me cuentes acá, mejor llego preparado a nuestra primera charla. No hace falta que tengas todo definido: para eso estoy yo.</p>
 
           <form class="brief-form" id="modal-form" novalidate>
             <div id="modal-form-fields"></div>
-            <p class="brief-note">Te respondo en un plazo máximo de 3 días — ojo con la carpeta de spam.</p>
-            <button type="submit" class="brief-submit">
-              <span>Enviar formulario</span>
-              <span aria-hidden="true">→</span>
-            </button>
-            <p class="form-error brief-error" id="modal-form-error" hidden>Revisá los campos marcados antes de enviar.</p>
+            <p class="brief-note">Te respondo en un plazo máximo de 3 días. Si no ves mi mail, revisá la carpeta de spam.</p>
+            <button type="submit" class="brief-submit">Enviar formulario</button>
+            <p class="form-error brief-error" id="modal-form-error" role="alert" hidden>Completá tu nombre y un email válido antes de enviar.</p>
           </form>
         </div>
 
         <div class="brief-step brief-thanks" id="brief-step-thanks" hidden>
-          <h2 class="brief-title" id="brief-thanks-title">Gracias.</h2>
-          <p class="brief-thanks-text">Recibí tu proyecto. Te voy a responder en un plazo máximo de 3 días — revisá también spam.</p>
+          <h2 class="brief-title" id="brief-thanks-title" tabindex="-1">Gracias.</h2>
+          <p class="brief-thanks-text">Recibí tu proyecto. Te voy a responder en un plazo máximo de 3 días; revisá también la carpeta de spam.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<script src="main.js?v=20260921a"></script>
+<script src="main.js?v=20261010a"></script>
 </body>
 </html>

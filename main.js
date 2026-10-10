@@ -35,44 +35,16 @@
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
-  /* ---------------------------------------------------------------------
-     Data
-     --------------------------------------------------------------------- */
-
-  var PROJECTS = [
-    { name: "The Outdoor Project", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/outdoor-project.webp", logo: "assets/img/portfolio/logos/outdoor-project.svg", url: "https://www.behance.net/gallery/255113623/The-Outdoor-Project-Identidad-Visual" },
-    { name: "Iron Lab", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/iron-lab.webp", logo: "assets/img/portfolio/logos/iron-lab.svg", url: "https://www.behance.net/gallery/251067825/Iron-Lab-Identidad-Visual" },
-    { name: "BulaVinaka", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/bulavinaka.webp", logo: "assets/img/portfolio/logos/bulavinaka.svg", url: "https://www.behance.net/gallery/248896559/BulaVinaka-Identidad-Visual" },
-    { name: "HomeBoyz", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/homeboyz.webp", logo: "assets/img/portfolio/logos/homeboyz.svg", url: "https://www.behance.net/gallery/226166415/HomeBoyz-Identidad-Visual" },
-    { name: "Salentein", tag: "Branding", cat: "branding", img: "assets/img/portfolio/salentein.webp", logo: "assets/img/portfolio/logos/salentein.svg", url: "https://www.behance.net/gallery/190253803/Salentein-Un-viaje-sensorial" },
-    { name: "EtherCore", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/ethercore.webp", logo: "assets/img/portfolio/logos/ethercore.svg", url: "https://www.behance.net/gallery/218318827/EtherCore-Identidad-Visual" },
-    { name: "Libema", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/libema.webp", logo: "assets/img/portfolio/logos/libema.svg", url: "https://www.behance.net/gallery/217216779/Libema-Identidad-Visual" },
-    { name: "33usd", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/33usd.webp", logo: "assets/img/portfolio/logos/33usd.svg", url: "https://www.behance.net/gallery/191433895/33usd-Identidad-Visual" },
-    { name: "ArmonyDrinks", tag: "Identidad Visual", cat: "identidad", img: "assets/img/portfolio/armonydrinks.webp", logo: "assets/img/portfolio/logos/armonydrinks.svg", url: "https://www.behance.net/gallery/191444525/ArmonyDrinks-Identidad-Visual" }
-  ];
-
-  var FAQ = [
-    { q: "¿Cuánto sale un proyecto de marca?", a: "Depende del alcance: un logotipo puntual no es lo mismo que una identidad visual completa con manual y aplicaciones. Después de una llamada de 20 minutos te envío una propuesta cerrada, con etapas, plazos y precio final sin sorpresas." },
-    { q: "¿Cuánto tarda?", a: "Entre 3 y 6 semanas según complejidad y velocidad de feedback. La agenda se reserva por orden de seña y trabajo un máximo de 2 proyectos por mes para no bajar el nivel de dedicación." },
-    { q: "¿Qué recibo al final?", a: "Logotipo en todas sus versiones y formatos productivos (vectorial y mapa de bits), sistema visual completo, manual de marca en PDF y las aplicaciones acordadas listas para imprimir o publicar." },
-    /* La lista de países de esta respuesta está replicada en otros dos lados
-       (se actualizan a mano): el "areaServed" del JSON-LD de index.html y la
-       sección 02 de sobre-mi.html. Confirmada por Julián el 2026-09-10:
-       unificó su texto nuevo con el FAQ viejo, así que van los seis países.
-       Además, TODO este array FAQ está duplicado como JSON-LD FAQPage en
-       index.html — si editás una pregunta acá, copiala allá también. */
-    { q: "¿Trabajás con marcas de otros países?", a: "Sí. El proceso es 100% remoto por videollamada y mail; hoy trabajo con clientes de Argentina, España, México, Guatemala, Chile y Uruguay sin diferencia de calidad ni de plazos." },
-    { q: "¿Y si no me gusta la propuesta?", a: "Cada etapa se aprueba antes de avanzar y las rondas de corrección se definen en la propuesta inicial. No hay entregas sorpresa: vas viendo y validando el camino conmigo." }
-  ];
+  /* Los proyectos del portfolio y las preguntas del FAQ viven en el HTML de
+     index.html (no acá), para que se indexen sin depender de JS. */
 
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 
   /* ---------------------------------------------------------------------
-     Scroll progress bar + dock flotante
+     Dock flotante + volver arriba
      --------------------------------------------------------------------- */
 
-  var progressBar = $("#scroll-progress");
   var dock = $("#floating-dock");
   var backToTop = $("#back-to-top");
 
@@ -80,7 +52,6 @@
     var doc = document.documentElement;
     var max = doc.scrollHeight - window.innerHeight;
     var pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-    if (progressBar) progressBar.style.width = (pct * 100).toFixed(2) + "%";
     if (dock) {
       var show = window.scrollY > window.innerHeight * 0.9 && pct < 0.94;
       dock.classList.toggle("is-visible", show);
@@ -155,47 +126,24 @@
   }
 
   /* ---------------------------------------------------------------------
-     Contadores (hero stats)
+     Foco atrapado dentro de un diálogo abierto (modal, menú, lightbox):
+     Tab y Shift+Tab ciclan solo entre sus elementos enfocables.
      --------------------------------------------------------------------- */
 
-  var statTargets = [
-    { el: $("#stat-0"), to: 40, prefix: "+", suffix: "" },
-    { el: $("#stat-1"), to: 6, prefix: "", suffix: "" },
-    { el: $("#stat-2"), to: 100, prefix: "", suffix: "%" }
-  ];
-
-  function countUp() {
-    if (reducedMotion) {
-      statTargets.forEach(function (t) { if (t.el) t.el.textContent = t.prefix + t.to + t.suffix; });
-      return;
+  function trapFocus(container, e) {
+    if (e.key !== "Tab") return;
+    var focusables = $all('a[href], button:not([disabled]), input:not([disabled]), textarea, select, [tabindex]:not([tabindex="-1"])', container)
+      .filter(function (el) { return el.offsetParent !== null || el === document.activeElement; });
+    if (!focusables.length) return;
+    var first = focusables[0];
+    var last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
-    var start = null;
-    var dur = 1600;
-    function tick(now) {
-      if (start === null) start = now;
-      var t = Math.min(1, (now - start) / dur);
-      var e = 1 - Math.pow(1 - t, 3);
-      statTargets.forEach(function (target) {
-        if (target.el) target.el.textContent = target.prefix + Math.round(target.to * e) + target.suffix;
-      });
-      if (t < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  var statsGrid = $(".stats-grid");
-  if (statsGrid && "IntersectionObserver" in window) {
-    var statsObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          countUp();
-          statsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    statsObserver.observe(statsGrid);
-  } else if (statsGrid) {
-    countUp();
   }
 
   /* ---------------------------------------------------------------------
@@ -228,13 +176,25 @@
       mobileMenu.classList.add("is-open");
       navToggle.setAttribute("aria-expanded", "true");
       document.body.style.overflow = "hidden";
+      if (mobileMenuClose) mobileMenuClose.focus();
     });
-    if (mobileMenuClose) mobileMenuClose.addEventListener("click", closeMenu);
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener("click", function () {
+        closeMenu();
+        navToggle.focus();
+      });
+    }
     $all("a", mobileMenu).forEach(function (a) {
       a.addEventListener("click", closeMenu);
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) closeMenu();
+      if (!mobileMenu.classList.contains("is-open")) return;
+      if (e.key === "Escape") {
+        closeMenu();
+        navToggle.focus();
+      } else {
+        trapFocus(mobileMenu, e);
+      }
     });
   }
 
@@ -243,6 +203,7 @@
      --------------------------------------------------------------------- */
 
   var worksRows = $("#works-rows");
+  var rows = worksRows ? $all(".work-row", worksRows) : [];
   var filters = $all(".filter-pill");
   var currentFilter = "all";
   var preview = $("#work-preview");
@@ -250,48 +211,29 @@
   var loadMoreWrap = $("#works-load-more-wrap");
   var loadMoreBtn = $("#works-load-more");
   var desktopMq = window.matchMedia("(min-width: 901px)");
-  var visibleCount = desktopMq.matches ? 5 : 4;
+  var visibleCount = worksPageSize();
 
   function worksPageSize() {
     return desktopMq.matches ? 5 : 4;
   }
 
+  /* Las filas ya están en el HTML: acá solo se muestran u ocultan según el
+     filtro activo y cuántas "páginas" se cargaron. */
   function renderRows() {
     if (!worksRows) return;
-    var all = PROJECTS.filter(function (p) { return currentFilter === "all" || p.cat === currentFilter; });
-    var shown = all.slice(0, visibleCount);
-    if (loadMoreWrap) loadMoreWrap.classList.toggle("is-hidden", visibleCount >= all.length);
-    worksRows.innerHTML = shown.map(function (p, i) {
-      var num = String(i + 1).padStart(2, "0");
-      var linkAttrs = p.url
-        ? 'href="' + p.url + '" target="_blank" rel="noopener"'
-        : "";
-      var logoClass = "work-row-logo" + (p.name === "Iron Lab" ? " work-row-logo--sm" : p.name === "The Outdoor Project" ? " work-row-logo--lg" : "");
-      var nameHtml = p.logo
-        ? '<img class="' + logoClass + '" src="' + p.logo + '" alt="' + p.name + '" loading="lazy">'
-        : '<span class="work-row-name">' + p.name + "</span>";
-      return (
-        '<a ' + linkAttrs + ' class="work-row' + (p.url ? "" : " work-row-disabled") + '" data-img="' + p.img + '" data-name="' + p.name + '">' +
-          '<span class="work-row-left">' +
-            '<span class="work-row-num">' + num + "</span>" +
-            nameHtml +
-          "</span>" +
-          '<span class="work-row-right">' +
-            '<span class="work-row-tag">' + p.tag + "</span>" +
-            '<span class="work-row-arrow">↗</span>' +
-          "</span>" +
-        "</a>"
-      );
-    }).join("");
-    bindRowEvents();
+    var matching = rows.filter(function (row) {
+      return currentFilter === "all" || row.dataset.cat === currentFilter;
+    });
+    rows.forEach(function (row) { row.hidden = true; });
+    matching.slice(0, visibleCount).forEach(function (row) { row.hidden = false; });
+    if (loadMoreWrap) loadMoreWrap.classList.toggle("is-hidden", visibleCount >= matching.length);
   }
 
-  function bindRowEvents() {
-    if (isCoarsePointer || !preview || !previewImg) return;
-    $all(".work-row", worksRows).forEach(function (row) {
+  if (!isCoarsePointer && preview && previewImg && worksRows) {
+    rows.forEach(function (row) {
       row.addEventListener("mouseenter", function () {
         previewImg.src = row.dataset.img || "";
-        previewImg.alt = row.dataset.name || "";
+        previewImg.alt = "";
         preview.classList.add("is-visible");
       });
       row.addEventListener("mousemove", function (e) {
@@ -307,7 +249,7 @@
   filters.forEach(function (btn) {
     btn.addEventListener("click", function () {
       currentFilter = btn.dataset.value;
-      filters.forEach(function (b) { b.setAttribute("aria-selected", b === btn ? "true" : "false"); });
+      filters.forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
       visibleCount = worksPageSize();
       renderRows();
     });
@@ -315,8 +257,13 @@
 
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", function () {
+      var firstNew = visibleCount;
       visibleCount += worksPageSize();
       renderRows();
+      /* El foco pasa a la primera fila nueva, así el teclado no vuelve al
+         principio de la lista. */
+      var shown = rows.filter(function (row) { return !row.hidden; });
+      if (shown[firstNew]) shown[firstNew].focus();
     });
   }
 
@@ -330,54 +277,32 @@
   renderRows();
 
   /* ---------------------------------------------------------------------
-     FAQ acordeón
+     FAQ acordeón (el markup está en index.html; se abre de a una)
      --------------------------------------------------------------------- */
 
-  var faqList = $("#faq-list");
-  var openFaq = 0;
-
-  function renderFaq() {
-    if (!faqList) return;
-    faqList.innerHTML = FAQ.map(function (f, i) {
-      return (
-        '<div class="faq-item" data-index="' + i + '">' +
-          '<button type="button" class="faq-question" data-index="' + i + '" aria-expanded="false" aria-controls="faq-panel-' + i + '" id="faq-btn-' + i + '">' +
-            "<span>" + f.q + "</span>" +
-            '<span class="faq-icon" aria-hidden="true">+</span>' +
-          "</button>" +
-          '<div class="faq-answer-wrap" id="faq-panel-' + i + '" role="region" aria-labelledby="faq-btn-' + i + '">' +
-            '<div class="faq-answer-inner"><p class="faq-answer">' + f.a + "</p></div>" +
-          "</div>" +
-        "</div>"
-      );
-    }).join("");
-    var items = $all(".faq-item", faqList);
-    $all(".faq-question", faqList).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var i = Number(btn.dataset.index);
-        var willOpen = openFaq !== i;
-        openFaq = willOpen ? i : -1;
-        items.forEach(function (item) {
-          var itemIndex = Number(item.dataset.index);
-          var isOpen = itemIndex === openFaq;
-          item.classList.toggle("is-open", isOpen);
-          $(".faq-question", item).setAttribute("aria-expanded", isOpen);
-        });
+  var faqItems = $all(".faq-item");
+  faqItems.forEach(function (item) {
+    var btn = $(".faq-question", item);
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var willOpen = !item.classList.contains("is-open");
+      faqItems.forEach(function (other) {
+        var isOpen = other === item && willOpen;
+        other.classList.toggle("is-open", isOpen);
+        $(".faq-question", other).setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
     });
-  }
-
-  renderFaq();
+  });
 
   /* ---------------------------------------------------------------------
      Brief (formulario del popup "Empezar proyecto")
      --------------------------------------------------------------------- */
 
   var BUDGET_OPTIONS = [
-    { value: "750-1200", label: "De 750 - 1200 USD" },
-    { value: "1200-1800", label: "De 1200 - 1800 USD" },
-    { value: "1800-2900", label: "De 1800 - 2900 USD" },
-    { value: "3000+", label: "Más de 3000 USD" }
+    { value: "750-1200", label: "750 a 1.200 USD" },
+    { value: "1200-1800", label: "1.200 a 1.800 USD" },
+    { value: "1800-2900", label: "1.800 a 2.900 USD" },
+    { value: "3000+", label: "Más de 3.000 USD" }
   ];
 
   function renderBriefFields(container) {
@@ -385,77 +310,65 @@
     var budgetHtml = BUDGET_OPTIONS.map(function (opt) {
       return (
         '<label class="brief-budget-option">' +
-          '<span class="brief-budget-dot"><span class="brief-budget-dot-inner"></span></span>' +
           '<input type="radio" name="budget" value="' + opt.value + '">' +
-          "<span>" + opt.label + "</span>" +
+          '<span class="brief-budget-dot" aria-hidden="true"></span>' +
+          '<span class="brief-budget-text">' + opt.label + "</span>" +
         "</label>"
       );
     }).join("");
 
     container.innerHTML =
-      '<div class="brief-section">' +
-        '<div class="brief-section-head">' +
-          '<span class="brief-section-num">01</span>' +
-          '<span class="brief-section-label">Tus datos</span>' +
-          '<span class="brief-section-line"></span>' +
-        "</div>" +
+      '<fieldset class="brief-section">' +
+        '<legend class="brief-section-head">Tus datos</legend>' +
         '<div class="brief-fields">' +
           '<label class="brief-field">' +
-            "<span>¿Cuál es tu nombre y apellido?</span>" +
+            '<span>Nombre y apellido <abbr class="brief-req" title="obligatorio">*</abbr></span>' +
             '<input type="text" name="fullName" placeholder="Nombre completo" autocomplete="name" required>' +
           "</label>" +
           '<div class="brief-row">' +
             '<label class="brief-field">' +
-              "<span>Mail que utilices</span>" +
+              '<span>Email <abbr class="brief-req" title="obligatorio">*</abbr></span>' +
               '<input type="email" name="email" placeholder="tu@email.com" autocomplete="email" required>' +
             "</label>" +
             '<label class="brief-field">' +
-              "<span>Número de teléfono</span>" +
+              "<span>Teléfono</span>" +
               '<input type="tel" name="phone" placeholder="+54 9 11 ..." autocomplete="tel">' +
             "</label>" +
           "</div>" +
           '<div class="brief-row">' +
             '<label class="brief-field">' +
-              "<span>¿Desde qué país te contactás?</span>" +
-              '<input type="text" name="country" placeholder="Argentina">' +
+              "<span>¿Desde qué país me escribís?</span>" +
+              '<input type="text" name="country" placeholder="Argentina" autocomplete="country-name">' +
             "</label>" +
             '<label class="brief-field">' +
-              "<span>¿Cuál es el nombre de tu negocio?</span>" +
-              '<input type="text" name="business" placeholder="Nombre de tu marca">' +
+              "<span>Nombre de tu negocio</span>" +
+              '<input type="text" name="business" placeholder="Nombre de tu marca" autocomplete="organization">' +
             "</label>" +
           "</div>" +
           '<label class="brief-field">' +
-            "<span>¿Tenés enlaces a redes sociales que te gustaría compartir? <em>(opcional)</em></span>" +
+            "<span>Redes o web de tu marca, si tenés</span>" +
             '<input type="text" name="social" placeholder="instagram.com/tumarca">' +
           "</label>" +
         "</div>" +
-      "</div>" +
-      '<div class="brief-section">' +
-        '<div class="brief-section-head">' +
-          '<span class="brief-section-num brief-section-num--light">02</span>' +
-          '<span class="brief-section-label">Inversión</span>' +
-          '<span class="brief-section-line"></span>' +
-        "</div>" +
-        '<span class="brief-field-label brief-budget-label">¿Cuánto invertirías en un proceso para que tu marca se vuelva inolvidable?</span>' +
+      "</fieldset>" +
+      '<fieldset class="brief-section">' +
+        '<legend class="brief-section-head">Presupuesto</legend>' +
+        '<p class="brief-budget-label">¿Qué presupuesto tenés pensado para el proyecto?</p>' +
         '<div class="brief-budget-options">' + budgetHtml + "</div>" +
-      "</div>" +
-      '<div class="brief-section">' +
-        '<div class="brief-section-head">' +
-          '<span class="brief-section-num">03</span>' +
-          '<span class="brief-section-label">El proyecto</span>' +
-          '<span class="brief-section-line"></span>' +
-        "</div>" +
+      "</fieldset>" +
+      '<fieldset class="brief-section">' +
+        '<legend class="brief-section-head">El proyecto</legend>' +
         '<div class="brief-fields">' +
           '<label class="brief-field">' +
             "<span>¿Qué te atrajo de mi trabajo y por qué creés que encajaríamos bien?</span>" +
-            '<textarea name="fit" rows="4" placeholder="Contame con tus palabras..."></textarea>' +
+            '<textarea name="fit" rows="4" placeholder="Contame con tus palabras"></textarea>' +
           "</label>" +
           '<label class="brief-field brief-field--narrow">' +
-            "<span>¿Cuándo planeás (re)lanzar tu marca? <em>(opcional)</em></span>" +
+            "<span>¿Cuándo planeás lanzar o relanzar tu marca?</span>" +
             '<input type="date" name="deadline">' +
           "</label>" +
         "</div>" +
-      "</div>";
+      "</fieldset>";
 
     container.querySelectorAll(".brief-budget-option").forEach(function (label) {
       var input = label.querySelector("input");
@@ -477,7 +390,11 @@
   var briefThanksTitle = $("#brief-thanks-title");
 
   function resetBrief() {
-    if (briefForm) briefForm.reset();
+    if (briefForm) {
+      briefForm.reset();
+      briefForm.classList.remove("was-validated");
+      $all("[aria-invalid]", briefForm).forEach(function (el) { el.removeAttribute("aria-invalid"); });
+    }
     if (modalFormFields) {
       modalFormFields.querySelectorAll(".brief-budget-option").forEach(function (l) {
         l.classList.remove("is-selected");
@@ -489,18 +406,30 @@
   }
 
   if (briefForm) {
+    /* Un campo marcado como inválido se "desmarca" apenas se corrige. */
+    briefForm.addEventListener("input", function (e) {
+      if (e.target.hasAttribute("aria-invalid") && e.target.checkValidity()) {
+        e.target.removeAttribute("aria-invalid");
+      }
+    });
+
     briefForm.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!briefForm.checkValidity()) {
+        briefForm.classList.add("was-validated");
+        var invalid = $all("input, textarea", briefForm).filter(function (el) { return !el.checkValidity(); });
+        invalid.forEach(function (el) { el.setAttribute("aria-invalid", "true"); });
         if (briefErrorEl) briefErrorEl.hidden = false;
+        if (invalid[0]) invalid[0].focus();
         return;
       }
       if (briefErrorEl) briefErrorEl.hidden = true;
       var fullName = (briefForm.elements.fullName && briefForm.elements.fullName.value || "").trim();
-      var firstName = fullName.split(" ")[0] || "crack";
-      if (briefThanksTitle) briefThanksTitle.textContent = "Gracias, " + firstName + ".";
+      var firstName = fullName.split(" ")[0];
+      if (briefThanksTitle) briefThanksTitle.textContent = firstName ? "Gracias, " + firstName + "." : "Gracias.";
       if (briefStepForm) briefStepForm.hidden = true;
       if (briefStepThanks) briefStepThanks.hidden = false;
+      if (briefThanksTitle) briefThanksTitle.focus();
       /* NOTA: conectar a un endpoint propio, Formspree o Resend para recibir los envíos por email. */
     });
   }
@@ -542,7 +471,9 @@
     });
   }
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal && modal.classList.contains("is-open")) closeModal();
+    if (!modal || !modal.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeModal();
+    else trapFocus(modal, e);
   });
 
   /* ---------------------------------------------------------------------
@@ -615,6 +546,7 @@
       if (e.key === "Escape") closeSketch();
       else if (e.key === "ArrowLeft") stepSketch(-1);
       else if (e.key === "ArrowRight") stepSketch(1);
+      else trapFocus(sketchLightbox, e);
     });
   }
 })();

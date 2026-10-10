@@ -9,9 +9,8 @@
   ===========================
   Esta página NO tiene CSS ni JS propios: usa `styles.css` y `main.js` tal
   cual. Todo lo específico vive en el bloque `Página "Sobre mí"` al final de
-  styles.css. Los módulos de main.js que no aplican acá (portfolio, FAQ,
-  contadores del hero, marquesina) están protegidos con null-checks y no
-  hacen nada. La única pieza de JS que SÍ es específica de esta página es el
+  styles.css. Los módulos de main.js que no aplican acá (portfolio, FAQ)
+  están protegidos con null-checks y no hacen nada. La única pieza de JS que SÍ es específica de esta página es el
   módulo "Lightbox de bocetos" (también null-checked, no rompe nada en
   index.html donde el nodo #sketch-lightbox no existe).
 
@@ -25,49 +24,53 @@
   modal — si el markup no estuviera, esos botones quedarían muertos en vez de
   degradar a un ancla. Si tocás el modal en index.html, tocalo también acá.
 
-  LA LÍNEA DE TIEMPO (sección 03)
-  ===============================
+  LA LÍNEA DE TIEMPO (sección "Trayectoria")
+  ==========================================
   Reutiliza LITERALMENTE las clases del timeline de la sección Proceso del
   home (.process-timeline-wrap / .process-timeline / .process-step / etc.).
   Eso fue un pedido explícito: así hereda gratis el efecto de main.js que
   dibuja la línea verde y enciende los puntos al scrollear, sin JS nuevo.
   El único agregado es `.process-year` (styles.css lo estila solo dentro de
-  `.about-timeline-section`), que ocupa el lugar que en el Proceso tiene la
-  duración de la etapa. NO renombres estas clases: si dejan de coincidir con
-  las del home, el efecto se rompe en silencio.
+  `.about-timeline-section`): acá el año es el único dato del encabezado de
+  cada hito (sin "Hito 01", "Hito 02"…, que era numeración de relleno).
+  NO renombres estas clases: si dejan de coincidir con las del home, el
+  efecto se rompe en silencio.
 
   IMÁGENES: regla a respetar
   ==========================
   Cada foto se usa UNA SOLA VEZ en la página. Además, el hero evita a
-  propósito el retrato sobre fondo verde y el titular "Un solo diseñador.
-  Sin intermediarios, sin plantillas.": ambos ya están en la sección
-  #estudio de index.html y, uno atrás del otro, la página parecía copiada.
-  El retrato verde quedó en el bloque 01 (recorte cuadrado, distinto al 4/5
-  del home). Si cambiás fotos, mantené las dos reglas.
+  propósito el retrato sobre fondo verde y el titular de la sección #estudio
+  de index.html ("Hablás con la misma persona que diseña tu marca."): uno
+  atrás del otro, la página parecía copiada. El retrato verde quedó en el
+  bloque "Cómo trabajo" (recorte cuadrado, distinto al 4/5 del home). Si
+  cambiás fotos, mantené las dos reglas.
 
   DATOS QUE VIVEN EN MÁS DE UN LADO (sync manual)
   ===============================================
-  · Países: la lista de la sección 02 debe coincidir con la respuesta del FAQ
-    en main.js (const FAQ) y con "areaServed" del JSON-LD de index.html.
+  · Países: la lista de la sección "Alcance" debe coincidir con la respuesta
+    del FAQ de index.html (HTML y JSON-LD FAQPage) y con "areaServed".
+  · Las secciones no llevan numeración ("01 —", "02 —"): es un tic típico
+    de sitios generados con IA y se sacó a propósito en todo el sitio.
   · Años del timeline: confirmados por Julián el 2026-09-10, son reales.
   · La URL absoluta de canonical/OG usa el dominio de GitHub Pages, que sigue
     siendo provisorio — ver la nota de dominio pendiente del proyecto.
 -->
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sobre mí — Julián Orlando | Brand Identity &amp; Logo Designer</title>
-<meta name="description" content="Soy Julián Orlando, diseñador de identidad visual y logotipos. Un solo diseñador detrás de cada marca: +40 marcas construidas en 6 años, con proyectos en Argentina, España, México, Guatemala, Chile y Uruguay.">
-<meta name="keywords" content="Julián Orlando, diseñador de logos, identidad visual, brand identity designer, branding Buenos Aires, sobre mí">
-<meta name="author" content="Julián Orlando — OrlandoStudio">
-<meta name="theme-color" content="#0F3A27">
+<title>Julián Orlando, diseñador de logos e identidad visual | OrlandoStudio</title>
+<meta name="description" content="Soy Julián Orlando, diseñador de logotipos e identidad visual en Buenos Aires. Más de 40 marcas construidas en 6 años, con clientes en Argentina, España, México, Guatemala, Chile y Uruguay.">
+<meta name="author" content="Julián Orlando">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1B272C">
 <link rel="canonical" href="https://axeljaviersalomon.github.io/OrlandoStudio/sobre-mi.html">
+<link rel="alternate" hreflang="es" href="https://axeljaviersalomon.github.io/OrlandoStudio/sobre-mi.html">
 
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="OrlandoStudio">
-<meta property="og:title" content="Julián Orlando — Brand Identity &amp; Logo Designer">
-<meta property="og:description" content="Cada marca que sale de OrlandoStudio pasa por mis manos de principio a fin. Un solo diseñador, sin intermediarios y sin plantillas.">
+<meta property="og:title" content="Julián Orlando, diseñador de logos e identidad visual">
+<meta property="og:description" content="Cada marca que sale de OrlandoStudio pasa por mis manos de principio a fin. Hablás conmigo, no con intermediarios.">
 <meta property="og:url" content="https://axeljaviersalomon.github.io/OrlandoStudio/sobre-mi.html">
 <meta property="og:image" content="https://axeljaviersalomon.github.io/OrlandoStudio/assets/img/sobre-mi/og-sobre-mi.jpg">
 <meta property="og:image:width" content="1200">
@@ -76,17 +79,28 @@
 <meta property="og:locale" content="es_AR">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Julián Orlando — Brand Identity &amp; Logo Designer">
+<meta name="twitter:title" content="Julián Orlando, diseñador de logos e identidad visual">
 <meta name="twitter:description" content="Cada marca que sale de OrlandoStudio pasa por mis manos de principio a fin.">
 <meta name="twitter:image" content="https://axeljaviersalomon.github.io/OrlandoStudio/assets/img/sobre-mi/og-sobre-mi.jpg">
+<meta name="twitter:image:alt" content="Julián Orlando bocetando logotipos en su escritorio">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 339.02 394.36'%3E%3Cpath fill='%23008358' d='M237.83,27.72a27.72,27.72,0,1,1,27.72,27.72A27.72,27.72,0,0,1,237.83,27.72Zm47,72.88V224.85A115.29,115.29,0,1,1,167.7,109.61,117.92,117.92,0,0,1,183.31,111V218.15s-.29,24.79-38.4,24.79v51.24s66.44,11.86,86.22-49.76a83.37,83.37,0,0,0,4.4-28.13l-.25-89.63V70.36a168.61,168.61,0,0,0-65.77-14.91v-.11c-.71,0-1.4,0-2.11,0s-1.31,0-2,0v.1C73.7,57.62,0,132.6,0,224.85A169.51,169.51,0,1,0,284.79,100.6Z'/%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="preload" as="font" href="assets/fonts/Geist-VariableFont_wght.ttf" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20260921a">
+<link rel="stylesheet" href="styles.css?v=20261010e">
+<!-- Preloader "afiche rasgado": decide ANTES de pintar si se muestra. Aparece en
+     cada carga, salvo con #hash en la URL o con prefers-reduced-motion
+     (mismo criterio que el del home). Markup y secuencia: ver #tear-loader
+     al abrir <body>. -->
+<script>
+(function () {
+  try {
+    if (location.hash) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.documentElement.classList.add("has-tear");
+  } catch (e) {}
+})();
+</script>
 
 <script type="application/ld+json">
 {
@@ -132,10 +146,176 @@
 </head>
 <body class="page-about">
 
+<!-- ============ PRELOADER ============
+     Afiche callejero rasgado: el logo de OrlandoStudio (el mismo SVG del
+     footer, se descarga una sola vez) se imprime sobre un afiche oscuro, el
+     papel se rasga de izquierda a derecha y las mitades salen hacia arriba y
+     hacia abajo. La línea de rotura se genera al azar en cada carga y pasa
+     siempre por el logo. Las mitades se clonan de .tl-intro, así que el
+     afiche se edita en UN solo lugar. Dura ~3 s; click/tecla lo adelanta.
+     Estilos: "Preloader afiche rasgado" en styles.css. -->
+<div class="tear-loader" id="tear-loader" aria-hidden="true">
+  <div class="tl-half tl-half--top">
+    <div class="tl-shadow"><span></span></div>
+    <div class="tl-fiber"></div>
+  </div>
+  <div class="tl-half tl-half--bottom">
+    <div class="tl-rip"><div class="tl-rip-inner"><div class="tl-fiber"></div></div></div>
+  </div>
+  <div class="tl-face tl-intro">
+    <div class="tl-big-wrap"><span class="tl-big">Sobre mí</span></div>
+    <div class="tl-print">
+      <i></i><i></i><i></i><i></i>
+      <span>OrlandoStudio™</span>
+      <span>Brand identity &amp; logo design</span>
+      <span>Buenos Aires — AR</span>
+      <span>05 / Sobre mí</span>
+    </div>
+    <div class="tl-brand">
+      <div class="tl-logo-wrap">
+        <img class="tl-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="" width="771" height="132">
+        <span class="tl-gloss"></span>
+      </div>
+      <span class="tl-rule"></span>
+      <div class="tl-meta"><span>Julián Orlando</span><span>Desde 2020</span></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var tl = document.getElementById("tear-loader");
+  if (!root.classList.contains("has-tear") || !tl || !tl.animate || !window.Promise) {
+    if (tl) tl.remove();
+    root.classList.remove("has-tear");
+    return;
+  }
+  function bail() { root.classList.add("tear-open"); tl.remove(); }
+  /* Si salta la red de seguridad del CSS (plFailsafe), el hero no puede
+     quedar congelado detrás. */
+  tl.addEventListener("animationend", function (e) { if (e.target === tl) bail(); });
+  try { setup(); } catch (e) { bail(); }
+
+  function setup() {
+    var RIP = 420, OPEN = 1100, MAX_WAIT = 3000;
+    var intro = tl.querySelector(".tl-intro");
+    var upper = tl.querySelector(".tl-half--top"), lower = tl.querySelector(".tl-half--bottom");
+    var band = tl.querySelector(".tl-rip"), bandInner = tl.querySelector(".tl-rip-inner");
+
+    /* Mitades: copias del afiche ya terminado (CSS les anula la animación). */
+    [upper, lower].forEach(function (half) {
+      var face = intro.cloneNode(true);
+      face.classList.remove("tl-intro");
+      half.appendChild(face);
+    });
+
+    /* Línea de rotura: horizontal y a la altura del logo. Un paseo al azar
+       da la forma general y encima va un dentado fino (los dientes del
+       papel). x en % del ancho; y en px respecto del centro, así el dentado
+       se ve igual en cualquier pantalla. Un punto cada ~11 px. */
+    var logoBox = intro.querySelector(".tl-logo-wrap").getBoundingClientRect();
+    var mid = logoBox.top + logoBox.height * .55 - innerHeight / 2;
+    var N = Math.max(32, Math.min(150, Math.round(innerWidth / 11)));
+    var slope = (Math.random() - .5) * 26, walk = 0, vel = 0, pts = [];
+    for (var i = 0; i <= N; i++) {
+      vel = vel * .75 + (Math.random() - .5) * 3;
+      walk = Math.max(-20, Math.min(20, walk + vel));
+      var x = (i / N) * 100;
+      if (i > 0 && i < N) x += (Math.random() - .5) * (40 / N);
+      pts.push([x, mid + slope * (i / N - .5) + walk + (Math.random() - .5) * 4.5]);
+    }
+    /* dy: corrimiento de cada punto (fibras del corte, sombra). */
+    function edge(dy, local) {
+      return pts.map(function (p) {
+        var y = p[1] + dy();
+        return p[0].toFixed(2) + "% " + (local ? (y - mid + 90).toFixed(1) + "px" : "calc(50% + " + y.toFixed(1) + "px)");
+      });
+    }
+    function zero() { return 0; }
+    function shade() { return 8; }
+    /* Fibras: finitas en la mitad de arriba, más anchas y con algún jirón
+       en la de abajo (así se ve un papel rasgado de verdad). */
+    function down() { return 1 + Math.random() * (Math.random() < .15 ? 5 : 2.2); }
+    function up() { return -(2.5 + Math.random() * (Math.random() < .14 ? 11 : 5)); }
+    function topPoly(dy) { return "polygon(0 0,100% 0," + edge(dy).reverse().join(",") + ")"; }
+
+    upper.querySelector(".tl-face").style.clipPath = topPoly(zero);
+    upper.querySelector(".tl-fiber").style.clipPath = topPoly(down);
+    upper.querySelector(".tl-shadow > span").style.clipPath = topPoly(shade);
+    lower.querySelector(".tl-face").style.clipPath = "polygon(" + edge(zero).join(",") + ",100% 100%,0 100%)";
+    band.style.top = "calc(50% + " + (mid - 90).toFixed(1) + "px)";
+    band.querySelector(".tl-fiber").style.clipPath = "polygon(" + edge(up, true).join(",") + ",100% 100%,0 100%)";
+
+    var t0 = 0, waitTimer, ripping = false;
+
+    function start() {
+      if (t0) return;
+      t0 = performance.now();
+      tl.classList.add("is-ready");
+    }
+
+    /* La rotura sigue al final real de la intro (el brillo es lo último) y
+       no a un setTimeout: en una pestaña abierta en segundo plano los
+       timers corren pero las animaciones no, y se pisarían. Si la página
+       todavía carga imágenes, el afiche espera un poco más (con tope). */
+    intro.querySelector(".tl-gloss").addEventListener("animationend", function () {
+      if (document.readyState === "complete" || performance.now() - t0 >= MAX_WAIT) return rip();
+      window.addEventListener("load", rip, { once: true });
+      waitTimer = setTimeout(rip, MAX_WAIT - (performance.now() - t0));
+    }, { once: true });
+
+    function rip() {
+      if (ripping) return;
+      ripping = true;
+      clearTimeout(waitTimer);
+      window.removeEventListener("load", rip);
+      /* Se saca la capa animada y quedan las mitades (idénticas y quietas).
+         Dos frames de margen para que ese cambio ya esté pintado cuando
+         arranca el movimiento: así no se pierde el primer cuadro. */
+      intro.remove();
+      requestAnimationFrame(function () { requestAnimationFrame(tear); });
+    }
+
+    /* El rasgado corre de izquierda a derecha: la banda de fibras entra con
+       dos translate opuestos que se compensan (efecto "cortina"). */
+    function tear() {
+      var o = { duration: RIP, easing: "cubic-bezier(.7,0,.3,1)", fill: "forwards" };
+      band.animate([{ transform: "translate3d(-101%,0,0)" }, { transform: "translate3d(0,0,0)" }], o);
+      bandInner.animate([{ transform: "translate3d(101%,0,0)" }, { transform: "translate3d(0,0,0)" }], o).onfinish = open;
+    }
+
+    function open() {
+      root.classList.add("tear-open");
+      tl.style.background = "none";
+      tl.style.pointerEvents = "none";
+      if (window.scrollY) window.scrollTo({ top: 0, behavior: "instant" });
+      var o = { duration: OPEN, easing: "cubic-bezier(.6,0,.12,1)", fill: "forwards" };
+      upper.animate([{ transform: "none" }, { transform: "translate3d(0,-84vh,0) rotate(-4deg)" }], o);
+      lower.animate([{ transform: "none" }, { transform: "translate3d(0,84vh,0) rotate(-3deg)" }], o)
+        .onfinish = function () { tl.remove(); };
+    }
+
+    /* Click o tecla: salta directo al rasgado. */
+    tl.addEventListener("click", function () { start(); rip(); });
+    window.addEventListener("keydown", function () { if (t0) rip(); }, { once: true });
+
+    /* La intro arranca con el logo decodificado y la tipografía cargada
+       (tope 700 ms: nunca se queda esperando). */
+    function noop() {}
+    var logo = intro.querySelector(".tl-logo");
+    Promise.all([
+      logo.decode ? logo.decode().catch(noop) : null,
+      document.fonts ? document.fonts.load("800 1em Geist").catch(noop) : null
+    ]).then(start);
+    setTimeout(start, 700);
+  }
+})();
+</script>
+
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <div class="noise-overlay" aria-hidden="true"></div>
-<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
 <!-- ============ HEADER ============ -->
 <!-- Copia del header de index.html con dos diferencias: los links de sección
@@ -177,18 +357,18 @@
 
   <div class="mobile-menu-inner">
     <nav class="mobile-nav" aria-label="Navegación móvil">
-      <ol>
-        <li><a href="index.html#top"><span class="mobile-nav-index">01</span><span class="mobile-nav-label">Inicio</span></a></li>
-        <li><a href="index.html#servicios"><span class="mobile-nav-index">02</span><span class="mobile-nav-label">Servicios</span></a></li>
-        <li><a href="index.html#trabajos"><span class="mobile-nav-index">03</span><span class="mobile-nav-label">Trabajos</span></a></li>
-        <li><a href="index.html#proceso"><span class="mobile-nav-index">04</span><span class="mobile-nav-label">Proceso</span></a></li>
-        <li><a href="sobre-mi.html" aria-current="page"><span class="mobile-nav-index">05</span><span class="mobile-nav-label">Sobre mí</span></a></li>
-        <li><a href="index.html#voces"><span class="mobile-nav-index">06</span><span class="mobile-nav-label">Clientes</span></a></li>
-      </ol>
+      <ul>
+        <li><a href="index.html#top"><span class="mobile-nav-label">Inicio</span></a></li>
+        <li><a href="index.html#servicios"><span class="mobile-nav-label">Servicios</span></a></li>
+        <li><a href="index.html#trabajos"><span class="mobile-nav-label">Trabajos</span></a></li>
+        <li><a href="index.html#proceso"><span class="mobile-nav-label">Proceso</span></a></li>
+        <li><a href="sobre-mi.html" aria-current="page"><span class="mobile-nav-label">Sobre mí</span></a></li>
+        <li><a href="index.html#voces"><span class="mobile-nav-label">Clientes</span></a></li>
+      </ul>
     </nav>
 
     <div class="mobile-menu-bottom">
-      <a href="#contacto" class="btn btn-primary btn-hero mobile-menu-cta" data-modal-trigger>Empezar proyecto <span aria-hidden="true">→</span></a>
+      <a href="#contacto" class="btn btn-primary btn-hero mobile-menu-cta" data-modal-trigger>Empezar proyecto</a>
     </div>
   </div>
 </div>
@@ -203,15 +383,13 @@
        #estudio del home — ver la nota de IMÁGENES arriba.
        Los stats NO usan .stats-grid del home (esa versión es de cajas sobre
        fondo oscuro): .about-stats son hairlines sobre claro, y son estáticos,
-       sin el contador animado de main.js, que solo apunta a #stat-0..2. -->
+       sin animación. -->
   <section id="top" class="about-hero">
     <img class="about-hero-mark" src="assets/brand/JO_Positivo.svg" alt="" aria-hidden="true" width="339" height="394">
     <div class="container about-hero-grid">
 
       <div class="about-hero-text">
-        <p class="eyebrow eyebrow--light about-hero-eyebrow">
-          <span class="about-dot" aria-hidden="true"></span>Brand identity &amp; Logo designer
-        </p>
+        <p class="eyebrow eyebrow--light about-hero-eyebrow" lang="en">Brand identity &amp; logo designer</p>
         <h1 class="about-title">
           <span class="line">Cada marca</span>
           <span class="line">pasa por</span>
@@ -219,24 +397,24 @@
         </h1>
         <p class="about-lead">Soy Julián Orlando. Hablás conmigo de principio a fin, no con un account manager ni con un equipo rotativo. Por eso cada marca tiene una mirada consistente, no un collage de decisiones de distintas personas.</p>
 
-        <div class="about-stats">
+        <dl class="about-stats">
           <div class="about-stat">
-            <span class="about-stat-num">+40</span>
-            <span class="about-stat-label">Marcas construidas</span>
+            <dt class="about-stat-label">Marcas construidas</dt>
+            <dd class="about-stat-num">+40</dd>
           </div>
           <div class="about-stat">
-            <span class="about-stat-num">6</span>
-            <span class="about-stat-label">Años de trayectoria</span>
+            <dt class="about-stat-label">Años de trayectoria</dt>
+            <dd class="about-stat-num">6</dd>
           </div>
           <div class="about-stat">
-            <span class="about-stat-num">6</span>
-            <span class="about-stat-label">Países</span>
+            <dt class="about-stat-label">Países con clientes</dt>
+            <dd class="about-stat-num">6</dd>
           </div>
           <div class="about-stat">
-            <span class="about-stat-num about-stat-num--accent">1</span>
-            <span class="about-stat-label">Mirada detrás de cada marca</span>
+            <dt class="about-stat-label">Mirada detrás de cada marca</dt>
+            <dd class="about-stat-num about-stat-num--accent">1</dd>
           </div>
-        </div>
+        </dl>
       </div>
 
       <div class="about-portrait-wrap">
@@ -257,7 +435,7 @@
         </div>
         <img class="about-portrait" src="assets/img/sobre-mi/hero-julian.webp" alt="Julián Orlando bocetando a lápiz un logotipo en su libreta" width="1100" height="1375" fetchpriority="high">
         <div class="about-portrait-badge">
-          <span class="about-portrait-role">Fundador · OrlandoStudio™</span>
+          <span class="about-portrait-role">Fundador de OrlandoStudio</span>
           <span class="about-portrait-name">Julián Orlando</span>
           <span class="about-portrait-place">Buenos Aires, Argentina</span>
         </div>
@@ -289,7 +467,7 @@
     </button>
   </div>
 
-  <!-- ============ 01 — CÓMO TRABAJO ============ -->
+  <!-- ============ CÓMO TRABAJO ============ -->
   <!-- Acá vive el retrato sobre fondo verde, en recorte CUADRADO (el home lo
        usa en 4/5 dentro de #estudio). El titular original del diseño base era
        "Cada marca tiene una mirada consistente..." pero esa frase se movió al
@@ -301,10 +479,10 @@
         <img src="assets/img/sobre-mi/retrato-cuadrado.webp" alt="Retrato de Julián Orlando, fundador de OrlandoStudio" loading="lazy" width="1000" height="1000">
       </div>
       <div class="about-split-text" data-reveal>
-        <p class="eyebrow eyebrow--light">01 — Cómo trabajo</p>
-        <h2 class="h2 about-h2">Un enfoque atemporal, no una tendencia con fecha de vencimiento.</h2>
-        <p class="about-body">Diseño identidades visuales con un enfoque atemporal: marcas sólidas, pensadas para perdurar y mantenerse relevantes más allá de las tendencias del momento.</p>
-        <p class="about-body">Mi trabajo no es solo estético, es estratégico: está construido para que cada decisión visual tenga una razón de ser.</p>
+        <p class="eyebrow eyebrow--light">Cómo trabajo</p>
+        <h2 class="h2 about-h2">Marcas pensadas para durar más que la tendencia del año.</h2>
+        <p class="about-body">Diseño identidades visuales con un enfoque atemporal: marcas sólidas, pensadas para perdurar y mantenerse relevantes más allá de las modas del momento.</p>
+        <p class="about-body">Cada decisión visual tiene una razón detrás. Si un color, una forma o una tipografía no le suma algo concreto a tu marca, no va.</p>
       </div>
     </div>
   </section>
@@ -314,39 +492,39 @@
        son anillos de contorno plano, sin glow: Julián evita explícitamente los
        efectos de neón/luces. Salen del viewport a propósito, contenidos por el
        overflow:hidden de la sección. -->
-  <section class="about-quote-section">
+  <section class="about-quote-section" aria-label="Cita de Julián Orlando">
     <span class="about-quote-ring about-quote-ring-1" aria-hidden="true"></span>
     <span class="about-quote-ring about-quote-ring-2" aria-hidden="true"></span>
-    <div class="container about-quote-inner" data-reveal>
+    <figure class="container about-quote-inner" data-reveal>
       <span class="about-quote-mark" aria-hidden="true">“</span>
-      <blockquote class="about-quote">Mi misión es ayudarte a construir una identidad visual única y estratégica que potencie y transforme tu negocio, conectando con tu audiencia de manera auténtica y efectiva.</blockquote>
-      <div class="about-quote-author">
-        <img class="about-quote-avatar" src="assets/img/sobre-mi/julian-avatar.webp" alt="" aria-hidden="true" loading="lazy" width="200" height="200">
+      <blockquote class="about-quote"><p>Quiero que tu marca se vea tan bien como trabajás, y que la gente correcta la elija por eso.</p></blockquote>
+      <figcaption class="about-quote-author">
+        <img class="about-quote-avatar" src="assets/img/sobre-mi/julian-avatar.webp" alt="" loading="lazy" width="200" height="200">
         <span>
           <cite>Julián Orlando</cite>
-          <span class="about-quote-role">Brand identity &amp; Logo designer</span>
+          <span class="about-quote-role" lang="en">Brand identity &amp; logo designer</span>
         </span>
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   </section>
 
-  <!-- ============ 02 — ALCANCE ============ -->
+  <!-- ============ ALCANCE ============ -->
   <!-- Lista de países CONFIRMADA por Julián el 2026-09-10: unificó su texto
        nuevo (España, Guatemala, Chile, Uruguay) con el FAQ viejo del home
-       (Argentina, México, España) — "van los dos". Si cambia, actualizar
-       también main.js (const FAQ) e index.html ("areaServed" del JSON-LD).
+       (Argentina, México, España): "van los dos". Si cambia, actualizar
+       también el FAQ de index.html (HTML + JSON-LD FAQPage) y "areaServed".
        Pendiente menor: el H2 dice "los dos lados del Atlántico" y con México
        y Guatemala en la lista quizás convenga "de todo el continente";
        quedó consultado con Julián, sin respuesta todavía. -->
   <section class="section-light about-block">
     <div class="container about-split about-split--wide-left">
       <div class="about-split-text" data-reveal>
-        <p class="eyebrow eyebrow--light">02 — Alcance</p>
+        <p class="eyebrow eyebrow--light">Alcance</p>
         <h2 class="h2 about-h2">Desde Buenos Aires, para marcas de los dos lados del Atlántico.</h2>
         <p class="about-body">Trabajo hace años con marcas locales e internacionales, llevando la misma mirada estratégica a cada país en el que aterrizo. El proceso es 100% remoto, sin diferencia de calidad ni de plazos.</p>
 
-        <ul class="about-countries sr-only">
-          <li><span class="about-country-name about-country-name--base">Argentina</span><span class="about-country-tag">Base · Buenos Aires</span></li>
+        <ul class="about-countries sr-only" aria-label="Países con clientes">
+          <li><span class="about-country-name about-country-name--base">Argentina</span><span class="about-country-tag">, base en Buenos Aires</span></li>
           <li><span class="about-country-name">España</span><span class="about-country-tag">Proyecto internacional</span></li>
           <li><span class="about-country-name">México</span><span class="about-country-tag">Proyecto internacional</span></li>
           <li><span class="about-country-name">Guatemala</span><span class="about-country-tag">Proyecto internacional</span></li>
@@ -356,12 +534,12 @@
       </div>
 
       <div class="about-figure about-figure--map" data-reveal>
-        <img class="about-map" src="assets/img/mapa-mundo-alcance.webp?v=20260921a" width="740" height="375" alt="Mapa mundial que ilustra el alcance internacional de los proyectos de Julián Orlando." loading="lazy">
+        <img class="about-map" src="assets/img/mapa-mundo-alcance.webp?v=20260921a" width="740" height="375" alt="Mapa con los países donde Julián Orlando tiene clientes: Argentina, Uruguay, Chile, México, Guatemala y España." loading="lazy">
       </div>
     </div>
   </section>
 
-  <!-- ============ 03 — TRAYECTORIA ============ -->
+  <!-- ============ TRAYECTORIA ============ -->
   <!-- Línea de tiempo VERTICAL con el mismo efecto que la del Proceso del home:
        no es una copia del CSS, son las MISMAS clases (.process-timeline-wrap,
        .process-timeline, .process-step, .process-timeline-progress). main.js
@@ -379,10 +557,10 @@
   <section class="section-light about-block about-timeline-section">
     <div class="container process-grid">
       <div class="process-left" data-reveal>
-        <p class="eyebrow eyebrow--light">03 — Trayectoria</p>
+        <p class="eyebrow eyebrow--light">Trayectoria</p>
         <h2 class="h2">Seis años construyendo una sola mirada.</h2>
         <p>De los primeros encargos como freelance al estudio de hoy: el mismo criterio, aplicado cada vez a más marcas y más países.</p>
-        <a href="index.html#trabajos" class="btn btn-light">Ver los trabajos <span aria-hidden="true">→</span></a>
+        <a href="index.html#trabajos" class="btn btn-light">Ver los trabajos</a>
       </div>
 
       <div class="process-timeline-wrap">
@@ -390,7 +568,6 @@
         <ol class="process-timeline">
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">Hito 01</span>
               <span class="process-year">2019</span>
             </div>
             <h3>Los primeros pasos</h3>
@@ -398,7 +575,6 @@
           </li>
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">Hito 02</span>
               <span class="process-year">2021</span>
             </div>
             <h3>Cruzo la frontera</h3>
@@ -406,15 +582,13 @@
           </li>
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">Hito 03</span>
               <span class="process-year">2023</span>
             </div>
             <h3>Nace OrlandoStudio™</h3>
-            <p>El freelance se vuelve estudio propio, enfocado exclusivamente en identidad visual y diseño de logotipos. Sin distraerme en disciplinas que no domino.</p>
+            <p>El freelance se vuelve estudio propio, enfocado exclusivamente en identidad visual y diseño de logotipos.</p>
           </li>
           <li class="process-step" data-reveal>
             <div class="process-step-head">
-              <span class="process-stage">Hito 04</span>
               <span class="process-year">2026</span>
             </div>
             <h3>+40 marcas después</h3>
@@ -425,7 +599,7 @@
     </div>
   </section>
 
-  <!-- ============ 04 — DETRÁS DE ESCENA ============ -->
+  <!-- ============ DETRÁS DE ESCENA ============ -->
   <!-- Segundo corte: fondo sage (el token mint / sage). El mosaico es un grid de 3 columnas
        (1.3fr 1fr 1fr) donde la foto vertical ocupa las dos filas de la
        izquierda (la del modificador "tall") y el bloque de cita cierra la fila de
@@ -436,7 +610,7 @@
     <div class="container">
       <div class="about-bts-head" data-reveal>
         <div>
-          <p class="eyebrow eyebrow--light">04 — Detrás de escena</p>
+          <p class="eyebrow eyebrow--light">Detrás de escena</p>
           <h2 class="h2 about-h2">El proceso, antes del archivo final.</h2>
         </div>
         <p class="about-bts-lead">Cada marca empieza en papel: lápiz, bocetos y horas de exploración antes de tocar la pantalla.</p>
@@ -452,9 +626,9 @@
         <figure class="about-bts-item">
           <img src="assets/img/sobre-mi/proceso-03.webp" alt="El escritorio de OrlandoStudio: libreta, plantillas de círculos y monitores" loading="lazy" width="1400" height="1050">
         </figure>
-        <div class="about-bts-item about-bts-quote">
+        <blockquote class="about-bts-item about-bts-quote">
           <p>“Recordá que tu proyecto también es mi proyecto.”</p>
-        </div>
+        </blockquote>
       </div>
     </div>
   </section>
@@ -467,17 +641,17 @@
        todos los CTA tienen que ir al formulario o al mail. -->
   <section id="contacto" class="section-light about-cta">
     <div class="container about-cta-inner" data-reveal>
-      <p class="eyebrow eyebrow--light">05 — Trabajemos juntos</p>
-      <h2 class="about-cta-title">Me comprometo a entenderlo, cuidarlo y llevarlo al siguiente nivel.</h2>
-      <p class="about-cta-sub">Mi prioridad es que te sientas orgulloso de cómo tu marca se presenta al mundo y que conecte de manera efectiva con tu audiencia.</p>
+      <p class="eyebrow eyebrow--light">Trabajemos juntos</p>
+      <h2 class="about-cta-title">Me comprometo a entender tu marca y cuidarla como si fuera mía.</h2>
+      <p class="about-cta-sub">Mi prioridad es que te sientas orgulloso cada vez que muestres tu marca.</p>
       <div class="about-cta-actions">
-        <a href="#contacto" class="btn btn-light btn-hero" data-modal-trigger>Empezar mi proyecto <span aria-hidden="true">→</span></a>
+        <a href="#contacto" class="btn btn-light btn-hero" data-modal-trigger>Empezar mi proyecto</a>
         <a href="mailto:julianorlando.dg@gmail.com" class="btn btn-outline-dark">julianorlando.dg@gmail.com</a>
       </div>
       <div class="about-cta-socials">
-        <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
-        <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener">Behance <span aria-hidden="true">↗</span></a>
-        <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a>
+        <a href="https://www.instagram.com/julianorlando.dg/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span><span class="sr-only">(se abre en una pestaña nueva)</span></a>
+        <a href="https://www.behance.net/julianorlandodg" target="_blank" rel="noopener">Behance <span aria-hidden="true">↗</span><span class="sr-only">(se abre en una pestaña nueva)</span></a>
+        <a href="https://www.tiktok.com/@julianorlando.dg" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span><span class="sr-only">(se abre en una pestaña nueva)</span></a>
       </div>
     </div>
   </section>
@@ -488,17 +662,17 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
-      <img class="footer-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio">
-      <nav class="footer-nav">
+      <img class="footer-logo" src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio" width="152" height="26" loading="lazy">
+      <nav class="footer-nav" aria-label="Navegación del pie de página">
         <a href="index.html#servicios">Servicios</a>
         <a href="index.html#trabajos">Trabajos</a>
         <a href="index.html#proceso">Proceso</a>
-        <a href="sobre-mi.html">Sobre mí</a>
+        <a href="sobre-mi.html" aria-current="page">Sobre mí</a>
         <a href="index.html#contacto">Contacto</a>
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 OrlandoStudio™ — Branding &amp; Design</p>
+      <p>© 2026 OrlandoStudio™. Branding y diseño de identidad visual.</p>
       <p>Diseñando para que tus clientes te elijan</p>
       <p>Web desarrollada por <a href="https://axeljaviersalomon.github.io/Portfolio/" target="_blank" rel="noopener">Axel Salomon</a></p>
     </div>
@@ -507,8 +681,8 @@
 
 <!-- ============ DOCK FLOTANTE ============ -->
 <div class="floating-dock" id="floating-dock">
-  <span class="floating-dock-text">Agenda abierta · 2 cupos</span>
-  <a href="#contacto" class="btn btn-primary" data-modal-trigger>Empezar</a>
+  <span class="floating-dock-text">Quedan 2 cupos este trimestre</span>
+  <a href="#contacto" class="btn btn-primary" data-modal-trigger>Empezar proyecto</a>
 </div>
 
 <!-- ============ VOLVER ARRIBA ============ -->
@@ -531,28 +705,25 @@
     <div class="modal-scroll brief-scroll">
       <div class="brief">
         <div class="brief-brand">
-          <img src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio™" class="brief-logo">
+          <img src="assets/brand/OrlandoStudio_Negativo.svg" alt="OrlandoStudio" class="brief-logo" width="128" height="22" loading="lazy">
         </div>
 
         <div class="brief-step" id="brief-step-form">
           <p class="brief-eyebrow">Empecemos</p>
           <h2 class="brief-title" id="brief-title">Contame tu proyecto</h2>
-          <blockquote class="brief-quote">"¡Hola! ¿Cómo estás? Bienvenido/a a OrlandoStudio™. Mi misión es ayudarte a construir una identidad visual que conecte con tu audiencia y transforme tu negocio. Cuanto más compartas acá, mejor voy a poder capturar tu esencia. Me muero de ganas de empezar a crear algo imposible de ignorar."</blockquote>
+          <p class="brief-intro">¡Hola! Cuanto más me cuentes acá, mejor llego preparado a nuestra primera charla. No hace falta que tengas todo definido: para eso estoy yo.</p>
 
           <form class="brief-form" id="modal-form" novalidate>
             <div id="modal-form-fields"></div>
-            <p class="brief-note">Te respondo en un plazo máximo de 3 días — ojo con la carpeta de spam.</p>
-            <button type="submit" class="brief-submit">
-              <span>Enviar formulario</span>
-              <span aria-hidden="true">→</span>
-            </button>
-            <p class="form-error brief-error" id="modal-form-error" hidden>Revisá los campos marcados antes de enviar.</p>
+            <p class="brief-note">Te respondo en un plazo máximo de 3 días. Si no ves mi mail, revisá la carpeta de spam.</p>
+            <button type="submit" class="brief-submit">Enviar formulario</button>
+            <p class="form-error brief-error" id="modal-form-error" role="alert" hidden>Completá tu nombre y un email válido antes de enviar.</p>
           </form>
         </div>
 
         <div class="brief-step brief-thanks" id="brief-step-thanks" hidden>
-          <h2 class="brief-title" id="brief-thanks-title">Gracias.</h2>
-          <p class="brief-thanks-text">Recibí tu proyecto. Te voy a responder en un plazo máximo de 3 días — revisá también spam.</p>
+          <h2 class="brief-title" id="brief-thanks-title" tabindex="-1">Gracias.</h2>
+          <p class="brief-thanks-text">Recibí tu proyecto. Te voy a responder en un plazo máximo de 3 días; revisá también la carpeta de spam.</p>
         </div>
       </div>
     </div>
@@ -562,6 +733,6 @@
 <!-- El ?v= es cache-busting manual: SUBIRLO en index.html Y acá cada vez que
      se edite main.js o styles.css, o los cambios no llegan a quien ya visitó
      el sitio. Ambas páginas tienen que apuntar a la misma versión. -->
-<script src="main.js?v=20260921a"></script>
+<script src="main.js?v=20261010a"></script>
 </body>
 </html>
